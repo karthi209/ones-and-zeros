@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import gfm from 'remark-gfm';
 import CodeBlock from './CodeBlock';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import "./css/Pages.css";
 import "./css/BlogList.css"
 
@@ -34,9 +35,6 @@ const BlogPost = () => {
   return (
     <div className='master-blog'>
       <div className="pages-individual">
-        <Link to="/blog">
-          ← Back to Posts
-        </Link>
         <article className="blog">
           <ReactMarkdown
             children={post}
@@ -88,7 +86,9 @@ const BlogList = () => {
               <h4>
                 {post.title}
               </h4>
-              <p className='meta'>POSTED ON {new Date(post.date).toLocaleDateString()} | BY {post.author} </p>
+              <div className="meta">
+                <p>POSTED ON {new Date(post.date).toLocaleDateString()} | BY {post.author} </p>
+              </div>
               <img src={`${import.meta.env.VITE_BASE_PATH}${post.image}`} alt={post.title} />
             </Link>
           </article>

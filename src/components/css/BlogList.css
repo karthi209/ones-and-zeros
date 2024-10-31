@@ -21,9 +21,10 @@
 
 .meta {
     color: rgb(155, 155, 155);
-    font-size: 13px;
+    font-size: 1px;
     line-height: 20px;
     font-weight: 500;
+    font-size: 12px;
 }
 
 .articleclass {
@@ -75,7 +76,7 @@
     }
 
     .meta {
-        font-size: 11px;
+        font-size: 10px;
     }
 
     .articleclass h4 {

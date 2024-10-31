@@ -1,7 +1,7 @@
 div.pages-custom {
   margin: 0 auto;
   padding: 25px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: normal;
   line-height: 28px;
   letter-spacing: normal;
@@ -19,6 +19,7 @@ div.pages-custom p {
 
 .master-blog p {
   font-family: "Poppins", sans-serif;
+  font-size: 16px;
 }
 
 .responsive-image {
