@@ -1,13 +1,15 @@
 /* Default light theme (set in :root) */
 :root {
   --background-color: #ffffff;
-  --text-color: rgba(50, 50, 50, 0.87);
+  --text-color: #000000de;
   --link-color: rgba(50, 50, 50, 0.87);  /* Define default link color */
-  font-family: "Geologica", sans-serif;
+  font-family: "Open Sans", sans-serif;
   overflow-y: scroll;
   transition: background-color 0.3s ease, color 0.3s ease;
   background-color: var(--background-color);
   color: var(--text-color);
+  --logo: url(../public/onesandzeros-logo.png) no-repeat;
+  --logo-dark: url(../public/onesandzeros-dark.png) no-repeat;
 }
 
 /* Dark theme */
@@ -15,6 +17,7 @@
   --background-color: #1d1d1d;
   --text-color: #f5f5f5;
   --link-color: #f5f5f5;
+  background-image: var(--logo-dark);
 }
 
 /* Ensure links use the correct theme color */

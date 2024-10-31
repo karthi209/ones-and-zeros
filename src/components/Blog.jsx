@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import gfm from 'remark-gfm';
+import CodeBlock from './CodeBlock';
 import "./css/Pages.css";
 import "./css/BlogList.css"
 
@@ -36,7 +38,23 @@ const BlogPost = () => {
           ← Back to Posts
         </Link>
         <article className="blog">
-          <ReactMarkdown>{post}</ReactMarkdown>
+          <ReactMarkdown
+            children={post}
+            remarkPlugins={[gfm]}
+            components={{
+              code({ node, inline, className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || '');
+                return inline ? (
+                  <code {...props}>{children}</code>
+                ) : (
+                  <CodeBlock 
+                    language={match ? match[1] : ''} 
+                    value={String(children).replace(/\n$/, '')} 
+                  />
+                );
+              },
+            }}
+          />
         </article>
       </div>
     </div>
@@ -63,18 +81,15 @@ const BlogList = () => {
 
   return (
     <div className="pages-custom">
-      <h3>Blog Posts</h3>
       <div className="blogposts">
         {posts.map((post) => (
           <article key={post.slug} className='articleclass'>
             <Link to={`/blog/${post.slug}`} aria-label={`Read more about ${post.title}`}>
-              <img src={`${import.meta.env.VITE_BASE_PATH}${post.image}`} alt={post.title} />
               <h4>
                 {post.title}
               </h4>
-              <time>
-                {new Date(post.date).toLocaleDateString()}
-              </time>
+              <p className='meta'>POSTED ON {new Date(post.date).toLocaleDateString()} | BY {post.author} </p>
+              <img src={`${import.meta.env.VITE_BASE_PATH}${post.image}`} alt={post.title} />
             </Link>
           </article>
         ))}

@@ -1,9 +1,8 @@
 div.logotext {
   display: flex;
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 25px;
+  font-weight: 700;
   padding: 15px; /* Padding around the logo text */
-  font-family: "Playwrite HR", cursive;
 }
 
 .iconclass {
@@ -21,10 +20,6 @@ div.logotext {
   transform: rotate(360deg) !important;  /* Rotates the icon by 360 degrees */
 }
 
-.mobile-icon {
-  display: none;
-}
-
 hr {
   border: 1px solid;
   max-width: 1200px;
@@ -35,12 +30,11 @@ hr {
 .navbar {
     display: flex;
     justify-content: space-between;
-    font-family: "Geologica", sans-serif;
     align-items: center;
     padding: 5px;
     margin: 15px auto;
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 700;
     max-width: 1200px;
     width: 100%;
   }
@@ -61,21 +55,27 @@ hr {
   }
 
   .navbar-links li:hover {
-    text-decoration: wavy gray underline;
-    text-underline-offset: 6px;
-    text-decoration-thickness: 2px;
+    text-decoration: #8f8f8f underline;
+    text-underline-offset: 8px;
+    text-decoration-thickness: 1.5px;
+    color: blue;
   }
 
   .selected {
     /* border-bottom: 2px solid; */
-    text-decoration: wavy green underline;
-    text-underline-offset: 6px;
-    text-decoration-thickness: 2px;
+    text-decoration: #656565 underline;
+    text-underline-offset: 8px;
+    text-decoration-thickness: 1.5px;
+    color: blue;
   }
 
   .navbar-links a {
     color: var(--text-color);
     text-decoration: none; /* Optional: remove underline */
+  }
+
+  .mobile-icon {
+    display: none;
   }
 
   @media only screen and (max-width: 768px) {
@@ -94,9 +94,9 @@ hr {
     div.logotext {
       justify-content: left;
       font-size: 22px;
-      padding: 5px 0px 30px 0px;
+      padding: 0px 0px 10px 0px;
       margin: 0;
-      width: 60%;
+      width: 50%;
       font-weight: 600;
     }
     
@@ -109,7 +109,7 @@ hr {
     .navbar-links li {
       margin: 0; /* Ensures there's no margin around list items */
       padding: 2 2vw;
-      font-weight: 300;
+      font-weight: 500;
     }
 
     .navbar-links li:hover {

@@ -1,26 +1,24 @@
 div.pages-custom {
   margin: 0 auto;
   padding: 25px;
-  font-size: 17px;
-  font-family: "Geologica", sans-serif;
+  font-size: 18px;
   font-weight: normal;
-  line-height: 23px;
+  line-height: 28px;
   letter-spacing: normal;
   max-width: 1200px;
   width: 100%;
 }
 
-.under-construction {
-  font-family: "Edu AU VIC WA NT Dots", cursive;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-  font-size: 30px;
+div.pages-custom h2 {
+  font-family: "Barlow Condensed", sans-serif;
 }
 
-div.pages-custom h3 {
-  padding: 0 20px;
-  text-align: center;
+div.pages-custom p {
+  font-family: "Poppins", sans-serif;
+}
+
+.master-blog p {
+  font-family: "Poppins", sans-serif;
 }
 
 .responsive-image {
@@ -34,19 +32,12 @@ div.pages-custom h3 {
 .master-blog {
   margin: 0 auto;
   padding: 25px;
-  font-size: 17px;
-  font-family: "Geologica", sans-serif;
+  font-size: 18px;
   font-weight: normal;
-  line-height: 23px;
+  line-height: 28px;
   letter-spacing: normal;
   max-width: 1000px;
   width: 100%;
-}
-
-.master-blog p {
-  text-align: justify;
-  font-weight: 300;
-  
 }
 
 .footer-custom {

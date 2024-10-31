@@ -1,26 +1,30 @@
 [
   {
     "slug": "post1",
-    "title": "The Madras Electric Tramways",
-    "date": "2024-10-12",
-    "image": "posts/post-thumbnails/post-thumbnail-1.webp"
+    "title": "Exposing a service running in local host in WSL2 to network",
+    "date": "2024-10-05",
+    "image": "posts/post-thumbnails/post-thumbnail-1.jpg",
+    "author": "KARTHIKEYAN MANIMARAN"
   },
   {
     "slug": "post2",
-    "title": "Another Great Post",
-    "date": "2024-03-21",
-    "image": "posts/post-thumbnails/post-thumbnail-2.webp"
+    "title": "The fragile worlds of the trains comes to life here!",
+    "date": "2024-10-05",
+    "image": "posts/post-thumbnails/post-thumbnail-2.webp",
+    "author": "KARTHIKEYAN MANIMARAN"
   },
   {
     "slug": "post3",
-    "title": "Pedestrains!",
-    "date": "2024-03-22",
-    "image": "posts/post-thumbnails/post-thumbnail-3.jpg"
+    "title": "Pedestrains! Their plight is never heard, but swims",
+    "date": "2024-10-05",
+    "image": "posts/post-thumbnails/post-thumbnail-3.jpg",
+    "author": "KARTHIKEYAN MANIMARAN"
   },
   {
     "slug": "post4",
-    "title": "Wow, a blog to test stuff? No no and a big no on how they do that",
-    "date": "2024-03-22",
-    "image": "posts/post-thumbnails/post-thumbnail-3.jpg"
+    "title": "Wow, a blog to test stuff? No no and a big no",
+    "date": "2024-10-05",
+    "image": "posts/post-thumbnails/post-thumbnail-3.jpg",
+    "author": "KARTHIKEYAN MANIMARAN"
   }
 ]
