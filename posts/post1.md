@@ -13,34 +13,30 @@ I'll first ping my windows machine from my phone. This should be successful, if 
 
 Now, you need to enable port forwarding from WSL2 to the Windows host:
 
-```powershell
+```shell
 netsh interface portproxy add v4tov4 listenport=<port-you-need> listenaddress=<windows-host-ip> connectport=<port-you-need> connectaddress=<WSL2-IP>
 ```
 
 Check the config if it's applied:
 
-```powershell
+```shell
 netsh interface portproxy show all
 ```
 
 Delete anything you don't need:
 
-```powershell
+```shell
 netsh interface portproxy delete v4tov4 listenport=<port-you-need> listenaddress=<windows-host-ip>
 ```
 
 
 Once this is done, your services in WSL2 should be port forwarded to the port in windows host. make sure you're service is actually listening to all devices in your network. Incase of vite-react, I use below config in **vite.config.js**
 
-```
+```shell
 server: {
-
     host: '0.0.0.0', // Allow access from external devices
-
     port: 5173,      // Your desired port
-
     strictPort: true, // Prevents automatic port switching if the port is already in use
-
 }
 ```
 
