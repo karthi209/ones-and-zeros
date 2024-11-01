@@ -11,7 +11,7 @@ const Home = () => {
   useEffect(() => {
     const fetchHome = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BASE_PATH}home.md`);
+        const response = await fetch(`/home.md`);
         const text = await response.text();
         setHome(text);
       } catch (error) {

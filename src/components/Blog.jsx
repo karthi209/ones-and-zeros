@@ -17,7 +17,7 @@ const BlogPost = () => {
     const fetchPost = async () => {
       setLoading(true); // Start loading
       try {
-        const response = await fetch(`${import.meta.env.VITE_BASE_PATH}posts/${slug}.md`);
+        const response = await fetch(`/posts/${slug}.md`);
         if (!response.ok) {
           navigate('/blog');
           return;
@@ -73,7 +73,7 @@ const BlogList = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BASE_PATH}posts/posts.json`);
+        const response = await fetch(`/posts/posts.json`);
         const data = await response.json();
         setPosts(data);
       } catch (error) {
@@ -96,7 +96,7 @@ const BlogList = () => {
               <div className="meta">
                 <p>POSTED ON {new Date(post.date).toLocaleDateString()} | BY {post.author} </p>
               </div>
-              <img src={`${import.meta.env.VITE_BASE_PATH}${post.image}`} alt={post.title} />
+              <img src={`${post.image}`} alt={post.title} />
             </Link>
           </article>
         ))}
