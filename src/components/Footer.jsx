@@ -10,7 +10,7 @@ function Footer() {
       <div className='footer-terms'>
         <p>Terms of Use</p>
       </div>
-      <p>© 2024 Tropical Being</p>
+      <p>© 2024 Ones and Zeros</p>
       <div className='footer-logo'>
         <XIcon className='foticon'/>
         <EmailIcon className='foticon'/>

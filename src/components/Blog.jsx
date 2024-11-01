@@ -3,18 +3,19 @@ import ReactMarkdown from 'react-markdown';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import gfm from 'remark-gfm';
 import CodeBlock from './CodeBlock';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import "./css/Pages.css";
-import "./css/BlogList.css"
+import "./css/BlogList.css";
 
 // Component to display a single blog post
 const BlogPost = () => {
   const [post, setPost] = useState('');
+  const [loading, setLoading] = useState(true); // Loading state
   const { slug } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPost = async () => {
+      setLoading(true); // Start loading
       try {
         const response = await fetch(`${import.meta.env.VITE_BASE_PATH}posts/${slug}.md`);
         if (!response.ok) {
@@ -26,6 +27,8 @@ const BlogPost = () => {
       } catch (error) {
         console.error('Error loading post:', error);
         navigate('/blog');
+      } finally {
+        setLoading(false); // End loading
       }
     };
 
@@ -35,25 +38,29 @@ const BlogPost = () => {
   return (
     <div className='master-blog'>
       <div className="pages-individual">
-        <article className="blog">
-          <ReactMarkdown
-            children={post}
-            remarkPlugins={[gfm]}
-            components={{
-              code({ node, inline, className, children, ...props }) {
-                const match = /language-(\w+)/.exec(className || '');
-                return inline ? (
-                  <code {...props}>{children}</code>
-                ) : (
-                  <CodeBlock 
-                    language={match ? match[1] : ''} 
-                    value={String(children).replace(/\n$/, '')} 
-                  />
-                );
-              },
-            }}
-          />
-        </article>
+        {loading ? (
+          <div className="loading-placeholder"></div> // Show while loading
+        ) : (
+          <article className="blog">
+            <ReactMarkdown
+              children={post}
+              remarkPlugins={[gfm]}
+              components={{
+                code({ node, inline, className, children, ...props }) {
+                  const match = /language-(\w+)/.exec(className || '');
+                  return inline ? (
+                    <code {...props}>{children}</code>
+                  ) : (
+                    <CodeBlock 
+                      language={match ? match[1] : ''} 
+                      value={String(children).replace(/\n$/, '')} 
+                    />
+                  );
+                },
+              }}
+            />
+          </article>
+        )}
       </div>
     </div>
   );

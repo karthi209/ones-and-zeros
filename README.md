@@ -1,3 +1,3 @@
-# Tropical Being
+# Ones and Zeros
 
-Trying to get this website up and running to post all the map stuff here!!!
+Trying to get this website up and running to blog!!!

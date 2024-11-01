@@ -3,6 +3,7 @@ div.logotext {
   font-size: 25px;
   font-weight: 700;
   padding: 15px; /* Padding around the logo text */
+  margin-left: 15vw;
 }
 
 .iconclass {
@@ -10,10 +11,10 @@ div.logotext {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  margin: 10px 5px 5px;
+  margin: 10px 5vw 5px;
   cursor: pointer;
   transition: transform 0.3s ease !important;
-  color:cornflowerblue;
+  color:rgb(204, 255, 204);
 }
 
 .iconclass.rotate {
@@ -29,14 +30,16 @@ hr {
 
 .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding: 5px;
-    margin: 15px auto;
+    margin: 15px 0px 0px auto;
+    margin-top: 0%;
     font-size: 16px;
     font-weight: 700;
-    max-width: 1200px;
+    max-width: 100%;
     width: 100%;
+    background-color: #000000;
   }
   
   .navbar-links {
@@ -47,10 +50,11 @@ hr {
     padding: 0;
     margin: 0;
     overflow: hidden;
+    margin-right: 1vw;
   }
 
   .navbar-links li {
-    padding: 10px 2vw;
+    padding: 5px 1vw;
     margin: 0;
   }
 
@@ -72,23 +76,71 @@ hr {
   .navbar-links a {
     color: var(--text-color);
     text-decoration: none; /* Optional: remove underline */
+    color: aliceblue;
+  }
+
+  .pc-icon {
+    margin-right: 5vw;
   }
 
   .mobile-icon {
     display: none;
   }
 
+  .theme-text {
+    color: white;
+  }
+
+  @media only screen and (max-width: 1500px) {
+
+    div.logotext {
+      margin-left: 5vw;
+    }
+
+    .iconclass {
+      margin: 10px 2vw 5px;
+    }
+
+    .navbar-links {
+      margin-right: 1vw;
+    }
+
+    .pc-icon {
+      margin-right: 3vw;
+    }
+
+  }
+
+  @media only screen and (max-width: 1320px) {
+
+    div.logotext {
+      margin-left: 0vw;
+    }
+
+    .iconclass {
+      margin: 10px 2vw 5px;
+    }
+
+    .navbar-links {
+      margin-right: 0vw;
+    }
+
+    .pc-icon {
+      margin-right: 1vw;
+    }
+
+  }
+
   @media only screen and (max-width: 768px) {
 
     .navbar {
-      width: 90%;
-      padding: 5px;
-      padding-bottom: 0;
+      width: 100%;
+      padding: 18px;
+      padding-top: 8px;
       flex-wrap: wrap;
-      margin: 10px 5%;
       justify-content: left;
       font-weight: 300;
-      font-size: 16px;
+      font-size: 14px;
     }
 
     div.logotext {
@@ -109,7 +161,7 @@ hr {
     .navbar-links li {
       margin: 0; /* Ensures there's no margin around list items */
       padding: 2 2vw;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .navbar-links li:hover {
@@ -129,7 +181,7 @@ hr {
     .mobile-icon {
       display: inline-flex;
       justify-content: left;
-      margin: auto 0 28px auto;
+      margin: 10px 0 28px auto;
     }
 
     hr {

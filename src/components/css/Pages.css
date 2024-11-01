@@ -7,6 +7,7 @@ div.pages-custom {
   letter-spacing: normal;
   max-width: 1200px;
   width: 100%;
+  min-height: 100vh;
 }
 
 div.pages-custom h2 {
@@ -15,6 +16,10 @@ div.pages-custom h2 {
 
 div.pages-custom p {
   font-family: "Poppins", sans-serif;
+}
+
+.master-blog h2 {
+  font-family: "Barlow Condensed", sans-serif;
 }
 
 .master-blog p {
@@ -44,8 +49,10 @@ div.pages-custom p {
 .footer-custom {
   display: flex;
   justify-content: space-around;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
+  background-color: black;
+  color: aliceblue;
 }
 
 .footer-text {
@@ -74,11 +81,16 @@ div.pages-custom p {
     margin: 0;
     padding: auto; /* Adjust as needed */
     max-width: 100%;
+    padding: 20px;
+    padding-top: 5px;
   }
 
   .master-blog {
     display: block;
     justify-content: center;
+    margin-top: 0;
+    padding: 20px;
+    padding-top: 5px;
   }
 
   div.pages-custom h3 {
