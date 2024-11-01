@@ -1,7 +1,7 @@
 ## Exposing a service running in local host in WSL2 to network
 
 
-![netstat output](posts/images/post1/netstat-img.jpg)
+![netstat output](/posts/images/post1/netstat-img.jpg)
 
 
 One thing that Microsoft did in WSL2 is make it a real VM! This means that the distro running inside the WSL2 has a different IP address compared to your Windows machine. The WSL2 also uses a separate virtual network adapter. Your windows can communicate with the WSL2, but none of the other devices inside your network can, unless and until you specifically enable the connection to run through windows to the WSL2
