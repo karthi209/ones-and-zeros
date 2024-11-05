@@ -1,7 +1,7 @@
 div.pages-custom {
   margin: 0 auto;
   padding: 25px;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: normal;
   line-height: 28px;
   letter-spacing: normal;
@@ -10,21 +10,16 @@ div.pages-custom {
   min-height: 100vh;
 }
 
-div.pages-custom h2 {
-  font-family: "Barlow Condensed", sans-serif;
-}
-
-div.pages-custom p {
-  font-family: "Poppins", sans-serif;
-}
-
 .master-blog h2 {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "DM Sans", sans-serif;
+  font-size: 48px;
+  line-height: 58px;
 }
 
 .master-blog p {
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 20px;
+  line-height: 33px;
 }
 
 .responsive-image {
@@ -38,7 +33,7 @@ div.pages-custom p {
 .master-blog {
   margin: 0 auto;
   padding: 25px;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: normal;
   line-height: 28px;
   letter-spacing: normal;
@@ -91,6 +86,16 @@ div.pages-custom p {
     margin-top: 0;
     padding: 20px;
     padding-top: 5px;
+  }
+
+  .master-blog h2 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .master-blog p {
+    font-size: 18px;
+    line-height: 30px;
   }
 
   div.pages-custom h3 {

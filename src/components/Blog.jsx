@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
-import ReactMarkdown from 'react-markdown';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import gfm from 'remark-gfm';
-import CodeBlock from './CodeBlock';
+import { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import gfm from "remark-gfm";
+import CodeBlock from "./CodeBlock";
 import "./css/Pages.css";
 import "./css/BlogList.css";
 
 // Component to display a single blog post
 const BlogPost = () => {
-  const [post, setPost] = useState('');
+  const [post, setPost] = useState("");
   const [loading, setLoading] = useState(true); // Loading state
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -19,14 +19,14 @@ const BlogPost = () => {
       try {
         const response = await fetch(`/posts/${slug}.md`);
         if (!response.ok) {
-          navigate('/blog');
+          navigate("/blog");
           return;
         }
         const text = await response.text();
         setPost(text);
       } catch (error) {
-        console.error('Error loading post:', error);
-        navigate('/blog');
+        console.error("Error loading post:", error);
+        navigate("/blog");
       } finally {
         setLoading(false); // End loading
       }
@@ -36,7 +36,7 @@ const BlogPost = () => {
   }, [slug, navigate]);
 
   return (
-    <div className='master-blog'>
+    <div className="master-blog">
       <div className="pages-individual">
         {loading ? (
           <div className="loading-placeholder"></div> // Show while loading
@@ -47,13 +47,13 @@ const BlogPost = () => {
               remarkPlugins={[gfm]}
               components={{
                 code({ node, inline, className, children, ...props }) {
-                  const match = /language-(\w+)/.exec(className || '');
+                  const match = /language-(\w+)/.exec(className || "");
                   return inline ? (
                     <code {...props}>{children}</code>
                   ) : (
-                    <CodeBlock 
-                      language={match ? match[1] : ''} 
-                      value={String(children).replace(/\n$/, '')} 
+                    <CodeBlock
+                      language={match ? match[1] : ""}
+                      value={String(children).replace(/\n$/, "")}
                     />
                   );
                 },
@@ -77,7 +77,7 @@ const BlogList = () => {
         const data = await response.json();
         setPosts(data);
       } catch (error) {
-        console.error('Error loading posts:', error);
+        console.error("Error loading posts:", error);
       }
     };
 
@@ -88,13 +88,17 @@ const BlogList = () => {
     <div className="pages-custom">
       <div className="blogposts">
         {posts.map((post) => (
-          <article key={post.slug} className='articleclass'>
-            <Link to={`/blog/${post.slug}`} aria-label={`Read more about ${post.title}`}>
-              <h4>
-                {post.title}
-              </h4>
+          <article key={post.slug} className="articleclass">
+            <Link
+              to={`/blog/${post.slug}`}
+              aria-label={`Read more about ${post.title}`}
+            >
+              <h4>{post.title}</h4>
               <div className="meta">
-                <p>POSTED ON {new Date(post.date).toLocaleDateString()} | BY {post.author} </p>
+                <p>
+                  POSTED ON {new Date(post.date).toLocaleDateString()} | BY{" "}
+                  {post.author}{" "}
+                </p>
               </div>
               <img src={`${post.image}`} alt={post.title} />
             </Link>

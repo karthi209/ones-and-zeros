@@ -2,8 +2,8 @@
 :root {
   --background-color: hsl(0, 0%, 96%);
   --text-color: #000000;
-  --link-color: rgba(50, 50, 50, 0.87);  /* Define default link color */
-  font-family: "Open Sans", sans-serif;
+  --link-color: rgba(50, 50, 50, 0.87); /* Define default link color */
+  font-family: "DM Sans", sans-serif;
   overflow-y: scroll;
   transition: background-color 0.3s ease, color 0.3s ease;
   background-color: var(--background-color);
@@ -30,16 +30,18 @@ a {
   margin: auto;
 }
 
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-/* Optional: Add transition for smooth theme change */
 body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }

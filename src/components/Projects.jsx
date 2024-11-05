@@ -1,13 +1,27 @@
-import React from 'react'
-import './css/Pages.css';
+import React from "react";
+import { Link } from 'react-router-dom';
+import "./css/Pages.css";
 
 function Projects() {
+
+  const tools = [
+    { id: 1, name: "Tool 1", slug: "tool-1" },
+    { id: 2, name: "Tool 2", slug: "tool-2" },
+  ];
+
   return (
-    <div className="pages-custom">
-      <p>Do not create unnecessary components, just to make design look complicated. A good design is always simple and elegant. A good way to think about it is if you were to create a spearate process/machine/infra for each component and you will have to code it yourself, would you still do it?</p>
-      <p>Markham's storm petrel (Hydrobates markhami) is a seabird native to the Pacific Ocean around Peru, Chile, and Ecuador. It is a large and slender storm petrel; its plumage is black to sooty brown with a grayish bar that runs diagonally across the upper side of the wings.</p>
+    <div>
+      <h1>Projects</h1>
+      <h2>Tools</h2>
+      <ul>
+        {tools.map(tool => (
+          <li key={tool.id}>
+            <Link to={`/projects/${tool.slug}`}>{tool.name}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
-  )
+  );
 }
 
-export default Projects
+export default Projects;

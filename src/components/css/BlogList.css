@@ -34,7 +34,6 @@
   
 .meta {
     color: rgb(155, 155, 155);
-    font-size: 1px;
     line-height: 20px;
     font-weight: 500;
     font-size: 12px;
@@ -51,11 +50,11 @@
 .articleclass h4 {
     padding: 0;
     margin: 0;
-    line-height: 45px;
-    font-size: 35px;
-    font-weight: 600;
+    line-height: 40px;
+    font-size: 30px;
+    font-weight: 900;
     text-align: auto;
-    font-family: "Barlow Condensed", sans-serif;
+    font-family: "DM Sans", sans-serif;
 }
 
 .blogposts img {
@@ -95,8 +94,8 @@
 
     .articleclass h4 {
         line-height: 28px;
-        font-size: 26px;
-        font-weight: 600;
+        font-size: 24px;
+        font-weight: 900;
         /* font-family: "Gelasio", serif; */
     }
 
