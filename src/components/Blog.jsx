@@ -14,16 +14,25 @@ const BlogPost = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+
     const fetchPost = async () => {
       setLoading(true); // Start loading
       try {
-        const response = await fetch(`/posts/${slug}.md`);
+        const response = await fetch(`http://localhost:3000/data`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            integerValue: parseInt(slug, 10)
+          })
+        });
         if (!response.ok) {
           navigate("/blog");
           return;
         }
-        const text = await response.text();
-        setPost(text);
+        const data = await response.json();
+        setPost(data[0]);
       } catch (error) {
         console.error("Error loading post:", error);
         navigate("/blog");
@@ -42,8 +51,10 @@ const BlogPost = () => {
           <div className="loading-placeholder"></div> // Show while loading
         ) : (
           <article className="blog">
+            <h1>{post.title}</h1>
+            <p>By {post.author} on {new Date(post.publicationdate).toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric' })}</p>
             <ReactMarkdown
-              children={post}
+              children={post.content}
               remarkPlugins={[gfm]}
               components={{
                 code({ node, inline, className, children, ...props }) {
@@ -73,8 +84,9 @@ const BlogList = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`/posts/posts.json`);
+        const response = await fetch(`http://localhost:3000/bloglist`);
         const data = await response.json();
+        console.log(data);
         setPosts(data);
       } catch (error) {
         console.error("Error loading posts:", error);
@@ -88,19 +100,19 @@ const BlogList = () => {
     <div className="pages-custom">
       <div className="blogposts">
         {posts.map((post) => (
-          <article key={post.slug} className="articleclass">
+          <article key={post.postid} className="articleclass">
             <Link
-              to={`/blog/${post.slug}`}
+              to={`/blog/${post.postid}`}
               aria-label={`Read more about ${post.title}`}
             >
               <h4>{post.title}</h4>
               <div className="meta">
                 <p>
-                  POSTED ON {new Date(post.date).toLocaleDateString()} | BY{" "}
+                  POSTED ON {post.publicationdate} | BY{" "}
                   {post.author}{" "}
                 </p>
               </div>
-              <img src={`${post.image}`} alt={post.title} />
+              <img src={`http://localhost:3000/images/${post.postid}.jpg`} alt={post.title} />
             </Link>
           </article>
         ))}
