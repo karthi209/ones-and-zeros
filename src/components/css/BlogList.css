@@ -1,8 +1,9 @@
 .blogposts {
     display: flex;
     justify-content: center;
-    flex-direction: column; 
-    max-width: 600px;
+    flex-direction: row; 
+    flex-wrap: wrap;
+    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
     gap: 25px;
@@ -42,9 +43,12 @@
 .articleclass {
     display: flex;
     justify-content: center;
-    max-width: 600px;
-    min-width: 600px;
-    margin: 10px;
+    max-width: 320px;
+    min-width: 200px;
+    max-height: 400px;
+    background-color: rgb(219, 219, 219);
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .articleclass h4 {
@@ -60,7 +64,7 @@
 .blogposts img {
     max-width: 75%;
     width: 100%;
-    height: auto;          /* Maintain aspect ratio */
+    height: 100px;          /* Maintain aspect ratio */
     border-radius: 5px;
     object-fit: cover;  
 }
@@ -86,6 +90,14 @@
         padding: 0;
         max-width: 100%;
         min-width: 100%;
+        display: flex;
+        justify-content: center;
+        /* max-width: 320px;
+        min-width: 200px; */
+        max-height: 400px;
+        background-color: rgb(219, 219, 219);
+        padding: 20px;
+        border-radius: 10px;
     }
 
     .meta {

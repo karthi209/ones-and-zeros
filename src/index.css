@@ -1,8 +1,8 @@
 /* Default light theme (set in :root) */
 :root {
-  --background-color: hsl(0, 0%, 96%);
+  --background-color: #ffffff;
   --text-color: #000000;
-  --link-color: rgba(50, 50, 50, 0.87); /* Define default link color */
+  --link-color: #323232de; /* Define default link color */
   font-family: "DM Sans", sans-serif;
   overflow-y: scroll;
   transition: background-color 0.3s ease, color 0.3s ease;

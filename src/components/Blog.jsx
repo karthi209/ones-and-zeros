@@ -105,14 +105,15 @@ const BlogList = () => {
               to={`/blog/${post.postid}`}
               aria-label={`Read more about ${post.title}`}
             >
+              <div><p>{post.catagory}</p></div>
               <h4>{post.title}</h4>
               <div className="meta">
                 <p>
-                  POSTED ON {post.publicationdate} | BY{" "}
+                  Posted on {new Date(post.publicationdate).toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric' })} | By{" "}
                   {post.author}{" "}
                 </p>
               </div>
-              <img src={`http://localhost:3000/images/${post.postid}.jpg`} alt={post.title} />
+              {/* <img src={`http://localhost:3000/images/${post.postid}.jpg`} alt={post.title} /> */}
             </Link>
           </article>
         ))}

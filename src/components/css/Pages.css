@@ -1,19 +1,25 @@
 div.pages-custom {
   margin: 0 auto;
-  padding: 25px;
+  padding: 24px 120px 48px 120px;
   font-size: 17px;
   font-weight: normal;
   line-height: 28px;
   letter-spacing: normal;
-  max-width: 1200px;
+  max-width: 1440px;
   width: 100%;
   min-height: 100vh;
 }
 
-.master-blog h2 {
-  font-family: "DM Sans", sans-serif;
+.master-blog h1 {
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 48px;
   line-height: 58px;
+}
+
+.home-head {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 40px;
+  line-height: 50px;
 }
 
 .master-blog p {

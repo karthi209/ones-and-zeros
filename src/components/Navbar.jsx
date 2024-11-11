@@ -23,7 +23,7 @@ const Navbar = ({ theme, toggleTheme }) => {
   }, [location.pathname]);
 
   const logo =
-    theme === "dark" ? "onesandzeros-dark.png" : "onesandzeros-dark.png";
+    theme === "dark" ? "onesandzeros-dark.png" : "onesandzeros-light.png";
 
   return (
     <nav className="navbar">

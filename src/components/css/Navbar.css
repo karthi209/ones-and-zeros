@@ -3,7 +3,7 @@ div.logotext {
   font-size: 25px;
   font-weight: 700;
   padding: 15px; /* Padding around the logo text */
-  margin-left: 15vw;
+  margin-left: 5vw;
 }
 
 .iconclass {
@@ -11,10 +11,9 @@ div.logotext {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  margin: 10px 5vw 5px;
+  margin: 10px 2vw 5px;
   cursor: pointer;
   transition: transform 0.3s ease !important;
-  color:rgb(204, 255, 204);
 }
 
 .iconclass.rotate {
@@ -32,14 +31,15 @@ hr {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 5px;
-    margin: 15px 0px 0px auto;
-    margin-top: 0%;
+    padding: auto;
+    margin: auto;
+    margin-top: 1%;
     font-size: 16px;
-    font-weight: 700;
-    max-width: 100%;
+    font-weight: 600;
+    max-width: 1440px;
     width: 100%;
-    background-color: #000000;
+    border-radius: 10px;
+    
   }
   
   .navbar-links {
@@ -76,7 +76,6 @@ hr {
   .navbar-links a {
     color: var(--text-color);
     text-decoration: none; /* Optional: remove underline */
-    color: aliceblue;
   }
 
   .pc-icon {
