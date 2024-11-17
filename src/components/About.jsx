@@ -1,17 +1,28 @@
 import React from "react";
 import "./css/Pages.css";
+import { ComposableMap, Geographies, Geography } from "react-simple-maps"
 
 function About() {
+  
+  const geoUrl = "/data.json"
+
   return (
-    <div className="pages-custom">
-      <h4>About</h4>
-      <p>DLots of stuff about the website</p>
-      <p>
-        Markham's storm petrel (Hydrobates markhami) is a seabird native to the
-        Pacific Ocean around Peru, Chile, and Ecuador. It is a large and slender
-        storm petrel; its plumage is black to sooty brown with a grayish bar
-        that runs diagonally across the upper side of the wings.
-      </p>
+    <div className="map-style">
+      <ComposableMap
+        projection="geoMercator"
+        projectionConfig={{
+          scale: 4800, // Increase scale to enlarge the map
+          center: [78.07, 10.95], // Replace with your GeoJSON's central coordinates
+        }}
+        style={{ width: "100%", height: "100%" }}>
+        <Geographies geography={geoUrl}>
+          {({ geographies }) =>
+            geographies.map((geo) => (
+              <Geography key={geo.rsmKey} geography={geo} />
+            ))
+          }
+        </Geographies>
+      </ComposableMap>
     </div>
   );
 }

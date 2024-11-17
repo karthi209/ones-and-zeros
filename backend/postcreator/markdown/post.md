@@ -1,9 +1,9 @@
 ---
-postid: 5
-title: "Running Python Web Applications on WSL2 and Accessing Externally"
+postid: 6
+title: "This is very difficult stuff, another post"
 author: "Karthikeyan Manimaran"
 category: Tech
-publicationdate: "2024-11-10 18:00:00"
+publicationdate: "2024-11-13 18:00:00"
 tags: python, flask, wsl2, web-dev
 ---
 

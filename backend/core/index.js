@@ -1,8 +1,9 @@
 const express = require("express");
-const db = require('../shared/db');
+const db = require('./db');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const port = 3000;
+const PORT = 3000;
+const HOST = '0.0.0.0';
 
 const app = express();
 
@@ -12,13 +13,23 @@ app.use(bodyParser.json());
 app.use('/images', express.static('media/thumbnails'));
 
 app.get('/bloglist', async (req, res) => {
+
+  const searchQuery = req.query.query || "";
+
   try {
-    const data = await db.query('SELECT postid, title, author, publicationdate FROM Post ORDER BY postid ASC;');
+    const data = await db.query(
+      `SELECT postid, title, author, publicationdate 
+       FROM Post 
+       ${searchQuery ? 'WHERE title ILIKE $1' : ''} 
+       ORDER BY postid ASC`,
+      searchQuery ? [`%${searchQuery}%`] : []
+    );
+    
     res.json(data.rows);
 
   } catch (err) {
-    res.status(500).send(err);
-    console.log(err);
+    res.status(500).json({ error: 'Internal Server Error', message: err.message });
+    console.log(err); // Log error message to server console
   }
 });
 
@@ -36,4 +47,4 @@ app.post('/data', async (req, res) => {
   }
 });
 
-app.listen(port, () => console.log(`Listening on ${port}`));
+app.listen(PORT, HOST, () => console.log(`Listening on http://${HOST}:${PORT}/`));

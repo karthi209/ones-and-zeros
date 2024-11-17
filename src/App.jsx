@@ -5,7 +5,6 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Blog from "./components/Blog";
 import Projects from "./components/Projects";
-import Tools from "./components/Tools";
 import About from "./components/About";
 
 function App() {
@@ -31,7 +30,7 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<Blog />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/projects/:toolslug" element={<Tools />} />
+        <Route path="/projects/:slug" element={<Projects />} />
         <Route path="/about" element={<About />} />
       </Routes>
       <Footer />

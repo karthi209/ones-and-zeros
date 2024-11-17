@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
-const db = require('../shared/db');
+const db = require('./db');
 
 // Insert post into the database
 async function insertPost(postid, title, content, author, category, publicationdate, tags) {

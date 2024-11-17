@@ -18,7 +18,7 @@ const BlogPost = () => {
     const fetchPost = async () => {
       setLoading(true); // Start loading
       try {
-        const response = await fetch(`http://localhost:3000/data`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/data`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const BlogPost = () => {
         setPost(data[0]);
       } catch (error) {
         console.error("Error loading post:", error);
-        navigate("/blog");
+        
       } finally {
         setLoading(false); // End loading
       }
@@ -51,8 +51,10 @@ const BlogPost = () => {
           <div className="loading-placeholder"></div> // Show while loading
         ) : (
           <article className="blog">
-            <h1>{post.title}</h1>
-            <p>By {post.author} on {new Date(post.publicationdate).toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+            <div className="header-container">
+              <h1 className="blog-header">{post.title}</h1>
+              <a className="blog-meta">Posted by {post.author} on {new Date(post.publicationdate).toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric' })}</a>
+            </div>
             <ReactMarkdown
               children={post.content}
               remarkPlugins={[gfm]}
@@ -79,25 +81,41 @@ const BlogPost = () => {
 
 // Component to display the list of blog posts
 const BlogList = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]); 
+  const [searchQuery, setSearchQuery ] = useState("");
+
+
+  const fetchPosts = async (query = "") => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/bloglist${query ? `?query=${encodeURIComponent(query)}` : ''}`);
+      const data = await response.json();
+      console.log(data);
+      setPosts(data);
+    } catch (error) {
+      console.error("Error loading posts:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch(`http://localhost:3000/bloglist`);
-        const data = await response.json();
-        console.log(data);
-        setPosts(data);
-      } catch (error) {
-        console.error("Error loading posts:", error);
-      }
-    };
-
     fetchPosts();
   }, []);
 
+  const handleSearch = () => {
+    fetchPosts(searchQuery);
+  };
+
   return (
     <div className="pages-custom">
+      <div className="search-container">
+        <input 
+            type="text" 
+            value={searchQuery} 
+            onChange={e => setSearchQuery(e.target.value)} 
+            placeholder="Search with title..." 
+            className="search-input"
+        />
+        <button onClick={handleSearch} className="search-button">Search</button>
+      </div>
       <div className="blogposts">
         {posts.map((post) => (
           <article key={post.postid} className="articleclass">
@@ -109,11 +127,10 @@ const BlogList = () => {
               <h4>{post.title}</h4>
               <div className="meta">
                 <p>
-                  Posted on {new Date(post.publicationdate).toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric' })} | By{" "}
-                  {post.author}{" "}
+                  Posted on {new Date(post.publicationdate).toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric' })}
                 </p>
               </div>
-              {/* <img src={`http://localhost:3000/images/${post.postid}.jpg`} alt={post.title} /> */}
+              <img src={`${import.meta.env.VITE_API_URL}/images/${post.postid}.jpg`} alt={post.title} />
             </Link>
           </article>
         ))}

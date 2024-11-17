@@ -1,13 +1,53 @@
 div.pages-custom {
-  margin: 0 auto;
-  padding: 24px 120px 48px 120px;
+  margin: auto;
   font-size: 17px;
   font-weight: normal;
   line-height: 28px;
   letter-spacing: normal;
-  max-width: 1440px;
+  max-width: 1200px;
   width: 100%;
   min-height: 100vh;
+  justify-content: flex-start;
+  min-height: 100vh; /* Ensures content takes full viewport height */
+  padding-bottom: 50px; /* Match this with the navbar height */
+  box-sizing: border-box;
+}
+
+div.pages-custom h1 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 40px;
+  line-height: 50px;
+  margin-top: auto 10vw;
+  text-align: end;
+}
+
+.welcome {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  height: 25vh;
+  font-size: 40px;
+  line-height: 50px;
+  margin-top: 40px;
+}
+
+.welcome h1 {
+  font-size: 55px;
+  margin-bottom: 0px;
+}
+
+.map-style {
+  width: 100%; /* Full width */
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome a {
+  align-self: auto;
+  font-size: 30px;
+  line-height: normal;
 }
 
 .master-blog h1 {
@@ -20,6 +60,10 @@ div.pages-custom {
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: 40px;
   line-height: 50px;
+}
+
+.home-head h1 {
+  margin-top: 0%;
 }
 
 .master-blog p {
@@ -52,8 +96,8 @@ div.pages-custom {
   justify-content: space-around;
   max-width: 100%;
   margin: 0 auto;
-  background-color: black;
-  color: aliceblue;
+  margin-top: 7vh;
+  margin-bottom: 7vh;
 }
 
 .footer-text {
@@ -83,7 +127,24 @@ div.pages-custom {
     padding: auto; /* Adjust as needed */
     max-width: 100%;
     padding: 20px;
-    padding-top: 5px;
+    padding-top: 0;
+  }
+
+  div.pages-custom h1 {
+    font-size: 40px;
+    line-height: 45px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: start;
+  }
+
+  .welcome a {
+    font-size: 20px;
+  }
+
+  .home-head {
+    font-size: 36px;
+    line-height: 40px;
   }
 
   .master-blog {

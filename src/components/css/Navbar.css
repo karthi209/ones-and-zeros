@@ -3,7 +3,7 @@ div.logotext {
   font-size: 25px;
   font-weight: 700;
   padding: 15px; /* Padding around the logo text */
-  margin-left: 5vw;
+  margin-left: 0;
 }
 
 .iconclass {
@@ -29,164 +29,215 @@ hr {
 
 .navbar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding: auto;
     margin: auto;
+    margin-left: 2vw;
+    margin-right: 2vw;
     margin-top: 1%;
-    font-size: 16px;
-    font-weight: 600;
-    max-width: 1440px;
-    width: 100%;
+    font-size: 18px;
+    font-weight: 800;
+    max-width: 100%;
     border-radius: 10px;
     
   }
+
+.logo-container {
+  display: flex;
+  align-items: center; /* Align icon and text horizontally */
+  justify-content: center; /* Center the content horizontally */
+}
+
+/* Hide the icon on desktop/tablet */
+.nav-icon {
+  display: none !important; /* Force hide the icon by default */
+}
+
+.nav-text {
+  font-size: 18px; /* Adjust text size */
+  margin-left: 10px; /* Space between icon and text */
+}
   
+.navbar-links {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.navbar-links li {
+  padding: 5px 1vw;
+  margin: 0;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.navbar-links li:hover {
+  text-decoration: #8f8f8f underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 1.5px;
+  color: blue;
+}
+
+.selected {
+  /* border-bottom: 2px solid; */
+  text-decoration: #656565 underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 1.5px;
+  color: blue;
+}
+
+.navbar-links a {
+  color: var(--text-color);
+  text-decoration: none; /* Optional: remove underline */
+}
+
+.mobile-icon {
+  display: none;
+}
+
+.theme-text {
+  color: white;
+}
+
+.bottombar {
+  display: none !important;
+}
+
+@media only screen and (max-width: 1500px) {
+
+  div.logotext {
+    margin-left: 5vw;
+  }
+
+  .iconclass {
+    margin: 10px 2vw 5px;
+  }
+
   .navbar-links {
-    display: flex;
-    list-style: none;
-    justify-content: flex-end;
-    flex-grow: 1;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
     margin-right: 1vw;
   }
 
-  .navbar-links li {
-    padding: 5px 1vw;
-    margin: 0;
+  .pc-icon {
+    margin-right: 3vw;
   }
 
-  .navbar-links li:hover {
-    text-decoration: #8f8f8f underline;
-    text-underline-offset: 8px;
-    text-decoration-thickness: 1.5px;
-    color: blue;
+}
+
+@media only screen and (max-width: 1320px) {
+
+  div.logotext {
+    margin-left: 0vw;
   }
 
-  .selected {
-    /* border-bottom: 2px solid; */
-    text-decoration: #656565 underline;
-    text-underline-offset: 8px;
-    text-decoration-thickness: 1.5px;
-    color: blue;
+  .iconclass {
+    margin: 10px 2vw 5px;
   }
 
-  .navbar-links a {
-    color: var(--text-color);
-    text-decoration: none; /* Optional: remove underline */
+  .navbar-links {
+    margin-right: 0vw;
   }
 
   .pc-icon {
-    margin-right: 5vw;
+    margin-right: 1vw;
   }
 
-  .mobile-icon {
+}
+
+@media only screen and (max-width: 768px) {
+
+  .navbar {
+    width: 100%;
+    padding: 18px;
+    padding-top: 8px;
+    padding-bottom: 0px;
+    flex-wrap: wrap;
+    justify-content: left;
+    font-size: 14px;
+  }
+
+  div.logotext {
+    justify-content: left;
+    font-size: 22px;
+    padding: 0px 0px 10px 0px;
+    margin: 0;
+    width: 50%;
+    font-weight: 600;
+  }
+  
+  .navbar-links {
+    justify-content: space-around;
+    margin: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0; /* Adjust the padding as needed */
+    z-index: 1000; /* Ensure it's above other content */
+    box-sizing: border-box;
+    background-color: var(--nav-bar-back-color);
+  }
+
+  .navbar-links li {
+    margin: 0; /* Ensures there's no margin around list items */
+    margin-top: 5px;
+    padding: 2 2vw;
+    font-weight: 500;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+
+  .navbar-links li:hover {
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+  }
+
+  .selected {
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+  }
+
+  .pc-icon {
     display: none;
   }
 
-  .theme-text {
-    color: white;
+  .mobile-icon {
+    display: inline-flex;
+    justify-content: left;
+    margin: 10px 0 28px auto;
   }
 
-  @media only screen and (max-width: 1500px) {
-
-    div.logotext {
-      margin-left: 5vw;
-    }
-
-    .iconclass {
-      margin: 10px 2vw 5px;
-    }
-
-    .navbar-links {
-      margin-right: 1vw;
-    }
-
-    .pc-icon {
-      margin-right: 3vw;
-    }
-
+  hr {
+    border: 0.5px solid;
+    max-width: 90%;
+    margin: 15px auto 0 auto;
   }
 
-  @media only screen and (max-width: 1320px) {
-
-    div.logotext {
-      margin-left: 0vw;
-    }
-
-    .iconclass {
-      margin: 10px 2vw 5px;
-    }
-
-    .navbar-links {
-      margin-right: 0vw;
-    }
-
-    .pc-icon {
-      margin-right: 1vw;
-    }
-
+  .logo-container {
+    flex-direction: column; /* Stack the icon and text vertically */
+    align-items: center; /* Center the items horizontally */
+    justify-content: center;
+    height: 24px; /* Center the items vertically */
   }
 
-  @media only screen and (max-width: 768px) {
-
-    .navbar {
-      width: 100%;
-      padding: 18px;
-      padding-top: 8px;
-      flex-wrap: wrap;
-      justify-content: left;
-      font-weight: 300;
-      font-size: 14px;
-    }
-
-    div.logotext {
-      justify-content: left;
-      font-size: 22px;
-      padding: 0px 0px 10px 0px;
-      margin: 0;
-      width: 50%;
-      font-weight: 600;
-    }
-    
-    .navbar-links {
-      justify-content: space-between;
-      width: 100%;
-      margin: 0;
-    }
-
-    .navbar-links li {
-      margin: 0; /* Ensures there's no margin around list items */
-      padding: 2 2vw;
-      font-weight: 600;
-    }
-
-    .navbar-links li:hover {
-      text-underline-offset: 6px;
-      text-decoration-thickness: 2px;
-    }
-  
-    .selected {
-      text-underline-offset: 6px;
-      text-decoration-thickness: 2px;
-    }
-
-    .pc-icon {
-      display: none;
-    }
-
-    .mobile-icon {
-      display: inline-flex;
-      justify-content: left;
-      margin: 10px 0 28px auto;
-    }
-
-    hr {
-      border: 0.5px solid;
-      max-width: 90%;
-      margin: 15px auto 0 auto;
-    }
-  
+  /* Show the icon on mobile */
+  .nav-icon {
+    display: block !important; /* Show the icon on mobile */
+    font-size: 27px !important; /* Adjust icon size for mobile */
   }
+
+  .nav-text {
+    font-size: 12px; /* Adjust text size for mobile */
+    margin-left: 0; /* Remove margin since the items are stacked vertically */
+    margin-top: 3px; /* Space between icon and text */
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+
+  .bottombar {
+    display: block !important;
+  }
+
+}
