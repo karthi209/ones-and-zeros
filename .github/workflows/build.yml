@@ -31,4 +31,6 @@ jobs:
           docker push ghcr.io/karthi209/onesandzeros/backend:latest
 
       - name: Clean up
-        run: docker rmi $(docker images -q)
+        run: |
+          docker rmi frontend
+          docker rmi backend
