@@ -91,7 +91,8 @@ jobs:
         if: ${{ github.event.inputs.build_backend == 'true' }}
         id: push_backend
         run: |
-          docker build -t ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }} -f ./backend/core/Dockerfile .
+          cd backend/core/
+          docker build -t ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }} -f Dockerfile .
           docker push ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }}
 
       # Only update the version if the push succeeded
