@@ -8,19 +8,23 @@ const HOST = '0.0.0.0';
 const app = express();
 
 // Configure CORS for specific domains
+const allowedOrigins = [
+  'http://144.126.254.165',
+  'http://144.126.254.165:80',
+  'http://172.28.238.244:5173'
+];
+
 const corsOptions = {
   origin: function (origin, callback) {
-    console.log("Received origin:", origin); // Log the origin for debugging
+    console.log("Received origin:", origin); // Debugging
 
-    // List of allowed domains
-    const allowedOrigins = ['http://144.126.254.165:80', 'http://172.28.238.244:5173'];
+    const normalizedOrigin = origin?.replace(/:80$/, ''); // Normalize origin
 
-    // If origin is in the allowed list or if there's no origin (for non-browser requests like curl or Postman)
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      console.log("Origin is allowed:", origin); // Log allowed origin for debugging
+    if (!origin || allowedOrigins.includes(normalizedOrigin)) {
+      console.log("Origin is allowed:", origin); // Debugging
       callback(null, true);
     } else {
-      console.log("Origin is not allowed:", origin); // Log rejected origin for debugging
+      console.log("Origin is not allowed:", origin); // Debugging
       callback(new Error('Not allowed by CORS'));
     }
   },
