@@ -40,7 +40,6 @@ permissions:
 
 jobs:
   build:
-    if: ${{ github.event.inputs.build_frontend == 'true' || github.event.inputs.build_backend == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
