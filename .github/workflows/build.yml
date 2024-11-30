@@ -8,9 +8,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Github login
-        run: |
-          echo "{{ secrets.PAT_TOKEN }}" | docker login ghcr.io -u karthi209 --password-stdin
+      - name: Login to GitHub Container Registry
+        run: echo "{{ secrets.PAT_TOKEN }}" | docker login ghcr.io -u karthi209 --password-stdin
 
       - name: Build frontend image
         run: |
