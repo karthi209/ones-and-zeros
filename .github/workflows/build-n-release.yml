@@ -21,7 +21,7 @@ permissions:
   id-token: write      # Needed for container image authentication
 
 jobs:
-  build:
+  build-n-release:
     runs-on: ubuntu-latest
     steps:
       # Checkout the repository code
