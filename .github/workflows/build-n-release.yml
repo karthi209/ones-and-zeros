@@ -185,10 +185,10 @@ jobs:
       - name: Deploy backend Docker container to production server using SSH with password
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} << 'EOF'
-            docker pull ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION_TO_DEPLOY }}
             docker stop backend-onesandzeros || true
             docker rm backend-onesandzeros  || true
             docker rmi $(docker images ghcr.io/karthi209/ones-and-zeros/backend -q | grep -v "$(docker images ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION_TO_DEPLOY }} -q)") || true
+            docker pull ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION_TO_DEPLOY }}
             docker run -d --name backend-onesandzeros -p 3000:3000 ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION_TO_DEPLOY }}
             docker update --restart unless-stopped backend-onesandzeros
           EOF
