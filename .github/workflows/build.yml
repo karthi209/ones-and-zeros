@@ -9,11 +9,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Login to GitHub Container Registry
-        run: echo "${{ secrets.PAT_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }}  --password-stdin
+        run: echo ${{ secrets.PAT_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build frontend image
-        run: |
-          docker build -t ghcr.io/karthi209/onesandzeros/frontend:latest -f Dockerfile .
+        run: docker build -t ghcr.io/karthi209/onesandzeros/frontend:latest -f Dockerfile .
 
       - name: Push frontend image
         run: |
@@ -32,5 +31,4 @@ jobs:
           docker push ghcr.io/karthi209/onesandzeros/backend:latest
 
       - name: Clean up
-        run: |
-          docker rmi $(docker images -q)
+        run: docker rmi $(docker images -q)
