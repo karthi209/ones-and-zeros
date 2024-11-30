@@ -154,7 +154,7 @@ jobs:
 
       - name: Verify frontend deployment
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "docker ps | grep frontend-container"
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "docker ps | grep frontend-onesandzeros"
 
   deploy_backend:
     if: ${{ github.event.inputs.deploy_backend == 'true' }}
@@ -194,4 +194,4 @@ jobs:
 
       - name: Verify backend deployment
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "docker ps | grep backend-container"
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "docker ps | grep backend-onesandzeros"
