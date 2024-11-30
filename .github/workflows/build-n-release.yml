@@ -13,6 +13,26 @@ on:
         required: true
         default: 'true'
         type: boolean
+      deploy_frontend:
+        description: 'Deploy frontend image?'
+        required: true
+        default: 'false'
+        type: boolean
+      deploy_backend:
+        description: 'Deploy backend image?'
+        required: true
+        default: 'false'
+        type: boolean
+      frontend_version:
+        description: 'Frontend version to deploy'
+        required: true
+        default: 'v1.0.1'
+        type: string
+      backend_version:
+        description: 'Backend version to deploy'
+        required: true
+        default: 'v1.0.1'
+        type: string
 
 permissions:
   contents: write
@@ -94,3 +114,54 @@ jobs:
           git add VERSION.txt
           git commit -m "Update backend version"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
+
+  deploy_frontend:
+    if: ${{ github.event.inputs.deploy_frontend == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy frontend Docker container to production server using SSH with password
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no user@your-prod-server-ip << 'EOF'
+          
+            docker pull ghcr.io/karthi209/ones-and-zeros/frontend:${{ github.event.inputs.frontend_version }}
+
+            docker stop frontend-container || true
+            docker rm frontend-container || true
+
+            # Run new frontend container
+            docker run -d --name frontend-container -p 80:3000 ghcr.io/karthi209/ones-and-zeros/frontend:${{ github.event.inputs.frontend_version }}
+
+            # Set frontend container to restart automatically unless stopped manually
+            docker update --restart unless-stopped frontend-container
+          EOF
+
+      - name: Verify frontend deployment
+        run: |
+          # SSH into the server and check frontend container status
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no user@your-prod-server-ip "docker ps | grep frontend-container"
+
+  deploy_backend:
+    if: ${{ github.event.inputs.deploy_backend == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy backend Docker container to production server using SSH with password
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no user@your-prod-server-ip << 'EOF'
+            # Pull the latest Docker backend image
+            docker pull ghcr.io/karthi209/ones-and-zeros/backend:${{ github.event.inputs.backend_version }}
+
+            # Stop and remove old backend container if it exists
+            docker stop backend-container || true
+            docker rm backend-container || true
+
+            # Run new backend container
+            docker run -d --name backend-container -p 5000:5000 ghcr.io/karthi209/ones-and-zeros/backend:${{ github.event.inputs.backend_version }}
+
+            # Set backend container to restart automatically unless stopped manually
+            docker update --restart unless-stopped backend-container
+          EOF
+
+      - name: Verify backend deployment
+        run: |
+          # SSH into the server and check backend container status
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no user@your-prod-server-ip "docker ps | grep backend-container"
