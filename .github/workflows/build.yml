@@ -77,12 +77,12 @@ jobs:
           if [[ "${{ github.event.inputs.build_frontend }}" == "true" ]]; then
             sed -i "s/frontend=.*/frontend=${{ env.FRONTEND_NEW_VERSION }}/" VERSION.txt
           fi
-          # Replace the backend version in VERSION.txt (if updated)
           if [[ "${{ github.event.inputs.build_backend }}" == "true" ]]; then
             sed -i "s/backend=.*/backend=${{ env.BACKEND_NEW_VERSION }}/" VERSION.txt
           fi
+          # Use GITHUB_TOKEN to commit and push the changes
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add VERSION.txt
           git commit -m "Update versions: frontend=${{ env.FRONTEND_NEW_VERSION }}, backend=${{ env.BACKEND_NEW_VERSION }}"
-          git push
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
