@@ -1,4 +1,4 @@
-name: build-n-release
+name: Build, Push, and Attest Docker Images
 
 on:
   workflow_dispatch:
@@ -15,20 +15,18 @@ on:
         type: boolean
 
 permissions:
-  contents: write      # Allow write access to repository contents
-  packages: write      # Allow pushing to GitHub Packages
-  attestations: write  # Allow pushing attestation for build provenance
-  id-token: write      # Needed for container image authentication
+  contents: write
+  packages: write
+  attestations: write
+  id-token: write
 
 jobs:
-  build-n-release:
+  build:
     runs-on: ubuntu-latest
     steps:
-      # Checkout the repository code
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Log in to GitHub Container Registry
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
         with:
@@ -36,7 +34,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Read current versions from VERSION.txt
       - name: Read current versions from VERSION.txt
         id: read_versions
         run: |
@@ -45,7 +42,6 @@ jobs:
           echo "FRONTEND_VERSION=$FRONTEND_VERSION" >> $GITHUB_ENV
           echo "BACKEND_VERSION=$BACKEND_VERSION" >> $GITHUB_ENV
 
-      # Increment frontend version
       - name: Increment frontend version
         if: ${{ github.event.inputs.build_frontend == 'true' }}
         run: |
@@ -53,7 +49,6 @@ jobs:
           echo "New frontend version: $FRONTEND_NEW_VERSION"
           echo "FRONTEND_NEW_VERSION=$FRONTEND_NEW_VERSION" >> $GITHUB_ENV
 
-      # Increment backend version
       - name: Increment backend version
         if: ${{ github.event.inputs.build_backend == 'true' }}
         run: |
@@ -61,42 +56,42 @@ jobs:
           echo "New backend version: $BACKEND_NEW_VERSION"
           echo "BACKEND_NEW_VERSION=$BACKEND_NEW_VERSION" >> $GITHUB_ENV
 
-      # Build and push frontend image
       - name: Build and push frontend image
         if: ${{ github.event.inputs.build_frontend == 'true' }}
-        run: |
-          docker build -t ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }} -f Dockerfile .
-          docker push ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }}
-          echo "::set-output name=digest::$(docker inspect --format='{{index .RepoDigests 0}}' ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }})"  # Extract image digest
+        id: push_frontend
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: Dockerfile
+          tags: ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }}
+          push: true
 
-      # Build and push backend image
       - name: Build and push backend image
         if: ${{ github.event.inputs.build_backend == 'true' }}
-        run: |
-          cd backend/core
-          docker build -t ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }} -f Dockerfile .
-          docker push ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }}
-          echo "::set-output name=digest::$(docker inspect --format='{{index .RepoDigests 0}}' ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }})"  # Extract image digest
+        id: push_backend
+        uses: docker/build-push-action@v2
+        with:
+          context: ./backend/core
+          file: Dockerfile
+          tags: ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }}
+          push: true
 
-      # Generate artifact attestation for frontend
       - name: Generate frontend artifact attestation
         if: ${{ github.event.inputs.build_frontend == 'true' }}
         uses: actions/attest-build-provenance@v1
         with:
           subject-name: ghcr.io/karthi209/ones-and-zeros/frontend
-          subject-digest: ${{ steps.push.outputs.digest }}
+          subject-digest: ${{ steps.push_frontend.outputs.digest }}
           push-to-registry: true
 
-      # Generate artifact attestation for backend
       - name: Generate backend artifact attestation
         if: ${{ github.event.inputs.build_backend == 'true' }}
         uses: actions/attest-build-provenance@v1
         with:
           subject-name: ghcr.io/karthi209/ones-and-zeros/backend
-          subject-digest: ${{ steps.push.outputs.digest }}
+          subject-digest: ${{ steps.push_backend.outputs.digest }}
           push-to-registry: true
 
-      # Commit and update the version file (if needed)
       - name: Update VERSION.txt
         run: |
           sed -i "s/frontend=.*/frontend=${{ env.FRONTEND_NEW_VERSION }}/" VERSION.txt
