@@ -13,4 +13,11 @@ const pool = new Pool({
   database: process.env.DB_NAME,
 });
 
+client.connect()
+  .then(() => console.log('Connected to the database'))
+  .catch(err => {
+    console.error('Database connection failed:', err.stack);
+    process.exit(1);  // Exit the process with a non-zero status if connection fails
+  });
+
 module.exports = pool;
