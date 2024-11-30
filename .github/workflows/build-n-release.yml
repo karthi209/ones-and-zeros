@@ -4,34 +4,32 @@ on:
   workflow_dispatch:
     inputs:
       build_frontend:
-        description: 'Build frontend image?'
+        description: 'Build frontend image'
         required: true
         default: 'true'
         type: boolean
       build_backend:
-        description: 'Build backend image?'
+        description: 'Build backend image'
         required: true
         default: 'true'
         type: boolean
       deploy_frontend:
-        description: 'Deploy frontend image?'
+        description: 'Deploy frontend image'
         required: true
         default: 'false'
         type: boolean
       deploy_backend:
-        description: 'Deploy backend image?'
+        description: 'Deploy backend image'
         required: true
         default: 'false'
         type: boolean
       frontend_version:
-        description: 'Frontend version to deploy'
-        required: true
-        default: 'v1.0.1'
+        description: 'Frontend version to deploy (optional): eg: v1.0.0'
+        required: false
         type: string
       backend_version:
-        description: 'Backend version to deploy'
-        required: true
-        default: 'v1.0.1'
+        description: 'Backend version to deploy (optional): eg: v1.0.0'
+        required: false
         type: string
 
 permissions:
@@ -115,31 +113,43 @@ jobs:
           git add VERSION.txt
           git commit -m "Update backend version"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
-
+  
   deploy_frontend:
-    if: ${{ github.event.inputs.deploy_frontend == 'true' }}
+    if: ${{ github.event.inputs.deploy_frontend == 'true' }}\
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Read frontend version from VERSION.txt
+        run: |
+          FRONTEND_VERSION=$(grep "frontend=" VERSION.txt | cut -d '=' -f 2)
+          echo "FRONTEND_VERSION=$FRONTEND_VERSION" >> $GITHUB_ENV
+
+      - name: Use frontend version from input or VERSION.txt
+        run: |
+          if [ -z "${{ github.event.inputs.frontend_version }}" ]; then
+            echo "Using frontend version from VERSION.txt: ${{ env.FRONTEND_VERSION }}"
+            FRONTEND_VERSION_TO_DEPLOY="${{ env.FRONTEND_VERSION }}"
+          else
+            echo "Using frontend version from input: ${{ github.event.inputs.frontend_version }}"
+            FRONTEND_VERSION_TO_DEPLOY="${{ github.event.inputs.frontend_version }}"
+          fi
+          echo "FRONTEND_VERSION_TO_DEPLOY=$FRONTEND_VERSION_TO_DEPLOY" >> $GITHUB_ENV
+
       - name: Deploy frontend Docker container to production server using SSH with password
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} << 'EOF'
-          
-            docker pull ghcr.io/karthi209/ones-and-zeros/frontend:${{ github.event.inputs.frontend_version }}
-
-            docker stop frontend-container || true
-            docker rm frontend-container || true
-
-            # Run new frontend container
-            docker run -d --name frontend-container -p 80:3000 ghcr.io/karthi209/ones-and-zeros/frontend:${{ github.event.inputs.frontend_version }}
-
-            # Set frontend container to restart automatically unless stopped manually
-            docker update --restart unless-stopped frontend-container
+            docker pull ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_VERSION_TO_DEPLOY }}
+            docker stop frontend-onesandzeros || true
+            docker rm frontend-onesandzeros || true
+            docker run -d --name frontend-onesandzeros -p 80:5173 ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_VERSION_TO_DEPLOY }}
+            docker update --restart unless-stopped frontend-onesandzeros
           EOF
 
       - name: Verify frontend deployment
         run: |
-          # SSH into the server and check frontend container status
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "docker ps | grep frontend-container"
 
   deploy_backend:
@@ -147,24 +157,35 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Read backend version from VERSION.txt
+        run: |
+          BACKEND_VERSION=$(grep "backend=" VERSION.txt | cut -d '=' -f 2)
+          echo "BACKEND_VERSION=$BACKEND_VERSION" >> $GITHUB_ENV
+
+      - name: Use backend version from input or VERSION.txt
+        run: |
+          if [ -z "${{ github.event.inputs.backend_version }}" ]; then
+            echo "Using backend version from VERSION.txt: ${{ env.BACKEND_VERSION }}"
+            BACKEND_VERSION_TO_DEPLOY="${{ env.BACKEND_VERSION }}"
+          else
+            echo "Using backend version from input: ${{ github.event.inputs.backend_version }}"
+            BACKEND_VERSION_TO_DEPLOY="${{ github.event.inputs.backend_version }}"
+          fi
+          echo "BACKEND_VERSION_TO_DEPLOY=$BACKEND_VERSION_TO_DEPLOY" >> $GITHUB_ENV
+
       - name: Deploy backend Docker container to production server using SSH with password
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} << 'EOF'
-            # Pull the latest Docker backend image
-            docker pull ghcr.io/karthi209/ones-and-zeros/backend:${{ github.event.inputs.backend_version }}
-
-            # Stop and remove old backend container if it exists
-            docker stop backend-container || true
-            docker rm backend-container || true
-
-            # Run new backend container
-            docker run -d --name backend-container -p 5000:5000 ghcr.io/karthi209/ones-and-zeros/backend:${{ github.event.inputs.backend_version }}
-
-            # Set backend container to restart automatically unless stopped manually
-            docker update --restart unless-stopped backend-container
+            docker pull ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION_TO_DEPLOY }}
+            docker stop backend-onesandzeros || true
+            docker rm backend-onesandzeros  || true
+            docker run -d --name backend-onesandzeros -p 3000:3000 ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION_TO_DEPLOY }}
+            docker update --restart unless-stopped backend-onesandzeros
           EOF
 
       - name: Verify backend deployment
         run: |
-          # SSH into the server and check backend container status
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "docker ps | grep backend-container"
