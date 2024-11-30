@@ -62,15 +62,15 @@ jobs:
       - name: Build and push frontend image
         if: ${{ github.event.inputs.build_frontend == 'true' }}
         run: |
-          docker build -t ghcr.io/karthi209/onesandzeros/frontend:${{ env.FRONTEND_NEW_VERSION }} -f Dockerfile .
-          docker push ghcr.io/karthi209/onesandzeros/frontend:${{ env.FRONTEND_NEW_VERSION }}
+          docker build -t ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }} -f Dockerfile .
+          docker push ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }}
 
       - name: Build and push backend image
         if: ${{ github.event.inputs.build_backend == 'true' }}
         run: |
           cd backend/core
-          docker build -t ghcr.io/karthi209/onesandzeros/backend:${{ env.BACKEND_NEW_VERSION }} -f Dockerfile .
-          docker push ghcr.io/karthi209/onesandzeros/backend:${{ env.BACKEND_NEW_VERSION }}
+          docker build -t ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }} -f Dockerfile .
+          docker push ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }}
           
       - name: Update VERSION.txt
         run: |
