@@ -62,7 +62,7 @@ jobs:
       - name: Build and push frontend image
         if: ${{ github.event.inputs.build_frontend == 'true' }}
         run: |
-          docker build -t ghcr.io/karthi209/onesandzeros/frontend:${{ env.FRONTEND_NEW_VERSION }} -f frontend/Dockerfile .
+          docker build -t ghcr.io/karthi209/onesandzeros/frontend:${{ env.FRONTEND_NEW_VERSION }} -f Dockerfile .
           docker push ghcr.io/karthi209/onesandzeros/frontend:${{ env.FRONTEND_NEW_VERSION }}
 
       - name: Build and push backend image
