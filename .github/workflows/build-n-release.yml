@@ -122,7 +122,7 @@ jobs:
     steps:
       - name: Deploy frontend Docker container to production server using SSH with password
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no user@your-prod-server-ip << 'EOF'
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} << 'EOF'
           
             docker pull ghcr.io/karthi209/ones-and-zeros/frontend:${{ github.event.inputs.frontend_version }}
 
