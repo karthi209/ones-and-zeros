@@ -1,88 +1,108 @@
-name: build-and-release
+name: Build, Push, and Attest Docker Images
 
 on:
   workflow_dispatch:
     inputs:
       build_frontend:
-        description: 'Build frontend image'
+        description: 'Build frontend image?'
         required: true
         default: 'true'
         type: boolean
       build_backend:
-        description: 'Build backend image'
+        description: 'Build backend image?'
         required: true
         default: 'true'
         type: boolean
 
+permissions:
+  contents: write      # Allow write access to repository contents
+  packages: write      # Allow pushing to GitHub Packages
+  attestations: write  # Allow pushing attestation for build provenance
+  id-token: write      # Needed for container image authentication
+
 jobs:
-  build-and-release:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      # Checkout the repository code
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Login to GitHub Container Registry
-        run: echo ${{ secrets.PAT_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      # Log in to GitHub Container Registry
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
+      # Read current versions from VERSION.txt
       - name: Read current versions from VERSION.txt
         id: read_versions
         run: |
           FRONTEND_VERSION=$(grep "frontend=" VERSION.txt | cut -d '=' -f 2)
           BACKEND_VERSION=$(grep "backend=" VERSION.txt | cut -d '=' -f 2)
-          echo "Current frontend version is $FRONTEND_VERSION"
-          echo "Current backend version is $BACKEND_VERSION"
           echo "FRONTEND_VERSION=$FRONTEND_VERSION" >> $GITHUB_ENV
           echo "BACKEND_VERSION=$BACKEND_VERSION" >> $GITHUB_ENV
 
+      # Increment frontend version
       - name: Increment frontend version
         if: ${{ github.event.inputs.build_frontend == 'true' }}
-        id: increment_frontend_version
         run: |
-          VERSION=${{ env.FRONTEND_VERSION }}
-          IFS='.' read -r -a version_parts <<< "${VERSION//v/}"
-          PATCH=$((version_parts[2]+1))
-          FRONTEND_NEW_VERSION="v${version_parts[0]}.${version_parts[1]}.$PATCH"
+          FRONTEND_NEW_VERSION="v$(echo ${{ env.FRONTEND_VERSION }} | cut -d'.' -f1).$(echo ${{ env.FRONTEND_VERSION }} | cut -d'.' -f2).$(($(echo ${{ env.FRONTEND_VERSION }} | cut -d'.' -f3) + 1))"
           echo "New frontend version: $FRONTEND_NEW_VERSION"
           echo "FRONTEND_NEW_VERSION=$FRONTEND_NEW_VERSION" >> $GITHUB_ENV
 
+      # Increment backend version
       - name: Increment backend version
         if: ${{ github.event.inputs.build_backend == 'true' }}
-        id: increment_backend_version
         run: |
-          VERSION=${{ env.BACKEND_VERSION }}
-          IFS='.' read -r -a version_parts <<< "${VERSION//v/}"
-          PATCH=$((version_parts[2]+1))
-          BACKEND_NEW_VERSION="v${version_parts[0]}.${version_parts[1]}.$PATCH"
+          BACKEND_NEW_VERSION="v$(echo ${{ env.BACKEND_VERSION }} | cut -d'.' -f1).$(echo ${{ env.BACKEND_VERSION }} | cut -d'.' -f2).$(($(echo ${{ env.BACKEND_VERSION }} | cut -d'.' -f3) + 1))"
           echo "New backend version: $BACKEND_NEW_VERSION"
           echo "BACKEND_NEW_VERSION=$BACKEND_NEW_VERSION" >> $GITHUB_ENV
 
-      - name: Login to GitHub Container Registry
-        run: echo ${{ secrets.PAT_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
+      # Build and push frontend image
       - name: Build and push frontend image
         if: ${{ github.event.inputs.build_frontend == 'true' }}
         run: |
-          docker build -t ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }} -f Dockerfile .
+          docker build -t ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }} -f frontend/Dockerfile .
           docker push ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }}
+          echo "::set-output name=digest::$(docker inspect --format='{{index .RepoDigests 0}}' ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }})"  # Extract image digest
 
+      # Build and push backend image
       - name: Build and push backend image
         if: ${{ github.event.inputs.build_backend == 'true' }}
         run: |
           cd backend/core
           docker build -t ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }} -f Dockerfile .
           docker push ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }}
-          
+          echo "::set-output name=digest::$(docker inspect --format='{{index .RepoDigests 0}}' ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }})"  # Extract image digest
+
+      # Generate artifact attestation for frontend
+      - name: Generate frontend artifact attestation
+        if: ${{ github.event.inputs.build_frontend == 'true' }}
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-name: ghcr.io/karthi209/ones-and-zeros/frontend
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
+
+      # Generate artifact attestation for backend
+      - name: Generate backend artifact attestation
+        if: ${{ github.event.inputs.build_backend == 'true' }}
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-name: ghcr.io/karthi209/ones-and-zeros/backend
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
+
+      # Commit and update the version file (if needed)
       - name: Update VERSION.txt
         run: |
-          if [[ "${{ github.event.inputs.build_frontend }}" == "true" ]]; then
-            sed -i "s/frontend=.*/frontend=${{ env.FRONTEND_NEW_VERSION }}/" VERSION.txt
-          fi
-          if [[ "${{ github.event.inputs.build_backend }}" == "true" ]]; then
-            sed -i "s/backend=.*/backend=${{ env.BACKEND_NEW_VERSION }}/" VERSION.txt
-          fi
-          # Use GITHUB_TOKEN to commit and push the changes
+          sed -i "s/frontend=.*/frontend=${{ env.FRONTEND_NEW_VERSION }}/" VERSION.txt
+          sed -i "s/backend=.*/backend=${{ env.BACKEND_NEW_VERSION }}/" VERSION.txt
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add VERSION.txt
-          git commit -m "Update versions: frontend=${{ env.FRONTEND_NEW_VERSION }}, backend=${{ env.BACKEND_NEW_VERSION }}"
+          git commit -m "Update version for frontend and backend"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
