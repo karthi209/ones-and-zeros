@@ -7,8 +7,24 @@ const HOST = '0.0.0.0';
 
 const app = express();
 
-// Configure CORS for a specific domain
-const corsOptions = { origin: '*' };
+// Configure CORS for specific domains
+const corsOptions = {
+  origin: function (origin, callback) {
+    // List of allowed domains
+    const allowedOrigins = ['http://144.126.254.165:80', 'http://172.28.238.244:5173'];
+    
+    // Check if the origin is in the allowed list
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      // If origin is in the allowed list or if no origin (e.g., for non-browser requests like curl)
+      callback(null, true);
+    } else {
+      // If origin is not allowed
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST'], // Add allowed methods as needed
+  allowedHeaders: ['Content-Type'] // Add any allowed headers
+};
 
 
 app.use(cors(corsOptions));
