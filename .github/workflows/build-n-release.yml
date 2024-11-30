@@ -6,12 +6,12 @@ on:
       build_frontend:
         description: 'Build frontend image'
         required: true
-        default: 'true'
+        default: 'false'
         type: boolean
       build_backend:
         description: 'Build backend image'
         required: true
-        default: 'true'
+        default: 'false'
         type: boolean
       deploy_frontend:
         description: 'Deploy frontend image'
