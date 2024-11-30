@@ -34,17 +34,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Validate VERSION.txt
-        run: |
-          if [[ ! -f "VERSION.txt" ]]; then
-            echo "VERSION.txt not found!"
-            exit 1
-          fi
-          if ! grep -q "frontend=" VERSION.txt || ! grep -q "backend=" VERSION.txt; then
-            echo "VERSION.txt must contain 'frontend=' and 'backend=' lines."
-            exit 1
-          fi
-
       - name: Read current versions from VERSION.txt
         id: read_versions
         run: |
@@ -67,66 +56,57 @@ jobs:
           echo "New backend version: $BACKEND_NEW_VERSION"
           echo "BACKEND_NEW_VERSION=$BACKEND_NEW_VERSION" >> $GITHUB_ENV
 
-      - name: Build frontend image
+      # Manually build and push frontend image
+      - name: Build and push frontend image
         if: ${{ github.event.inputs.build_frontend == 'true' }}
-        id: build_frontend
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: Dockerfile
-          tags: ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }}
-          push: false
+        id: push_frontend
+        run: |
+          docker build -t ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }} -f Dockerfile .
+          docker push ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }}
 
-      - name: Push frontend image
-        if: ${{ github.event.inputs.build_frontend == 'true' && steps.build_frontend.outcome == 'success' }}
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: Dockerfile
-          tags: ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }}
-          push: true
-
-      - name: Build backend image
+      # Manually build and push backend image
+      - name: Build and push backend image
         if: ${{ github.event.inputs.build_backend == 'true' }}
-        id: build_backend
-        uses: docker/build-push-action@v2
-        with:
-          context: ./backend/core
-          file: Dockerfile
-          tags: ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }}
-          push: false
+        id: push_backend
+        run: |
+          docker build -t ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }} -f ./backend/core/Dockerfile .
+          docker push ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }}
 
-      - name: Push backend image
-        if: ${{ github.event.inputs.build_backend == 'true' && steps.build_backend.outcome == 'success' }}
-        uses: docker/build-push-action@v2
-        with:
-          context: ./backend/core
-          file: Dockerfile
-          tags: ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }}
-          push: true
-
-      - name: Generate frontend artifact attestation
-        if: ${{ github.event.inputs.build_frontend == 'true' && steps.build_frontend.outcome == 'success' }}
-        uses: actions/attest-build-provenance@v1
-        with:
-          subject-name: ghcr.io/karthi209/ones-and-zeros/frontend
-          subject-digest: ${{ steps.build_frontend.outputs.digest }}
-          push-to-registry: true
-
-      - name: Generate backend artifact attestation
-        if: ${{ github.event.inputs.build_backend == 'true' && steps.build_backend.outcome == 'success' }}
-        uses: actions/attest-build-provenance@v1
-        with:
-          subject-name: ghcr.io/karthi209/ones-and-zeros/backend
-          subject-digest: ${{ steps.build_backend.outputs.digest }}
-          push-to-registry: true
-
-      - name: Update VERSION.txt
+      # Only update the version if the push succeeded
+      - name: Update frontend version in VERSION.txt
+        if: ${{ github.event.inputs.build_frontend == 'true' && steps.push_frontend.outcome == 'success' }}
         run: |
           sed -i "s/frontend=.*/frontend=${{ env.FRONTEND_NEW_VERSION }}/" VERSION.txt
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add VERSION.txt
+          git commit -m "Update frontend version"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
+
+      - name: Update backend version in VERSION.txt
+        if: ${{ github.event.inputs.build_backend == 'true' && steps.push_backend.outcome == 'success' }}
+        run: |
           sed -i "s/backend=.*/backend=${{ env.BACKEND_NEW_VERSION }}/" VERSION.txt
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add VERSION.txt
-          git commit -m "Update version for frontend and backend"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref_name }}
+          git commit -m "Update backend version"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
+
+      # Generate frontend artifact attestation
+      - name: Generate frontend artifact attestation
+        if: ${{ github.event.inputs.build_frontend == 'true' && steps.push_frontend.outcome == 'success' }}
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-name: ghcr.io/karthi209/ones-and-zeros/frontend
+          subject-digest: ${{ steps.push_frontend.outputs.digest }}
+          push-to-registry: true
+
+      # Generate backend artifact attestation
+      - name: Generate backend artifact attestation
+        if: ${{ github.event.inputs.build_backend == 'true' && steps.push_backend.outcome == 'success' }}
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-name: ghcr.io/karthi209/ones-and-zeros/backend
+          subject-digest: ${{ steps.push_backend.outputs.digest }}
+          push-to-registry: true
