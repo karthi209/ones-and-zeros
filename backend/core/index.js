@@ -8,21 +8,8 @@ const HOST = '0.0.0.0';
 const app = express();
 
 // Configure CORS for a specific domain
-const corsOptions = {
-  origin: function (origin, callback) {
-    // List of allowed IP addresses
-    const allowedOrigins = ['http://144.126.254.165:80', 'http://172.28.238.244:5173']; // Add your allowed IPs here
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      // If origin matches one of the allowed IPs or if there's no origin (e.g., for non-browser requests)
-      callback(null, true);
-    } else {
-      // If origin is not in the allowed list
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
-};
+const corsOptions = { origin: '*' };
+
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
