@@ -7,29 +7,42 @@ const HOST = '0.0.0.0';
 
 const app = express();
 
-app.use(cors());
+// Configure CORS for a specific domain
+const corsOptions = {
+  origin: 'http://144.126.254.165:5173', // Replace with your front-end URL
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.use('/images', express.static('media/thumbnails'));
 
 app.get('/bloglist', async (req, res) => {
-
   const searchQuery = req.query.query || "";
 
   try {
+    const limit = 12;  // Set a limit on the number of rows returned
+
     const data = await db.query(
       `SELECT postid, title, author, publicationdate 
        FROM Post 
        ${searchQuery ? 'WHERE title ILIKE $1' : ''} 
-       ORDER BY postid ASC`,
-      searchQuery ? [`%${searchQuery}%`] : []
+       ORDER BY postid ASC
+       LIMIT $${searchQuery ? 2 : 1}`,
+      searchQuery ? [`%${searchQuery}%`, limit] : [limit]
     );
-    
+
     res.json(data.rows);
 
   } catch (err) {
-    res.status(500).json({ error: 'Internal Server Error', message: err.message });
-    console.log(err); // Log error message to server console
+    res.status(500).json({
+      error: 'Internal Server Error',
+      message: 'An error occurred while processing your request.',
+      details: process.env.NODE_ENV === 'development' ? err.message : undefined
+    });
+    console.log(err);
   }
 });
 

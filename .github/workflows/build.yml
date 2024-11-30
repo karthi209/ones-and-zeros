@@ -1,0 +1,37 @@
+name: build
+on:
+  workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Github login
+        run: |
+          echo "{{ secrets.PAT_TOKEN }}" | docker login ghcr.io -u karthi209 --password-stdin
+
+      - name: Build frontend image
+        run: |
+          docker build -t ghcr.io/karthi209/onesandzeros/frontend:latest -f Dockerfile .
+
+      - name: Push frontend image
+        run: |
+          docker tag ghcr.io/karthi209/onesandzeros/frontend:latest karthi209/frontend:latest
+          docker push ghcr.io/karthi209/onesandzeros/frontend:latest
+
+      - name: Build backend image
+        run: |
+          cd backend/core
+          docker build -t ghcr.io/karthi209/onesandzeros/backend:latest -f Dockerfile .
+
+      - name: Push backend image
+        run: |
+          cd backend/core
+          docker tag ghcr.io/karthi209/onesandzeros/backend:latest karthi209/backend:latest
+          docker push ghcr.io/karthi209/onesandzeros/backend:latest
+
+      - name: Clean up
+        run: |
+          docker rmi $(docker images -q)
