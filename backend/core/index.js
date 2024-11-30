@@ -17,13 +17,15 @@ const corsOptions = {
 
     // If origin is in the allowed list or if there's no origin (for non-browser requests like curl or Postman)
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      console.log("Origin is allowed:", origin); // Log allowed origin for debugging
       callback(null, true);
     } else {
+      console.log("Origin is not allowed:", origin); // Log rejected origin for debugging
       callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: ['GET', 'POST'], // Add allowed methods as needed
-  allowedHeaders: ['Content-Type'], // Add any allowed headers
+  methods: ['*'], // Allow all HTTP methods
+  allowedHeaders: ['*'], // Allow all headers
 };
 
 app.use(cors(corsOptions));
