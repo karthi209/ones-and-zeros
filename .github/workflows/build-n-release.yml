@@ -92,21 +92,3 @@ jobs:
           git add VERSION.txt
           git commit -m "Update backend version"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
-
-      # Generate frontend artifact attestation
-      - name: Generate frontend artifact attestation
-        if: ${{ github.event.inputs.build_frontend == 'true' && steps.push_frontend.outcome == 'success' }}
-        uses: actions/attest-build-provenance@v1
-        with:
-          subject-name: ghcr.io/karthi209/ones-and-zeros/frontend
-          subject-digest: ${{ steps.push_frontend.outputs.digest }}
-          push-to-registry: true
-
-      # Generate backend artifact attestation
-      - name: Generate backend artifact attestation
-        if: ${{ github.event.inputs.build_backend == 'true' && steps.push_backend.outcome == 'success' }}
-        uses: actions/attest-build-provenance@v1
-        with:
-          subject-name: ghcr.io/karthi209/ones-and-zeros/backend
-          subject-digest: ${{ steps.push_backend.outputs.digest }}
-          push-to-registry: true
