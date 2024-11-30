@@ -1,4 +1,4 @@
-name: Build, Push, and Attest Docker Images
+name: build-n-release
 
 on:
   workflow_dispatch:
@@ -65,7 +65,7 @@ jobs:
       - name: Build and push frontend image
         if: ${{ github.event.inputs.build_frontend == 'true' }}
         run: |
-          docker build -t ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }} -f frontend/Dockerfile .
+          docker build -t ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }} -f Dockerfile .
           docker push ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }}
           echo "::set-output name=digest::$(docker inspect --format='{{index .RepoDigests 0}}' ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }})"  # Extract image digest
 
