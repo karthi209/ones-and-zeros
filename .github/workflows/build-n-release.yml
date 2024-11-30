@@ -140,7 +140,7 @@ jobs:
       - name: Verify frontend deployment
         run: |
           # SSH into the server and check frontend container status
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no user@your-prod-server-ip "docker ps | grep frontend-container"
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "docker ps | grep frontend-container"
 
   deploy_backend:
     if: ${{ github.event.inputs.deploy_backend == 'true' }}
@@ -167,4 +167,4 @@ jobs:
       - name: Verify backend deployment
         run: |
           # SSH into the server and check backend container status
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no user@your-prod-server-ip "docker ps | grep backend-container"
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "docker ps | grep backend-container"
