@@ -190,7 +190,15 @@ jobs:
             docker rm backend-onesandzeros  || true
             docker rmi $(docker images ghcr.io/karthi209/ones-and-zeros/backend -q | grep -v "$(docker images ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION_TO_DEPLOY }} -q)") || true
             docker pull ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION_TO_DEPLOY }}
-            docker run -d --name backend-onesandzeros -p 3000:3000 ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION_TO_DEPLOY }}
+            docker run -d \
+              --name backend-onesandzeros \
+              -p 3000:3000 \
+              -e DB_USER="${{ secrets.DB_USER }}" \
+              -e DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
+              -e DB_HOST="${{ secrets.DB_HOST }}" \
+              -e DB_PORT="${{ secrets.DB_PORT }}" \
+              -e DB_NAME="${{ secrets.DB_NAME }}" \
+              ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION_TO_DEPLOY }}
             docker update --restart unless-stopped backend-onesandzeros
           EOF
 
