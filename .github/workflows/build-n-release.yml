@@ -40,7 +40,7 @@ permissions:
 
 jobs:
   build:
-    if: ${{ github.event.inputs.build_frontend == 'true' }} || ${{ github.event.inputs.build_backend== 'true' }}
+    if: ${{ github.event.inputs.build_frontend == 'true' || github.event.inputs.build_backend == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -117,7 +117,7 @@ jobs:
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
   
   deploy_frontend:
-    if: ${{ github.event.inputs.deploy_frontend == 'true' }}\
+    if: ${{ github.event.inputs.deploy_frontend == 'true' }}
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -148,6 +148,7 @@ jobs:
             docker pull ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_VERSION_TO_DEPLOY }}
             docker stop frontend-onesandzeros || true
             docker rm frontend-onesandzeros || true
+            docker rmi $(docker images ghcr.io/karthi209/ones-and-zeros/frontend -q | grep -v "$(docker images ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.BACKEND_VERSION_TO_DEPLOY }} -q)") || true
             docker run -d --name frontend-onesandzeros -p 80:5173 ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_VERSION_TO_DEPLOY }}
             docker update --restart unless-stopped frontend-onesandzeros
           EOF
@@ -188,6 +189,7 @@ jobs:
             docker pull ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION_TO_DEPLOY }}
             docker stop backend-onesandzeros || true
             docker rm backend-onesandzeros  || true
+            docker rmi $(docker images ghcr.io/karthi209/ones-and-zeros/backend -q | grep -v "$(docker images ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION_TO_DEPLOY }} -q)") || true
             docker run -d --name backend-onesandzeros -p 3000:3000 ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION_TO_DEPLOY }}
             docker update --restart unless-stopped backend-onesandzeros
           EOF
