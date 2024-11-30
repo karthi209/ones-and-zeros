@@ -117,6 +117,7 @@ jobs:
 
   deploy_frontend:
     if: ${{ github.event.inputs.deploy_frontend == 'true' }}
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Deploy frontend Docker container to production server using SSH with password
@@ -142,6 +143,7 @@ jobs:
 
   deploy_backend:
     if: ${{ github.event.inputs.deploy_backend == 'true' }}
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Deploy backend Docker container to production server using SSH with password
