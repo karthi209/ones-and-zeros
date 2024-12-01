@@ -37,9 +37,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
-app.use('/images', express.static('media/thumbnails'));
+app.use('/api/images', express.static('media/thumbnails'));
 
-app.get('/bloglist', async (req, res) => {
+app.get('/api/bloglist', async (req, res) => {
   const searchQuery = req.query.query || "";
 
   try {
@@ -66,7 +66,7 @@ app.get('/bloglist', async (req, res) => {
   }
 });
 
-app.post('/data', async (req, res) => {
+app.post('/api/data', async (req, res) => {
   const { integerValue } = req.body;
   console.log('Received integerValue:', integerValue);
 
