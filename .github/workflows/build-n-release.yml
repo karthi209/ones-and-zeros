@@ -285,11 +285,11 @@ jobs:
             docker stop nginx-onesandzeros || true
             docker rm nginx-onesandzeros || true
             docker rmi $(docker images nginx -q) || true
-            docker pull nginx:latest
+            docker pull nginx
             docker run -d --name nginx-onesandzeros \
               -v /home/karthi209/nginx-config/nginx.conf:/etc/nginx/nginx.conf \
               -p 80:80 \
-              --link postgres:postgres \
+              --link postgres-onesandzeros:postgres-onesandzeros \
               nginx:latest
             docker update --restart unless-stopped nginx-onesandzeros
           EOF
