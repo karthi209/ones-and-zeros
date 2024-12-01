@@ -4,7 +4,7 @@ services:
   frontend:
     image: "ghcr.io/karthi209/ones-and-zeros/frontend:${FRONTEND_VERSION}"
     build:
-      context: .  # Adjust to the folder containing your React Dockerfile
+      context: "."  # Adjust to the folder containing your React Dockerfile
     ports:
       - "5173:5173"  # React app runs on port 3000 internally, adjust as needed
     depends_on:
@@ -13,7 +13,7 @@ services:
   backend:
     image: "ghcr.io/karthi209/ones-and-zeros/backend:${BACKEND_VERSION}"
     build:
-      context: ./backend/core  # Adjust to the folder containing your Node.js Dockerfile
+      context: "./backend/core"  # Adjust to the folder containing your Node.js Dockerfile
     ports:
       - "3000:3000"  # Node backend runs on port 5000 internally
     environment:
@@ -26,7 +26,7 @@ services:
       - postgres
 
   postgres:
-    image: postgres:latest
+    image: "postgres:latest"
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -37,7 +37,7 @@ services:
       - "/home/karthi209/postgres_data:/var/lib/postgresql/data"
 
   nginx:
-    image: nginx:latest
+    image: "nginx:latest"
     volumes:
       - "/home/karthi209/nginx-config/nginx.conf:/etc/nginx/nginx.conf"  # Ensure this path is correct
     ports:
