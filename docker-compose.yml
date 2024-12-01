@@ -39,7 +39,7 @@ services:
   nginx:
       image: nginx:latest
       volumes:
-        - "/home/username/nginx-config/nginx.conf:/etc/nginx/nginx.conf"
+        - "/home/karthi209/nginx_conf/nginx.conf:/etc/nginx/nginx.conf"
       ports:
         - "80:80"
         - "443:443"
