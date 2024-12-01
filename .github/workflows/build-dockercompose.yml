@@ -169,7 +169,8 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
         run: |
           # SCP to upload dynamic-nginx.conf to the server
-          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} dynamic-nginx.conf ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }}:/tmp/tmp_gitrepos
+          echo "Uploading Nginx configuration..."
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no dynamic-nginx.conf ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }}:/tmp/tmp_gitrepos
       
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} << 'EOF'
             cd /tmp/tmp_gitrepos  # Ensure you're in the project directory
