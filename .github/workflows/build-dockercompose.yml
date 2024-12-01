@@ -47,6 +47,12 @@ jobs:
         with:
           clean: true
 
+      - name: Install dependecies
+        run: |
+          sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+          docker-compose --version
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
         with:
