@@ -24,7 +24,7 @@ on:
         default: 'false'
         type: boolean
       deploy_postgres:
-        description: 'Deploy postgres
+        description: 'Deploy postgres'
         required: true
         default: 'false'
         type: boolean
