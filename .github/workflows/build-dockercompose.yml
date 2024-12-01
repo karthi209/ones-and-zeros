@@ -176,9 +176,7 @@ jobs:
             cd /tmp/tmp_gitrepos  # Ensure you're in the project directory
             rm -rf ./*
             # Clone the repo if it's not already present
-            if [ ! -d ".git" ]; then
-              git clone https://github.com/karthi209/ones-and-zeros.git .
-            fi
+            git clone https://github.com/karthi209/ones-and-zeros.git .
             git pull origin main
       
             echo "Updating Nginx configuration..."
