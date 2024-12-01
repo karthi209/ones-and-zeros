@@ -1,4 +1,4 @@
-name: build-n-release
+name: build-dockercompose
 
 on:
   workflow_dispatch:
