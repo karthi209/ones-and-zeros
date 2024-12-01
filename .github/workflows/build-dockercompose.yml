@@ -190,8 +190,9 @@ jobs:
             git pull origin main
       
             echo "Updating Nginx configuration..."
-            sudo mv /tmp/dynamic-nginx.conf /etc/nginx/conf.d/nginx.conf
-            sudo chmod 644 /etc/nginx/conf.d/nginx.conf
+            
+            mv /tmp/dynamic-nginx.conf /home/karthi209/nginx_conf/nginx.conf
+            chmod 644 /home/karthi209/nginx_conf/nginx.conf
 
               # Ensure docker-compose.yml exists before continuing
             if [ ! -f docker-compose.yml ]; then
