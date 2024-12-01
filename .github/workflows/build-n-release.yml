@@ -257,7 +257,7 @@ jobs:
               -v /home/karthi209/postgres_data:/var/lib/postgresql/data \
               -p 5432:5432 \
               postgres:latest
-            docker update --restart unless-stopped postgres
+            docker update --restart unless-stopped postgres-onesandzeros
           EOF
 
       - name: Check if postgres container is running
@@ -291,7 +291,7 @@ jobs:
               -p 80:80 \
               --link postgres:postgres \
               nginx:latest
-            docker update --restart unless-stopped nginx
+            docker update --restart unless-stopped nginx-onesandzeros
           EOF
 
       - name: Check if nginx container is running
