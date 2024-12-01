@@ -191,7 +191,7 @@ jobs:
       
             echo "Updating Nginx configuration..."
             mv /tmp/dynamic-nginx.conf /etc/nginx/conf.d/nginx.conf
-            chmod 644 ./nginx.conf 
+            chmod 644 /etc/nginx/conf.d/nginx.conf
 
               # Ensure docker-compose.yml exists before continuing
             if [ ! -f docker-compose.yml ]; then
