@@ -37,12 +37,12 @@ services:
       - /home/karthi209/postgres_data:/var/lib/postgresql/data
 
   nginx:
-    image: nginx:latest
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf  # Mount your custom Nginx config file
-    ports:
-      - "80:80"   # HTTP port
-      - "443:443" # HTTPS port
-    depends_on:
-      - frontend
-      - backend
+      image: nginx:latest
+      volumes:
+        - ./dynamic-nginx.conf:/etc/nginx/nginx.conf:ro
+      ports:
+        - "80:80"
+        - "443:443"
+      depends_on:
+        - frontend
+        - backend
