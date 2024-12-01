@@ -1,0 +1,130 @@
+name: build-n-release
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_frontend:
+        description: 'Build frontend image'
+        required: true
+        default: 'false'
+        type: boolean
+      build_backend:
+        description: 'Build backend image'
+        required: true
+        default: 'false'
+        type: boolean
+      deploy_frontend:
+        description: 'Deploy frontend image'
+        required: true
+        default: 'false'
+        type: boolean
+      deploy_backend:
+        description: 'Deploy backend image'
+        required: true
+        default: 'false'
+        type: boolean
+      frontend_version:
+        description: 'Frontend version to deploy (optional): eg: v1.0.0'
+        required: false
+        type: string
+      backend_version:
+        description: 'Backend version to deploy (optional): eg: v1.0.0'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  packages: write
+  attestations: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          clean: true
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Read current versions from VERSION.txt
+        id: read_versions
+        run: |
+          FRONTEND_VERSION=$(grep "frontend=" VERSION.txt | cut -d '=' -f 2)
+          BACKEND_VERSION=$(grep "backend=" VERSION.txt | cut -d '=' -f 2)
+          echo "FRONTEND_VERSION=$FRONTEND_VERSION" >> $GITHUB_ENV
+          echo "BACKEND_VERSION=$BACKEND_VERSION" >> $GITHUB_ENV
+          
+      - name: Increment frontend version
+        if: ${{ github.event.inputs.build_frontend == 'true' }}
+        run: |
+          FRONTEND_VERSION_NO_V=$(echo ${{ env.FRONTEND_VERSION }} | sed 's/^v//')  # Remove leading 'v' if present
+          FRONTEND_NEW_VERSION="v$(echo $FRONTEND_VERSION_NO_V | cut -d'.' -f1).$(echo $FRONTEND_VERSION_NO_V | cut -d'.' -f2).$(($(echo $FRONTEND_VERSION_NO_V | cut -d'.' -f3) + 1))"
+          echo "New frontend version: $FRONTEND_NEW_VERSION"
+          echo "FRONTEND_NEW_VERSION=$FRONTEND_NEW_VERSION" >> $GITHUB_ENV
+
+      - name: Increment backend version
+        if: ${{ github.event.inputs.build_backend == 'true' }}
+        run: |
+          BACKEND_VERSION_NO_V=$(echo ${{ env.BACKEND_VERSION }} | sed 's/^v//')  # Remove leading 'v' if present
+          BACKEND_NEW_VERSION="v$(echo $BACKEND_VERSION_NO_V | cut -d'.' -f1).$(echo $BACKEND_VERSION_NO_V | cut -d'.' -f2).$(($(echo $BACKEND_VERSION_NO_V | cut -d'.' -f3) + 1))"
+          echo "New backend version: $BACKEND_NEW_VERSION"
+          echo "BACKEND_NEW_VERSION=$BACKEND_NEW_VERSION" >> $GITHUB_ENV
+
+      # Build and push images using Docker Compose
+      - name: Build and push images
+        if: ${{ github.event.inputs.build_frontend == 'true' || github.event.inputs.build_backend == 'true' }}
+        run: |
+          # Update Docker Compose file with new versions
+          if [ "${{ github.event.inputs.build_frontend }}" == "true" ]; then
+            sed -i "s|ghcr.io/karthi209/ones-and-zeros/frontend:.*|ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_NEW_VERSION }}|" docker-compose.yml
+          fi
+          if [ "${{ github.event.inputs.build_backend }}" == "true" ]; then
+            sed -i "s|ghcr.io/karthi209/ones-and-zeros/backend:.*|ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_NEW_VERSION }}|" docker-compose.yml
+          fi
+
+          # Build and push the images using Docker Compose
+          docker-compose build
+          docker-compose push
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.deploy_frontend == 'true' || github.event.inputs.deploy_backend == 'true' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          clean: true
+
+      - name: Pull latest changes from repository
+        run: git pull origin HEAD
+
+      - name: Deploy services using Docker Compose
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} << 'EOF'
+            git pull origin main
+
+            # Update Docker Compose file with new versions
+            sed -i "s|ghcr.io/karthi209/ones-and-zeros/frontend:.*|ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_VERSION }}|" docker-compose.yml
+            sed -i "s|ghcr.io/karthi209/ones-and-zeros/backend:.*|ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION }}|" docker-compose.yml
+
+            # Pull new images and restart services
+            docker-compose pull
+            docker-compose down
+            docker-compose up -d
+
+            # Clean up old images
+            docker system prune -f
+          EOF
+
+      - name: Verify deployment
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "docker ps"

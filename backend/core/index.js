@@ -11,6 +11,8 @@ const app = express();
 const allowedOrigins = [
   'http://144.126.254.165',
   'http://144.126.254.165:80',
+  'http://theonesandzeros.com',
+  'https://theonesandzeros.com',
   'http://172.28.238.244:5173'
 ];
 

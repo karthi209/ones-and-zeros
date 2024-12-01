@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: ghcr.io/karthi209/ones-and-zeros/frontend:v1.0.1
+    build:
+      context: . # Adjust to the folder containing your React Dockerfile
+    ports:
+      - "5173:5173" # React app runs on port 3000 internally
+    depends_on:
+      - backend
+
+  backend:
+    image: ghcr.io/karthi209/ones-and-zeros/backend:v1.0.1
+    build:
+      context: ./backend/core # Adjust to the folder containing your Node.js Dockerfile
+    ports:
+      - "3000:3000" # Node backend runs on port 5000
+    environment:
+      DB_USER:
+      DB_PASSWORD:
+      DB_HOST:
+      DB_PORT:
+      DB_NAME:
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dbname
+    ports:
+      - "5432:5432" # PostgreSQL runs on port 5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf # Mount your custom Nginx config file
+    ports:
+      - "80:80"   # HTTP port
+      - "443:443" # HTTPS port
+    depends_on:
+      - react
+      - backend
+
+volumes:
+  pgdata:
