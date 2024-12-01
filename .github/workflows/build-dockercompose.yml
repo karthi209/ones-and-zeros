@@ -183,7 +183,8 @@ jobs:
             cd ..
             mv dynamic-nginx.conf ./nginx.conf
             chmod 644 ./nginx.conf  # Ensure Nginx can read the config
-      
+
+            cd /tmp/tmp_gitrepos
             # Update Docker Compose file with new versions
             sed -i "s|ghcr.io/karthi209/ones-and-zeros/frontend:.*|ghcr.io/karthi209/ones-and-zeros/frontend:${{ github.sha }}|" docker-compose.yml
             sed -i "s|ghcr.io/karthi209/ones-and-zeros/backend:.*|ghcr.io/karthi209/ones-and-zeros/backend:${{ github.sha }}|" docker-compose.yml
