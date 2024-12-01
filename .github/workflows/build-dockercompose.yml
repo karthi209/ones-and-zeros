@@ -190,7 +190,7 @@ jobs:
             git pull origin main
       
             echo "Updating Nginx configuration..."
-            mv /tmp/dynamic-nginx.conf ./nginx.conf
+            mv /tmp/dynamic-nginx.conf /etc/nginx/conf.d/nginx.conf
             chmod 644 ./nginx.conf 
 
               # Ensure docker-compose.yml exists before continuing
@@ -199,9 +199,12 @@ jobs:
               exit 1
             fi
 
-            # Update Docker Compose file with new versions
-            sed -i "s|ghcr.io/karthi209/ones-and-zeros/frontend:.*|ghcr.io/karthi209/ones-and-zeros/frontend:${{ github.sha }}|" docker-compose.yml
-            sed -i "s|ghcr.io/karthi209/ones-and-zeros/backend:.*|ghcr.io/karthi209/ones-and-zeros/backend:${{ github.sha }}|" docker-compose.yml
+            # Update Docker Compose file with the frontend version to deploy
+            sed -i "s|ghcr.io/karthi209/ones-and-zeros/frontend:.*|ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_VERSION_TO_DEPLOY }}|" docker-compose.yml
+            
+            # Update Docker Compose file with the backend version to deploy (if needed)
+            sed -i "s|ghcr.io/karthi209/ones-and-zeros/backend:.*|ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION_TO_DEPLOY }}|" docker-compose.yml
+
       
             # Pull new images and restart services
             docker-compose pull
