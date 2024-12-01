@@ -170,12 +170,22 @@ jobs:
       - name: Check if frontend container is running
         run: |
           echo "Checking if frontend container is running on remote server..."
+          TIMEOUT=120  # 2 minutes in seconds
+          START_TIME=$(date +%s)
+          
           until sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "docker ps --filter 'name=frontend-onesandzeros' --filter 'status=running' --format '{{.Names}}' | grep -w 'frontend-onesandzeros'"; do
             echo "Container not found or not running yet. Retrying in 5 seconds..."
             sleep 5
+            
+            CURRENT_TIME=$(date +%s)
+            ELAPSED_TIME=$((CURRENT_TIME - START_TIME))
+            
+            if [ $ELAPSED_TIME -ge $TIMEOUT ]; then
+              echo "Frontend container did not start within 2 minutes. Exiting."
+              exit 1  # Exit with an error code
+            fi
           done
           echo "frontend-onesandzeros container is running!"
-
 
   deploy_backend:
     if: ${{ github.event.inputs.deploy_backend == 'true' }}
@@ -230,11 +240,22 @@ jobs:
       - name: Check if backend container is running
         run: |
           echo "Checking if backend container is running on remote server..."
+          TIMEOUT=120  # 2 minutes in seconds
+          START_TIME=$(date +%s)
+          
           until sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "docker ps --filter 'name=backend-onesandzeros' --filter 'status=running' --format '{{.Names}}' | grep -w 'backend-onesandzeros'"; do
             echo "Container not found or not running yet. Retrying in 5 seconds..."
             sleep 5
+            
+            CURRENT_TIME=$(date +%s)
+            ELAPSED_TIME=$((CURRENT_TIME - START_TIME))
+            
+            if [ $ELAPSED_TIME -ge $TIMEOUT ]; then
+              echo "Backend container did not start within 2 minutes. Exiting."
+              exit 1  # Exit with an error code
+            fi
           done
-          echo "backend container is running!"
+          echo "Backend container is running!"
 
   deploy_postgres:
     if: ${{ github.event.inputs.deploy_postgres == 'true' }}
@@ -268,11 +289,22 @@ jobs:
       - name: Check if postgres container is running
         run: |
           echo "Checking if postgres container is running on remote server..."
+          TIMEOUT=120  # 2 minutes in seconds
+          START_TIME=$(date +%s)
+          
           until sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "docker ps --filter 'name=postgres-onesandzeros' --filter 'status=running' --format '{{.Names}}' | grep -w 'postgres-onesandzeros'"; do
             echo "Container not found or not running yet. Retrying in 5 seconds..."
             sleep 5
+            
+            CURRENT_TIME=$(date +%s)
+            ELAPSED_TIME=$((CURRENT_TIME - START_TIME))
+            
+            if [ $ELAPSED_TIME -ge $TIMEOUT ]; then
+              echo "Postgres container did not start within 2 minutes. Exiting."
+              exit 1  # Exit with an error code
+            fi
           done
-          echo "postgres container is running!"
+          echo "postgres-onesandzeros container is running!"
 
   deploy_nginx:
     if: ${{ github.event.inputs.deploy_nginx == 'true' }}
@@ -304,9 +336,21 @@ jobs:
       - name: Check if nginx container is running
         run: |
           echo "Checking if nginx container is running on remote server..."
+          TIMEOUT=120  # 2 minutes in seconds
+          START_TIME=$(date +%s)
+          
           until sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "docker ps --filter 'name=nginx-onesandzeros' --filter 'status=running' --format '{{.Names}}' | grep -w 'nginx-onesandzeros'"; do
             echo "Container not found or not running yet. Retrying in 5 seconds..."
             sleep 5
+            
+            CURRENT_TIME=$(date +%s)
+            ELAPSED_TIME=$((CURRENT_TIME - START_TIME))
+            
+            if [ $ELAPSED_TIME -ge $TIMEOUT ]; then
+              echo "Nginx container did not start within 2 minutes. Exiting."
+              exit 1  # Exit with an error code
+            fi
           done
-          echo "nginx container is running!"
+          echo "nginx-onesandzeros container is running!"
+
 
