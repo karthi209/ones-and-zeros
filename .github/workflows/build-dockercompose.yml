@@ -171,14 +171,22 @@ jobs:
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} << 'EOF'
             git pull origin main
 
+            echo "Updating Nginx configuration..."
+            mv dynamic-nginx.conf ./nginx.conf
+            chmod 644 ./nginx.conf  # Ensure Nginx can read the config
+
             # Update Docker Compose file with new versions
-            sed -i "s|ghcr.io/karthi209/ones-and-zeros/frontend:.*|ghcr.io/karthi209/ones-and-zeros/frontend:${{ env.FRONTEND_VERSION }}|" docker-compose.yml
-            sed -i "s|ghcr.io/karthi209/ones-and-zeros/backend:.*|ghcr.io/karthi209/ones-and-zeros/backend:${{ env.BACKEND_VERSION }}|" docker-compose.yml
+            sed -i "s|ghcr.io/karthi209/ones-and-zeros/frontend:.*|ghcr.io/karthi209/ones-and-zeros/frontend:${{ github.sha }}|" docker-compose.yml
+            sed -i "s|ghcr.io/karthi209/ones-and-zeros/backend:.*|ghcr.io/karthi209/ones-and-zeros/backend:${{ github.sha }}|" docker-compose.yml
 
             # Pull new images and restart services
             docker-compose pull
             docker-compose down
             docker-compose up -d
+            docker-compose up -d --force-recreate nginx
+
+            # Reload Nginx to apply the new config
+            docker exec -it nginx nginx -s reload
 
             # Clean up old images
             docker system prune -f
@@ -187,3 +195,4 @@ jobs:
       - name: Verify deployment
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "docker ps"
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "curl -I http://localhost"
