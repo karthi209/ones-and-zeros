@@ -160,38 +160,46 @@ jobs:
               }
           }
           EOF
-
+      
       - name: Deploy services using Docker Compose
         env:
-            DB_USER: ${{ secrets.DB_USER }}
-            DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-            DB_HOST: ${{ secrets.DB_HOST }}
-            DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_NAME: ${{ secrets.DB_NAME }}
         run: |
+          # SCP to upload dynamic-nginx.conf to the server
+          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} dynamic-nginx.conf ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }}:/tmp/tmp_gitrepos
+      
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} << 'EOF'
+            cd /tmp/tmp_gitrepos  # Ensure you're in the project directory
+            # Clone the repo if it's not already present
+            if [ ! -d ".git" ]; then
+              git clone https://github.com/karthi209/ones-and-zeros.git .
+            fi
             git pull origin main
-
+      
             echo "Updating Nginx configuration..."
             mv dynamic-nginx.conf ./nginx.conf
             chmod 644 ./nginx.conf  # Ensure Nginx can read the config
-
+      
             # Update Docker Compose file with new versions
             sed -i "s|ghcr.io/karthi209/ones-and-zeros/frontend:.*|ghcr.io/karthi209/ones-and-zeros/frontend:${{ github.sha }}|" docker-compose.yml
             sed -i "s|ghcr.io/karthi209/ones-and-zeros/backend:.*|ghcr.io/karthi209/ones-and-zeros/backend:${{ github.sha }}|" docker-compose.yml
-
+      
             # Pull new images and restart services
             docker-compose pull
             docker-compose down
             docker-compose up -d
             docker-compose up -d --force-recreate nginx
-
+      
             # Reload Nginx to apply the new config
             docker exec -it nginx nginx -s reload
-
+      
             # Clean up old images
             docker system prune -f
           EOF
-
+      
       - name: Verify deployment
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} "docker ps"
