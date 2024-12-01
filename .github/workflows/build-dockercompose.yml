@@ -107,7 +107,28 @@ jobs:
       - name: Pull latest changes from repository
         run: git pull origin HEAD
 
+      - name: Read frontend version from VERSION.txt
+        run: |
+            FRONTEND_VERSION=$(grep "frontend=" VERSION.txt | cut -d '=' -f 2)
+            echo "FRONTEND_VERSION=$FRONTEND_VERSION" >> $GITHUB_ENV
+
+      - name: Use frontend version from input or VERSION.txt
+        run: |
+            if [ -z "${{ github.event.inputs.frontend_version }}" ]; then
+                echo "Using frontend version from VERSION.txt: ${{ env.FRONTEND_VERSION }}"
+                FRONTEND_VERSION_TO_DEPLOY="${{ env.FRONTEND_VERSION }}"
+            else
+                echo "Using frontend version from input: ${{ github.event.inputs.frontend_version }}"
+                FRONTEND_VERSION_TO_DEPLOY="${{ github.event.inputs.frontend_version }}"
+            fi
+            echo "FRONTEND_VERSION_TO_DEPLOY=$FRONTEND_VERSION_TO_DEPLOY" >> $GITHUB_ENV
+
       - name: Deploy services using Docker Compose
+        env:
+            DB_USER: ${{ secrets.DB_USER }}
+            DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+            DB_HOST: ${{ secrets.DB_HOST }}
+            DB_NAME: ${{ secrets.DB_NAME }}
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} << 'EOF'
             git pull origin main
