@@ -67,16 +67,32 @@ app.get('/api/bloglist', async (req, res) => {
 });
 
 app.post('/api/data', async (req, res) => {
+  console.log('Received request body:', req.body);
   const { integerValue } = req.body;
   console.log('Received integerValue:', integerValue);
 
+  // Validate the integerValue
+  if (!integerValue || !Number.isInteger(integerValue)) {
+    return res.status(400).json({ error: 'Invalid integer value' });
+  }
+
   try {
     const data = await db.query('SELECT * FROM Post WHERE postid = $1;', [integerValue]);
+
+    // Check if data exists
+    if (data.rows.length === 0) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
     res.json(data.rows);
 
   } catch (err) {
-    res.status(500).send(err);
-    console.log(err);
+    console.error('Database error:', err);
+    res.status(500).json({
+      error: 'Internal Server Error',
+      message: 'An error occurred while fetching data from the database.',
+      details: err.message
+    });
   }
 });
 
