@@ -327,7 +327,7 @@ jobs:
             docker run -d --name nginx-onesandzeros \
               -v /home/karthi209/nginx_conf/nginx.conf:/etc/nginx/nginx.conf:ro \
               -v /etc/letsencrypt:/etc/letsencrypt:ro \
-              -p 80:80 \
+              -p 443:443 \
               --network network-onesandzeros \
               --link postgres-onesandzeros:postgres-onesandzeros \
               nginx:latest
