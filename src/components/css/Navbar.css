@@ -12,20 +12,14 @@ div.logotext {
 
 .navbar {
     display: flex;
-    justify-content:center;
-    align-items: center;
     font-size: 18px;
     font-weight: 700;
     max-width: 75%;
-    width: 75%;
-    grid-column: 1 / span 1;
     border: 1px solid rgb(188, 188, 188);
     border-bottom: none;
     padding: 20px;
-    margin: auto;
+    margin: 0 auto;
     grid-gap: 0;
-    justify-items: stretch; /* Stretch grid items to full width */
-    align-items: stretch; /* Stretch grid items to fill full height */
 }
 
 /* Hide the icon on desktop/tablet */

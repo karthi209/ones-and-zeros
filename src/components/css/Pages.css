@@ -6,7 +6,13 @@ div.pages-custom {
   letter-spacing: normal;
   max-width: 1200px;
   width: 100%;
+  min-height: 100vh;
   justify-content: flex-start;
+  min-height: 100vh; /* Ensures content takes full viewport height */
+  padding-bottom: 50px; /* Match this with the navbar height */
+  box-sizing: border-box;
+  border: 1px solid rgb(188, 188, 188);
+  grid-gap: 0;
 }
 .container {
   display: grid;
@@ -20,17 +26,32 @@ div.pages-custom {
   grid-gap: 0;
 }
 
+.holder {
+  display: grid;
+  border: 1px solid rgb(188, 188, 188);
+  grid-gap: 0;
+  max-width: 75%; /* Make the container take up 75% of the parent width */
+  min-width: 75%; /* Optional: Ensure it doesn't shrink below a minimum width */
+  border-top: 0;
+  border-bottom: 0;
+  justify-content: center;
+}
+
 .centered-element {
-  font-size: 20px;
-  font-family: "IBM Plex Mono", serif;
+  font-size: 18px;
+  font-weight:500;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   text-align: center; /* Align text to the left inside the columns */
   border: 1px solid rgb(188, 188, 188);
   grid-gap: 0;
-  width: 75%; /* Make the container take up 75% of the parent width */
-  min-width: 200px; /* Optional: Ensure it doesn't shrink below a minimum width */
+  max-width: 75%; /* Make the container take up 75% of the parent width */
+  min-width: 75%; /* Optional: Ensure it doesn't shrink below a minimum width */
   margin: 0 auto; /* Center the container horizontally (optional) */
-  padding: 20px;
+  padding: 40px;
   border-top: 0;
+  font-family: "IBM Plex Mono", serif;
+  line-height: 30px;
 }
 
 /* Grid of 3 columns */
@@ -43,6 +64,7 @@ div.pages-custom {
   min-width: 200px; /* Optional: Ensure it doesn't shrink below a minimum width */
   margin: 0 auto; /* Center the container horizontally (optional) */
   border-top: 0;
+  border-bottom: 0;
 }
 /* Individual column styles */
 .column {
@@ -53,6 +75,7 @@ div.pages-custom {
   border: 1px solid rgb(188, 188, 188);
   border-top: 0;
   border-right: 0;
+  border-bottom: 0;
 }
 
 .column1 {
@@ -134,6 +157,10 @@ div.pages-custom h1 {
   letter-spacing: normal;
   max-width: 1000px;
   width: 100%;
+  justify-items: left; /* Center elements horizontally */
+  align-items: left; /* Center elements vertically */
+  text-align: left; /* Center text inside elements */
+  
 }
 
 .footer-custom {
