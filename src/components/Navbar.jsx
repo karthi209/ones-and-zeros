@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./css/Navbar.css";
-import ThemeToggle from "./ThemeToggle";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
 import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
@@ -26,21 +25,11 @@ const Navbar = ({ theme, toggleTheme }) => {
     );
   }, [location.pathname]);
 
-  const logo =
-    theme === "dark" ? "onesandzeros-dark.png" : "onesandzeros-light.png";
-
   return (
     <nav className="navbar">
       <div className="logotext">
-        <img
-          alt="Ones and Zeros"
-          src={logo}
-          style={{ height: "50px", paddingRight: "10px" }}
-        />
+        <p>karthi(209)</p>
       </div>
-      <Link className="mobile-icon">
-        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-      </Link>
       <ul className="navbar-links">
         <li className={selectedItem === "home" ? "selected" : ""}>
           <Link to="/" onClick={() => setSelectedItem("home")}>
@@ -77,10 +66,6 @@ const Navbar = ({ theme, toggleTheme }) => {
           </Link>
         </li>
       </ul>
-      
-      <Link className="pc-icon">
-        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-      </Link>
     </nav>
   );
 };
