@@ -1,52 +1,31 @@
 div.logotext {
   display: flex;
-  font-size: 25px;
-  font-weight: 700;
-  padding: 15px; /* Padding around the logo text */
-  margin-left: 0;
-}
-
-.iconclass {
-  display: inline-flex; 
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  margin: 10px 2vw 5px;
-  cursor: pointer;
-  transition: transform 0.3s ease !important;
+  font-size: 24px;
+  font-weight: 800;
+  font-family: Anonymous Pro;
+  margin-left: 20px;
 }
 
 .iconclass.rotate {
   transform: rotate(360deg) !important;  /* Rotates the icon by 360 degrees */
 }
 
-hr {
-  border: 1px solid;
-  max-width: 1200px;
-  margin: 20px auto;
-  text-align: 'center';
-}
-
 .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content:center;
     align-items: center;
-    padding: auto;
-    margin: auto;
-    margin-left: 2vw;
-    margin-right: 2vw;
-    margin-top: 1%;
     font-size: 18px;
-    font-weight: 800;
-    max-width: 100%;
-    border-radius: 10px;
-    
-  }
-
-.logo-container {
-  display: flex;
-  align-items: center; /* Align icon and text horizontally */
-  justify-content: center; /* Center the content horizontally */
+    font-weight: 700;
+    max-width: 75%;
+    width: 75%;
+    grid-column: 1 / span 1;
+    border: 1px solid rgb(188, 188, 188);
+    border-bottom: none;
+    padding: 20px;
+    margin: auto;
+    grid-gap: 0;
+    justify-items: stretch; /* Stretch grid items to full width */
+    align-items: stretch; /* Stretch grid items to fill full height */
 }
 
 /* Hide the icon on desktop/tablet */
@@ -58,12 +37,14 @@ hr {
   font-size: 18px; /* Adjust text size */
   margin-left: 10px; /* Space between icon and text */
   font-weight: 600;
+  color: #8f8f8f;
 }
   
 .navbar-links {
   display: flex;
   list-style: none;
-  justify-content: center;
+  justify-content: right;
+  align-items: center;
   flex-grow: 1;
   padding: 0;
   margin: 0;
@@ -71,27 +52,19 @@ hr {
 }
 
 .navbar-links li {
-  padding: 5px 1vw;
+  padding: 5px 0.5vw;
   margin: 0;
 }
 
-.navbar-links li:hover {
-  text-decoration: #8f8f8f underline;
-  text-underline-offset: 8px;
-  text-decoration-thickness: 1.5px;
-  color: blue;
+.nav-text:hover {
+  color: black;
 }
 
-.selected {
-  /* border-bottom: 2px solid; */
-  text-decoration: #656565 underline;
-  text-underline-offset: 8px;
-  text-decoration-thickness: 1.5px;
-  color: blue;
+.navbar-links li.selected .nav-text {
+  color: #000; /* Black color for selected item */
 }
 
 .navbar-links a {
-  color: var(--text-color);
   text-decoration: none; /* Optional: remove underline */
 }
 

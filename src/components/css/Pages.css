@@ -6,11 +6,57 @@ div.pages-custom {
   letter-spacing: normal;
   max-width: 1200px;
   width: 100%;
-  min-height: 100vh;
   justify-content: flex-start;
-  min-height: 100vh; /* Ensures content takes full viewport height */
-  padding-bottom: 50px; /* Match this with the navbar height */
-  box-sizing: border-box;
+}
+.container {
+  display: grid;
+  grid-template-rows: auto 1fr; /* Header row and content row */
+  grid-template-columns: 1fr; /* Single column for centered element */
+  grid-gap: 20px; /* Spacing between grid items */
+  justify-items: center; /* Center elements horizontally */
+  align-items: center; /* Center elements vertically */
+  text-align: center; /* Center text inside elements */
+  border: 1px solid rgb(188, 188, 188);
+  grid-gap: 0;
+}
+
+.centered-element {
+  font-size: 20px;
+  font-family: "IBM Plex Mono", serif;
+  text-align: center; /* Align text to the left inside the columns */
+  border: 1px solid rgb(188, 188, 188);
+  grid-gap: 0;
+  width: 75%; /* Make the container take up 75% of the parent width */
+  min-width: 200px; /* Optional: Ensure it doesn't shrink below a minimum width */
+  margin: 0 auto; /* Center the container horizontally (optional) */
+  padding: 20px;
+  border-top: 0;
+}
+
+/* Grid of 3 columns */
+.grid-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Three equal columns */
+  border: 1px solid rgb(188, 188, 188);
+  grid-gap: 0;
+  width: 75%; /* Make the container take up 75% of the parent width */
+  min-width: 200px; /* Optional: Ensure it doesn't shrink below a minimum width */
+  margin: 0 auto; /* Center the container horizontally (optional) */
+  border-top: 0;
+}
+/* Individual column styles */
+.column {
+  border: 1px solid black; /* Border for each column */
+  padding: 20px; /* Padding inside each column */
+  text-align: left; /* Align text to the left inside the columns */
+  grid-gap: 0;
+  border: 1px solid rgb(188, 188, 188);
+  border-top: 0;
+  border-right: 0;
+}
+
+.column1 {
+  border-left: 0;
 }
 
 div.pages-custom h1 {
@@ -24,14 +70,11 @@ div.pages-custom h1 {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  height: 25vh;
-  font-size: 40px;
   line-height: 50px;
   margin-top: 40px;
 }
 
 .welcome h1 {
-  font-size: 55px;
   margin-bottom: 0px;
 }
 
@@ -45,18 +88,19 @@ div.pages-custom h1 {
 
 .welcome a {
   align-self: auto;
-  font-size: 30px;
+  font-size: 18px;
   line-height: normal;
 }
 
 .master-blog h1 {
-  font-size: 48px;
+  font-size: 30px;
   line-height: 58px;
 }
 
 .home-head {
-  font-size: 40px;
+  font-size: 26px;
   line-height: 50px;
+  font-weight: 600;
 }
 
 .home-head h1 {
@@ -64,7 +108,12 @@ div.pages-custom h1 {
 }
 
 .master-blog p {
-  font-size: 20px;
+  font-size: 18px;
+  line-height: 33px;
+}
+
+.master-blog h3 {
+  font-size: 22px;
   line-height: 33px;
 }
 
