@@ -70,6 +70,7 @@
     border: 1px solid rgb(188, 188, 188);
     grid-gap: 0;
     margin-bottom: 20px;
+    background-color: #ffffff;
 }
 
 .articleclass:hover {
@@ -82,7 +83,7 @@
     padding: 0;
     margin: 0;
     line-height: 28px;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
     text-align: left;
     display: -webkit-box;
@@ -143,70 +144,38 @@
 
 @media only screen and (max-width: 768px) {
 
-.blogposts {
-    margin: 0;
-    max-width: 100%;
-    width: 100%;
-    padding-top: 20px;
-}
+    .blogposts {
+        margin: auto;
+        max-width: 95%;
+        padding-top: 20px;
+    }
 
-.articleclass {
-    margin: 0;
-    padding: 0;
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 18px;
-    border-radius: 10px;
-    max-height: 1000px;
-}
+    .articleclass {
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        max-height: 500px;
+    }
 
-.search-container {
-    display: flex;
-    align-items: flex-end;
-    margin: 5px;
-    margin-right: 8px;
-    margin-bottom: 30px;
-    justify-content: flex-end;
-}
+    .meta {
+        font-size: 10px;
+        text-align: left;
+    }
 
-.search-input {
-    width: 400px;
-    padding: 5px;
-    border: 3px solid var(--search-bar-border-color);
-    border-radius: 8px;
-    font-size: 18px;
-    color: var(--search-bar-font-color);
-    background-color: var(--search-bar-background-color);
-}
+    .blogposts img {
+        max-width: 100%;
+    }
 
-.meta {
-    font-size: 10px;
-}
+    .search-container {
+        align-items: center;
+        margin: 20px;
+        margin-right: 15px;
+        margin-bottom: 30px;
+        justify-content: flex-end;
+    }
 
-.articleclass h4 {
-    padding: 0;
-    margin: 0;
-    line-height: 38px;
-    font-size: 28px;
-    font-weight: 900;
-    text-align: auto;
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Sets exactly three lines */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Adds "..." if text exceeds three lines */
-    height: calc(1em * 1.5 * 3);
-    /* font-family: "Gelasio", serif; */
+    .articleclass {
+        max-width: 95%;
+        padding: 22px;
+    }
 }
-
-.blogposts img {
-    max-width: 100%;
-    width: 100vw;
-}
-
-.search-container {
-    margin-bottom: 10px;
-}
-
- }

@@ -1,6 +1,6 @@
 div.pages-custom {
   margin: auto;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: normal;
   line-height: 28px;
   letter-spacing: normal;
@@ -18,12 +18,12 @@ div.pages-custom {
   display: grid;
   grid-template-rows: auto 1fr; /* Header row and content row */
   grid-template-columns: 1fr; /* Single column for centered element */
-  grid-gap: 20px; /* Spacing between grid items */
   justify-items: center; /* Center elements horizontally */
   align-items: center; /* Center elements vertically */
   text-align: center; /* Center text inside elements */
   border: 1px solid rgb(188, 188, 188);
   grid-gap: 0;
+  margin: 0;
 }
 
 .holder {
@@ -39,15 +39,15 @@ div.pages-custom {
 
 .centered-element {
   font-size: 18px;
-  font-weight:500;
+  font-weight: 500;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 3fr 1fr;
   text-align: center; /* Align text to the left inside the columns */
   border: 1px solid rgb(188, 188, 188);
   grid-gap: 0;
-  max-width: 75%; /* Make the container take up 75% of the parent width */
-  min-width: 75%; /* Optional: Ensure it doesn't shrink below a minimum width */
-  margin: 0 auto; /* Center the container horizontally (optional) */
+  max-width: 75%;
+  min-width: 75%;
+  margin: 0 auto;
   padding: 40px;
   border-top: 0;
   font-family: "IBM Plex Mono", serif;
@@ -60,7 +60,7 @@ div.pages-custom {
   grid-template-columns: 1fr 1fr; /* Three equal columns */
   border: 1px solid rgb(188, 188, 188);
   grid-gap: 0;
-  width: 75%; /* Make the container take up 75% of the parent width */
+  max-width: 75%; /* Make the container take up 75% of the parent width */
   min-width: 200px; /* Optional: Ensure it doesn't shrink below a minimum width */
   margin: 0 auto; /* Center the container horizontally (optional) */
   border-top: 0;
@@ -155,12 +155,17 @@ div.pages-custom h1 {
   font-weight: normal;
   line-height: 28px;
   letter-spacing: normal;
-  max-width: 1000px;
-  width: 100%;
-  justify-items: left; /* Center elements horizontally */
-  align-items: left; /* Center elements vertically */
-  text-align: left; /* Center text inside elements */
-  
+  max-width: 75%;
+  min-width: 75%;
+  justify-items: left;
+  align-items: left;
+  text-align: left;
+  background-color: rgb(250, 250, 250);
+  border: 1px solid rgb(188, 188, 188);
+  border-bottom: 0;
+  border-top: 0;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 .footer-custom {
@@ -193,6 +198,40 @@ div.pages-custom h1 {
   margin: 10px;
 }
 
+@media only screen and (max-width: 1320px) { 
+
+  .centered-element {
+    max-width: 85%;
+  }
+
+  .grid-columns {
+    max-width: 85%;
+  }
+
+  .master-blog {
+    max-width: 85%;
+  }
+
+  .holder {
+    max-width: 85%;
+  }
+
+}
+
+@media only screen and (max-width: 1000px) { 
+  .centered-element {
+    font-size: 16px;
+  }
+
+  .home-head {
+    font-size: 22px;
+  }
+
+  .column a {
+    font-size: 16px;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   div.pages-custom {
     margin: 0;
@@ -203,7 +242,7 @@ div.pages-custom h1 {
   }
 
   div.pages-custom h1 {
-    font-size: 40px;
+    font-size: 20px;
     line-height: 45px;
     margin-top: 0;
     margin-bottom: 10px;
@@ -215,7 +254,7 @@ div.pages-custom h1 {
   }
 
   .home-head {
-    font-size: 36px;
+    font-size: 20px;
     line-height: 40px;
   }
 
@@ -228,7 +267,7 @@ div.pages-custom h1 {
   }
 
   .master-blog h2 {
-    font-size: 24px;
+    font-size: 20px;
     line-height: 28px;
   }
 
@@ -271,4 +310,29 @@ div.pages-custom h1 {
   .foticon {
     margin: 10px;
   }
+
+  .centered-element {
+    display: block;
+    text-align: left;
+    max-width: 100%;
+    padding: 20px;
+    margin: 0;
+  }
+
+  .grid-columns {
+    max-width: 100%;
+    display: block;
+  }
+
+  .master-blog {
+    padding: 10px;
+    max-width: 100%;
+  }
+
+  .holder {
+    max-width: 100%;
+    padding: auto;
+    margin: auto;
+  }
 }
+
