@@ -57,6 +57,7 @@ hr {
 .nav-text {
   font-size: 18px; /* Adjust text size */
   margin-left: 10px; /* Space between icon and text */
+  font-weight: 600;
 }
   
 .navbar-links {
@@ -72,7 +73,6 @@ hr {
 .navbar-links li {
   padding: 5px 1vw;
   margin: 0;
-  font-family: "Bricolage Grotesque", sans-serif;
 }
 
 .navbar-links li:hover {
@@ -187,7 +187,6 @@ hr {
     margin-top: 5px;
     padding: 2 2vw;
     font-weight: 500;
-    font-family:Arial, Helvetica, sans-serif;
   }
 
   .navbar-links li:hover {

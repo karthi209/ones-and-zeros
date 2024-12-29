@@ -22,7 +22,6 @@
 }
 
 .blog-header {
-    font-family: "Bricolage Grotesque", sans-serif;
     font-size: 48px;
     line-height: 58px;
     margin-bottom: 10px;
@@ -56,7 +55,6 @@
     line-height: 18px;
     font-weight: 500;
     font-size: 14px;
-    font-family: "Bricolage Grotesque", sans-serif;
 }
 
 .articleclass {
@@ -85,7 +83,6 @@
     font-size: 28px;
     font-weight: 900;
     text-align: auto;
-    font-family: "Bricolage Grotesque", sans-serif;
     display: -webkit-box;
     -webkit-line-clamp: 3; /* Sets exactly three lines */
     -webkit-box-orient: vertical;
@@ -198,7 +195,6 @@
     font-size: 28px;
     font-weight: 900;
     text-align: auto;
-    font-family: "Bricolage Grotesque", sans-serif;
     display: -webkit-box;
     -webkit-line-clamp: 3; /* Sets exactly three lines */
     -webkit-box-orient: vertical;

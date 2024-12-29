@@ -9,7 +9,7 @@
   --search-bar-border-color: #c6c6c6;
   --search-bar-font-color: #000000;
   --nav-bar-back-color: #f0f0f0;
-  font-family: "DM Sans", sans-serif;
+  font-family: "Barlow", serif;
   overflow-y: scroll;
   transition: background-color 0.3s ease, color 0.3s ease;
   background-color: var(--background-color);

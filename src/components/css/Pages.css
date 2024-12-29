@@ -14,7 +14,6 @@ div.pages-custom {
 }
 
 div.pages-custom h1 {
-  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 40px;
   line-height: 50px;
   margin-top: auto 10vw;
@@ -51,13 +50,11 @@ div.pages-custom h1 {
 }
 
 .master-blog h1 {
-  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 48px;
   line-height: 58px;
 }
 
 .home-head {
-  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 40px;
   line-height: 50px;
 }
@@ -67,7 +64,6 @@ div.pages-custom h1 {
 }
 
 .master-blog p {
-  font-family: "DM Sans", sans-serif;
   font-size: 20px;
   line-height: 33px;
 }
