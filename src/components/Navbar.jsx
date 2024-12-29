@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./css/Navbar.css";
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
-import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
-import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 
-const Navbar = ({ theme, toggleTheme }) => {
+const Navbar = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const location = useLocation();
 
@@ -19,8 +15,6 @@ const Navbar = ({ theme, toggleTheme }) => {
         ? "blog"
         : currentPath === "/projects"
         ? "projects"
-        : currentPath === "/about"
-        ? "about"
         : null
     );
   }, [location.pathname]);
@@ -34,7 +28,6 @@ const Navbar = ({ theme, toggleTheme }) => {
         <li className={selectedItem === "home" ? "selected" : ""}>
           <Link to="/" onClick={() => setSelectedItem("home")}>
           <div class="logo-container">
-            <HomeOutlinedIcon className="nav-icon" />
             <span className="nav-text">Home</span>
           </div>
           </Link>
@@ -43,7 +36,6 @@ const Navbar = ({ theme, toggleTheme }) => {
           <div class="logo-container">
             <Link to="/blog" onClick={() => setSelectedItem("blog")}>
             <div class="logo-container">
-              <LibraryBooksOutlinedIcon className="nav-icon" />
               <span className="nav-text">Blogs</span>
             </div>
           </Link>
@@ -52,16 +44,7 @@ const Navbar = ({ theme, toggleTheme }) => {
         <li className={selectedItem === "projects" ? "selected" : ""}>
           <Link to="/projects" onClick={() => setSelectedItem("projects")}>
             <div class="logo-container">
-              <WorkOutlineOutlinedIcon className="nav-icon" />
               <span className="nav-text">Projects</span>
-            </div>
-          </Link>
-        </li>
-        <li className={selectedItem === "about" ? "selected" : ""}>
-          <Link to="/about" onClick={() => setSelectedItem("about")}>
-            <div class="logo-container">
-              <PermIdentityOutlinedIcon className="nav-icon" />
-              <span className="nav-text">About</span>
             </div>
           </Link>
         </li>

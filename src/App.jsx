@@ -5,7 +5,6 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Blog from "./components/Blog";
 import Projects from "./components/Projects";
-import About from "./components/About";
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -31,7 +30,6 @@ function App() {
         <Route path="/blog/:slug" element={<Blog />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<Projects />} />
-        <Route path="/about" element={<About />} />
       </Routes>
       <Footer />
     </>

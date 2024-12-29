@@ -100,110 +100,48 @@ div.logotext {
     margin-left: 0vw;
   }
 
-  .iconclass {
-    margin: 10px 2vw 5px;
-  }
-
   .navbar-links {
     margin-right: 0vw;
   }
 
-  .pc-icon {
-    margin-right: 1vw;
+  .navbar {
+    display: flex;
+    font-size: 18px;
+    max-width: 85%;
+    padding: 20px;
   }
 
+}
+
+@media only screen and (max-width: 1000px) {
+  div.logotext {
+    font-size: 20px;
+  }
+
+  .nav-text {
+    font-size: 16px;
+  }
 }
 
 @media only screen and (max-width: 768px) {
 
   .navbar {
-    width: 100%;
     padding: 18px;
-    padding-top: 8px;
+    padding-top: 10px;
     padding-bottom: 0px;
     flex-wrap: wrap;
     justify-content: left;
     font-size: 14px;
+    max-width: 100%;
   }
 
   div.logotext {
-    justify-content: left;
-    font-size: 22px;
-    padding: 0px 0px 10px 0px;
-    margin: 0;
-    width: 50%;
-    font-weight: 600;
-  }
-  
-  .navbar-links {
-    justify-content: space-around;
-    margin: 0;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    padding: 10px 0; /* Adjust the padding as needed */
-    z-index: 1000; /* Ensure it's above other content */
-    box-sizing: border-box;
-    background-color: var(--nav-bar-back-color);
-  }
-
-  .navbar-links li {
-    margin: 0; /* Ensures there's no margin around list items */
-    margin-top: 5px;
-    padding: 2 2vw;
-    font-weight: 500;
-  }
-
-  .navbar-links li:hover {
-    text-underline-offset: 6px;
-    text-decoration-thickness: 2px;
-  }
-
-  .selected {
-    text-underline-offset: 6px;
-    text-decoration-thickness: 2px;
-  }
-
-  .pc-icon {
-    display: none;
-  }
-
-  .mobile-icon {
-    display: inline-flex;
-    justify-content: left;
-    margin: 10px 0 28px auto;
-  }
-
-  hr {
-    border: 0.5px solid;
-    max-width: 90%;
-    margin: 15px auto 0 auto;
-  }
-
-  .logo-container {
-    flex-direction: column; /* Stack the icon and text vertically */
-    align-items: center; /* Center the items horizontally */
-    justify-content: center;
-    height: 24px; /* Center the items vertically */
-  }
-
-  /* Show the icon on mobile */
-  .nav-icon {
-    display: block !important; /* Show the icon on mobile */
-    font-size: 27px !important; /* Adjust icon size for mobile */
+    font-size: 24px;
   }
 
   .nav-text {
-    font-size: 12px; /* Adjust text size for mobile */
-    margin-left: 0; /* Remove margin since the items are stacked vertically */
-    margin-top: 3px; /* Space between icon and text */
-    font-family: "Bricolage Grotesque", sans-serif;
-  }
-
-  .bottombar {
-    display: block !important;
+    font-size: 16px;
+    padding: auto;
   }
 
 }
