@@ -16,7 +16,8 @@ const allowedOrigins = [
   'http://theonesandzeros.com',
   'https://theonesandzeros.com',
   'http://172.28.238.244:5173',
-  'http://192.168.0.102:5173'
+  'http://192.168.0.102:5173',
+  'http://192.168.0.103:5173'
 ];
 
 const corsOptions = {

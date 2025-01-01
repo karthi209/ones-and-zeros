@@ -11,10 +11,10 @@ const Home = () => {
         <section>
           <p>Welcome to my little corner of the web! I mostly post about computers and stuff, a little bit of transit map here and there and tons of rant about cities and stuff.</p>
           <p>Oh and also, if for some reason you need more rants, go over to <a href="https://x.com/karthi9003" target="_blank" rel="noopener noreferrer">Twitter (X)</a> to see more of my ranting.</p>
-          <p style={{ fontSize: "12px", fontWeight: 400, textAlign: "right" }}>Last Updated: 29/12/2024</p>
+          <p style={{ fontSize: "12px", fontWeight: 400, textAlign: "left" }}>Last Updated: 29/12/2024</p>
         </section>
         <section>
-          <img src="welcome.gif" alt="welcome" style={{ width: "200px", height: "auto" }} />
+          <img src="welcome.gif" alt="welcome" className="homegif" />
         </section>
       </div>
     <div className="grid-columns">
