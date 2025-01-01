@@ -228,6 +228,7 @@ jobs:
               --name backend-onesandzeros \
               --network network-onesandzeros \
               -p 3000:3000 \
+              -v /home/karthi209/media:/app/media \
               -e DB_USER="${{ secrets.DB_USER }}" \
               -e DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
               -e DB_HOST="${{ secrets.DB_HOST }}" \
