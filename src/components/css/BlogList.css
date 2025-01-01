@@ -4,7 +4,7 @@
     flex-direction: row; 
     flex-wrap: wrap;
     max-width: 1200px;
-    width: 100%;
+    min-width: 100%;
     margin: auto;
     gap: 25px;
     line-height: normal;
@@ -145,7 +145,8 @@
 
     .blogposts {
         margin: auto;
-        max-width: 95%;
+        max-width: 100%;
+        min-width: 100%;
         padding-top: 20px;
     }
 
@@ -162,9 +163,12 @@
 
     .articleclass {
         margin: 0;
-        padding: 0;
+        padding: 22px;
         justify-content: center;
         max-height: 500px;
+        min-height: 320px;
+        max-width: 360px;
+        min-width: 230px;
     }
 
     .meta {
@@ -178,7 +182,7 @@
     }
 
     .blogposts img {
-        max-width: 100%;
+        max-width: 360px;
     }
 
     .search-container {
@@ -189,10 +193,6 @@
         justify-content: flex-end;
     }
 
-    .articleclass {
-        max-width: 95%;
-        padding: 22px;
-    }
     .articleclass h4 { 
         font-size: 30px;
         line-height: 40px;
