@@ -133,7 +133,7 @@ const BlogList = () => {
                     Posted on {new Date(post.publicationdate).toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric' })}
                   </p>
                 </div>
-                <img src={`${import.meta.env.VITE_API_URL}/images/${post.postid}.jpg`} alt={post.title} />
+                <img src={`${import.meta.env.VITE_API_URL}/images/thumbnails/${post.postid}.jpg`} alt={post.title} />
               </Link>
             </article>
           ))}

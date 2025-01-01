@@ -134,7 +134,7 @@ const ProjectList = () => {
                     Posted on {new Date(project.publicationdate).toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric' })}
                   </p>
                 </div>
-                <img src={`${import.meta.env.VITE_API_URL}/images/${project.postid}.jpg`} alt={project.title} />
+                <img src={`${import.meta.env.VITE_API_URL}/images/thumbnails/${project.postid}.jpg`} alt={project.title} />
               </Link>
             </article>
           ))}

@@ -40,7 +40,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
-app.use('/api/images', express.static('media/thumbnails'));
+app.use('/api/images', express.static('media'));
 
 app.get('/api/bloglist', async (req, res) => {
   const searchQuery = req.query.query || "";
