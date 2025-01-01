@@ -11,6 +11,7 @@
   "dependencies": {
     "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",
+    "dotenv": "^16.4.7",
     "path": "^0.12.7",
     "pg": "^8.13.1"
   }

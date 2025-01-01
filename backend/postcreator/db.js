@@ -1,11 +1,20 @@
-const { Pool } = require('pg');
+// In development, load .env file (only if it exists)
 
-const pool = new Pool({
-    user: 'postgres',
-    password: '!#t!LbP6Ppjeqj&B',
-    host: '192.168.0.12',
-    port: 5432,
-    database: 'postgres'
-});
-
-module.exports = pool;
+if (process.env.NODE_ENV != 'production') {
+    const path = require('path');
+    const envPath = path.resolve(__dirname, '../../.env');
+    console.log(`Loading .env file from: ${envPath}`);
+    require('dotenv').config({ path: envPath });
+  }
+    
+  const { Pool } = require('pg');
+  
+  const pool = new Pool({
+    user: process.env.DB_USER,        // These will be set either from .env in dev or GitHub secrets in prod
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    database: process.env.DB_NAME,
+  });
+  
+  module.exports = pool;

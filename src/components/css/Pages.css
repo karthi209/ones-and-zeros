@@ -165,7 +165,7 @@ div.pages-custom h1 {
   justify-items: left;
   align-items: left;
   text-align: left;
-  background-color: rgb(250, 250, 250);
+  background-color: rgb(255, 255, 255);
   border: 1px solid rgb(188, 188, 188);
   border-bottom: 0;
   border-top: 0;
@@ -277,7 +277,7 @@ div.pages-custom h1 {
 
   div.pages-custom h1 {
     font-size: 20px;
-    line-height: 45px;
+    line-height: 22px;
     margin-top: 0;
     margin-bottom: 10px;
     text-align: start;
@@ -289,20 +289,12 @@ div.pages-custom h1 {
 
   .home-head {
     font-size: 20px;
-    line-height: 40px;
-  }
-
-  .master-blog {
-    display: block;
-    justify-content: center;
-    margin-top: 0;
-    padding: 20px;
-    padding-top: 5px;
+    line-height: 22px;
   }
 
   .master-blog h2 {
     font-size: 20px;
-    line-height: 28px;
+    line-height: 22px;
   }
 
   .master-blog p {
@@ -360,6 +352,11 @@ div.pages-custom h1 {
   .master-blog {
     padding: 10px;
     max-width: 100%;
+    display: block;
+    justify-content: center;
+    margin-top: 0;
+    padding: 30px;
+    padding-top: 5px;
   }
 
   .holder {

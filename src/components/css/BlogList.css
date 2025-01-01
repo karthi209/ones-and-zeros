@@ -162,6 +162,11 @@
         text-align: left;
     }
 
+    
+    .meta p {
+        margin-top: 0;
+    }
+
     .blogposts img {
         max-width: 100%;
     }
@@ -178,4 +183,14 @@
         max-width: 95%;
         padding: 22px;
     }
+    .articleclass h4 { 
+        font-size: 30px;
+        line-height: 40px;
+        font-weight: 700;
+    }
+
+    .header-container {
+        margin-bottom: 40px;
+    }
+    
 }
