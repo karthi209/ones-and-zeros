@@ -35,6 +35,9 @@ div.pages-custom {
   border-top: 0;
   border-bottom: 0;
   justify-content: center;
+  background-image: linear-gradient(0deg, #f3f2f2 1px, transparent 1px),
+  linear-gradient(90deg, #f1f1f1 1px, transparent 1px);
+  background-size: 8px 8px;
 }
 
 .centered-element {
@@ -52,6 +55,9 @@ div.pages-custom {
   border-top: 0;
   font-family: "IBM Plex Mono", serif;
   line-height: 30px;
+  background-image: linear-gradient(0deg, #f3f2f2 1px, transparent 1px),
+  linear-gradient(90deg, #f1f1f1 1px, transparent 1px);
+  background-size: 8px 8px;
 }
 
 /* Grid of 3 columns */
@@ -61,7 +67,7 @@ div.pages-custom {
   border: 1px solid rgb(188, 188, 188);
   grid-gap: 0;
   max-width: 75%; /* Make the container take up 75% of the parent width */
-  min-width: 200px; /* Optional: Ensure it doesn't shrink below a minimum width */
+  min-width: 75%; /* Optional: Ensure it doesn't shrink below a minimum width */
   margin: 0 auto; /* Center the container horizontally (optional) */
   border-top: 0;
   border-bottom: 0;
@@ -298,8 +304,8 @@ div.pages-custom h1 {
   }
 
   .master-blog p {
-    font-size: 18px;
-    line-height: 30px;
+    font-size: 16px;
+    line-height: 28px;
   }
 
   div.pages-custom h3 {
@@ -350,12 +356,11 @@ div.pages-custom h1 {
   }
 
   .master-blog {
-    padding: 10px;
     max-width: 100%;
     display: block;
     justify-content: center;
     margin-top: 0;
-    padding: 30px;
+    padding: 25px;
     padding-top: 5px;
   }
 

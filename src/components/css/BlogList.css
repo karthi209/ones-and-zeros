@@ -141,12 +141,22 @@
     background-color: #000000;
 }
 
+@media only screen and (max-width: 1500px) {
+
+    .blogposts {
+        margin: auto;
+        max-width: 95%;
+        padding-top: 20px;
+    }
+
+}
+
 
 @media only screen and (max-width: 768px) {
 
     .blogposts {
         margin: auto;
-        max-width: 95%;
+        max-width: 90%;
         padding-top: 20px;
     }
 
@@ -191,6 +201,14 @@
 
     .header-container {
         margin-bottom: 40px;
+    }
+
+    .blog-header {
+        line-height: 48px !important;
+     }
+
+     .blog-meta {
+        font-size: 16px;
     }
     
 }

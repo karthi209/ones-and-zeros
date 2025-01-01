@@ -1,10 +1,35 @@
 import React from "react";
 import "./css/Pages.css";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import "./css/BlogList.css";
 
 const Home = () => {
+
+  const [posts, setPosts] = useState([]); 
+  const [searchQuery, setSearchQuery ] = useState("");
+
+
+  const fetchPosts = async (query = "") => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/bloglist${query ? `?query=${encodeURIComponent(query)}` : ''}`);
+      const data = await response.json();
+      console.log(data);
+      setPosts(data);
+    } catch (error) {
+      console.error("Error loading posts:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const handleSearch = () => {
+    fetchPosts(searchQuery);
+  };
+
   return (
     <div className="container">
       <div className="centered-element">
@@ -21,33 +46,27 @@ const Home = () => {
       <section className="column column1">
           <h2 className="home-head">Featured Post</h2>
           <article className="post">
-            <h3><a href="blog/1.html">Setting Up a Local Development Server with Node.js</a></h3>
-            <p>Running a Node.js server in WSL2 allows for efficient, VM-like environments right inside your Windows OS...</p>
+            <h3>Nothing at the moment still figuring it out :-)</h3>
+            <p>Weill be right back with something...</p>
           </article>
         </section>
         <section className="column">
           <h2 className="home-head">Recent Posts</h2>
-          <div className="posts-grid">
-            <article className="post">
-              <h3><a href="blog/2.html">Setting Up a Local Development Server with Node.js in WSL2</a></h3>
-              <p>A guide to running Node.js servers on WSL2 for efficient development.</p>
-            </article>
-            <article className="post">
-              <h3><a href="blog/3.html">Configuring Docker to Work Across WSL2 and Windows</a></h3>
-              <p>Learn how to integrate Docker across your WSL2 and Windows environments.</p>
-            </article>
-            <article className="post">
-              <h3><a href="blog/4.html">Using Git from WSL2 for Windows Projects</a></h3>
-              <p>Explore how to use Git in WSL2 to manage projects hosted on Windows.</p>
-            </article>
-            <article className="post">
-              <h3><a href="blog/5.html">Running Jupyter Notebooks on WSL2</a></h3>
-              <p>Make Jupyter Notebooks accessible via your browser for a smoother workflow.</p>
-            </article>
-            <article className="post">
-              <h3><a href="/posts/python-web-wsl2.html">Running Python Web Applications on WSL2</a></h3>
-              <p>Set up Python web applications and expose them to your network.</p>
-            </article>
+          <div>
+            {posts.map((post) => (
+              <Link
+                to={`/blog/${post.postid}`}
+                aria-label={`Read more about ${post.title}`}
+              >
+                <div><p>{post.category}</p></div>
+                <h4 style={{ marginBottom: "5px" }}>{post.title}</h4>
+                <div className="meta">
+                  <p style={{ fontSize: "14px", marginTop: "0px" }}>
+                    Posted on {new Date(post.publicationdate).toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric' })}
+                  </p>
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
       </div>
