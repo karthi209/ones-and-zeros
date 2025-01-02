@@ -3,8 +3,8 @@ import ReactMarkdown from "react-markdown";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import gfm from "remark-gfm";
 import CodeBlock from "./CodeBlock";
-import "./css/Pages.css";
-import "./css/BlogList.css";
+import "../css/Pages.css";
+import "../css/BlogList.css";
 
 // Component to display a single blog post
 const ProjectTool = () => {
@@ -134,7 +134,7 @@ const ProjectList = () => {
                     Posted on {new Date(project.publicationdate).toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric' })}
                   </p>
                 </div>
-                <img src={`${import.meta.env.VITE_API_URL}/images/thumbnails/${project.postid}.jpg`} alt={project.title} />
+                <img src={`${import.meta.env.VITE_API_URL}/files/thumbnails/${project.slug}.jpg`} alt={project.title} />
               </Link>
             </article>
           ))}

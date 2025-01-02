@@ -1,7 +1,5 @@
 import React from "react";
-import "./css/Pages.css";
-import XIcon from "@mui/icons-material/X";
-import EmailIcon from "@mui/icons-material/Email";
+import "../css/Pages.css";
 
 function Footer() {
   return (

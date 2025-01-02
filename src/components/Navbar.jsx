@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import "./css/Navbar.css";
+import "../css/Navbar.css";
 
 const Navbar = () => {
   const [selectedItem, setSelectedItem] = useState(null);

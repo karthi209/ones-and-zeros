@@ -15,14 +15,11 @@ const allowedOrigins = [
   'https://theonesandzeros.com:443',
   'http://theonesandzeros.com',
   'https://theonesandzeros.com',
-  'http://172.28.238.244:5173',
-  'http://192.168.0.102:5173',
-  'http://192.168.0.103:5173'
+  'http://172.28.238.244:5173'
 ];
 
 const corsOptions = {
   origin: function (origin, callback) {
-    console.log("Received origin:", origin); // Debugging
 
     const normalizedOrigin = origin?.replace(/:80$/, ''); // Normalize origin
 
@@ -41,22 +38,21 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
-app.use('/api/images', express.static('media'));
+app.use('/api/files', express.static('webfiles'));
 
 app.get('/api/bloglist', async (req, res) => {
   const searchQuery = req.query.query || "";
 
   try {
-    const limit = 12;  // Set a limit on the number of rows returned
-
-    const data = await db.query(
-      `SELECT postid, title, author, publicationdate 
-       FROM Post 
-       ${searchQuery ? 'WHERE title ILIKE $1' : ''} 
-       ORDER BY postid ASC
-       LIMIT $${searchQuery ? 2 : 1}`,
-      searchQuery ? [`%${searchQuery}%`, limit] : [limit]
-    );
+    const limit = 12;
+    const query = `
+      SELECT postid, title, author, publicationdate, slug 
+      FROM Post 
+      ${searchQuery ? 'WHERE title ILIKE $1' : ''} 
+      ORDER BY postid ASC
+      LIMIT $${searchQuery ? 2 : 1}`;
+    const values = searchQuery ? [`%${searchQuery}%`, limit] : [limit];
+    const data = await db.query(query, values);
 
     res.json(data.rows);
 
@@ -72,23 +68,32 @@ app.get('/api/bloglist', async (req, res) => {
 
 app.post('/api/data', async (req, res) => {
   console.log('Received request body:', req.body);
-  const { integerValue } = req.body;
-  console.log('Received integerValue:', integerValue);
-
-  // Validate the integerValue
-  if (!integerValue || !Number.isInteger(integerValue)) {
-    return res.status(400).json({ error: 'Invalid integer value' });
-  }
+  const { slug } = req.body;
+  console.log(slug);
 
   try {
-    const data = await db.query('SELECT * FROM Post WHERE postid = $1;', [integerValue]);
+    const data = await db.query('SELECT * FROM Post WHERE slug = $1;', [slug]);
 
     // Check if data exists
     if (data.rows.length === 0) {
       return res.status(404).json({ error: 'Post not found' });
     }
 
-    res.json(data.rows);
+    const post = data.rows[0];
+
+    // Check if map-related data exists
+    const { mapCenter, zoom } = post;
+
+    const mapDetails = mapCenter ? {
+      center: mapCenter.split(','),  // Example: Convert a string like '12.34,-56.78' into an array [12.34, -56.78]
+      zoom: zoom || 2  // Default zoom level if not available
+    } : null;
+
+    // Send the post data along with map details
+    res.json({
+      post: post,
+      mapDetails: mapDetails
+    });
 
   } catch (err) {
     console.error('Database error:', err);
@@ -99,5 +104,6 @@ app.post('/api/data', async (req, res) => {
     });
   }
 });
+
 
 app.listen(PORT, HOST, () => console.log(`Listening on http://${HOST}:${PORT}/`));

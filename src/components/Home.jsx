@@ -1,9 +1,9 @@
 import React from "react";
-import "./css/Pages.css";
+import "../css/Pages.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import "./css/BlogList.css";
+import "../css/BlogList.css";
 
 const Home = () => {
 
@@ -55,7 +55,7 @@ const Home = () => {
           <div>
             {posts.map((post) => (
               <Link
-                to={`/blog/${post.postid}`}
+                to={`/blog/${post.slug}`}
                 aria-label={`Read more about ${post.title}`}
               >
                 <div><p>{post.category}</p></div>

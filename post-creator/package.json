@@ -1,5 +1,5 @@
 {
-  "name": "postcreator",
+  "name": "post-creator",
   "version": "1.0.0",
   "description": "Used to create new posts for ones and zeros website",
   "main": "index.js",
@@ -9,10 +9,11 @@
   "author": "Karthikeyan Manimaran",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.7",
     "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",
-    "dotenv": "^16.4.7",
     "path": "^0.12.7",
-    "pg": "^8.13.1"
+    "pg": "^8.13.1",
+    "uuid": "^11.0.3"
   }
 }

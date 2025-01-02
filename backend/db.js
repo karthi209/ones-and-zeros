@@ -2,7 +2,7 @@
 
 if (process.env.NODE_ENV != 'production') {
   const path = require('path');
-  const envPath = path.resolve(__dirname, '../../.env');
+  const envPath = path.resolve(__dirname, '../.env');
   console.log(`Loading .env file from: ${envPath}`);
   require('dotenv').config({ path: envPath });
 }
