@@ -36,7 +36,7 @@ console.log(token);
 
 This is a post with maps embedded in it.
 
-[map center="40.7484,-73.9857" zoom="12" gisdataurl="https://theonesandzeros.com/api/files/gis/expanded-gcc.geojson"]
+[map center="80.286900,13.079755" zoom="10" gisdataurl="https://theonesandzeros.com/api/files/gis/expanded-gcc.geojson"]
 
 
 ## More STuff

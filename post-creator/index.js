@@ -9,7 +9,7 @@ function generateSlug(title) {
   return title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
 }
 
-async function upsertPost(title, content, author, category, publicationdate, tags, mapcenter, zoom, hasmap, gisdataurl, postId = null) {
+async function upsertPost(title, content, author, category, publicationdate, tags, hasmap, postId = null) {
   const slug = generateSlug(title);  // Generate a slug for the post
 
   // Check if postId is provided (update) or not (insert new post)
@@ -24,22 +24,19 @@ async function upsertPost(title, content, author, category, publicationdate, tag
           publicationdate = $6,
           tags = $7,
           slug = $8,
-          mapcenter = $9,
-          zoom = $10,
-          hasmap = $11,
-          gisdataurl = $12
+          hasmap = $9
         WHERE postid = $1
         RETURNING *;
       `
     : `
-        INSERT INTO Post (postid, title, content, author, category, publicationdate, tags, slug, mapcenter, zoom, hasmap, gisdataurl)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+        INSERT INTO Post (postid, title, content, author, category, publicationdate, tags, slug, hasmap )
+        VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9 )
         RETURNING *;
       `;
 
   const values = postId
-    ? [postId, title, content, author, category, publicationdate, tags, slug, mapcenter, zoom, hasmap, gisdataurl]
-    : [uuidv4(), title, content, author, category, publicationdate, tags, slug, mapcenter, zoom, hasmap, gisdataurl];
+    ? [postId, title, content, author, category, publicationdate, tags, slug, hasmap]
+    : [uuidv4(), title, content, author, category, publicationdate, tags, slug, hasmap];
 
   try {
     const res = await db.query(query, values);
@@ -66,10 +63,10 @@ async function processMarkdownFiles() {
         const { data, content } = matter(markdown);
 
         // Extract front matter fields
-        const { title, author, category, publicationdate, tags, mapcenter, zoom, hasmap, gisdataurl } = data;
+        const { title, author, category, publicationdate, tags, hasmap } = data;
 
         // Log the extracted values
-        console.log('Extracted data:', { title, mapcenter, zoom, hasmap, gisdataurl });
+        console.log('Extracted data:', { title, hasmap });
 
         // Ensure required fields are available
         if (title && author && content && category && publicationdate && tags) {
@@ -78,10 +75,10 @@ async function processMarkdownFiles() {
 
           if (existingPost.rows.length > 0) {
             // If post exists, update it
-            await upsertPost(title, content, author, category, publicationdate, tags, mapcenter, zoom, hasmap, gisdataurl, existingPost.rows[0].postid);
+            await upsertPost(title, content, author, category, publicationdate, tags, hasmap, existingPost.rows[0].postid);
           } else {
             // If post doesn't exist, create a new one
-            await upsertPost(title, content, author, category, publicationdate, tags, mapcenter, zoom, hasmap, gisdataurl);
+            await upsertPost(title, content, author, category, publicationdate, tags, hasmap);
           }
         } else {
           console.error(`Missing required fields in ${filePath}`);
