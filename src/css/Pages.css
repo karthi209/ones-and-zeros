@@ -11,7 +11,7 @@ div.pages-custom {
   min-height: 100vh; /* Ensures content takes full viewport height */
   padding-bottom: 50px; /* Match this with the navbar height */
   box-sizing: border-box;
-  border: 1px solid rgb(188, 188, 188);
+  border-bottom: 1px solid rgb(220, 220, 220);
   grid-gap: 0;
 }
 .container {
@@ -21,7 +21,6 @@ div.pages-custom {
   justify-items: center; /* Center elements horizontally */
   align-items: center; /* Center elements vertically */
   text-align: center; /* Center text inside elements */
-  border: 1px solid rgb(188, 188, 188);
   grid-gap: 0;
   margin: 0;
 }
@@ -35,36 +34,36 @@ div.pages-custom {
   border-top: 0;
   border-bottom: 0;
   justify-content: center;
-  background-image: linear-gradient(0deg, #f3f2f2 1px, transparent 1px),
-  linear-gradient(90deg, #f1f1f1 1px, transparent 1px);
-  background-size: 8px 8px;
+  background: 
+    linear-gradient(to right, #f5f5f5 1px, transparent 1px) 0 0, 
+    linear-gradient(to bottom, #f5f5f5 1px, transparent 1px) 0 0;
+  background-size: 20px 20px;
 }
 
 .centered-element {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 500;
-  display: grid;
-  grid-template-columns: 3fr 1fr;
+  line-height: 23px !important;
   text-align: left; /* Align text to the left inside the columns */
-  border: 1px solid rgb(188, 188, 188);
+  border: 1px solid rgb(220, 220, 220);
   grid-gap: 0;
   max-width: 75%;
   min-width: 75%;
   margin: 0 auto;
   padding: 40px;
   border-top: 0;
-  font-family: "IBM Plex Mono", serif;
   line-height: 30px;
-  background-image: linear-gradient(0deg, #f3f2f2 1px, transparent 1px),
-  linear-gradient(90deg, #f1f1f1 1px, transparent 1px);
-  background-size: 8px 8px;
+  background: 
+    linear-gradient(to right, #f5f5f5 1px, transparent 1px) 0 0, 
+    linear-gradient(to bottom, #f5f5f5 1px, transparent 1px) 0 0;
+  background-size: 20px 20px;
 }
 
 /* Grid of 3 columns */
 .grid-columns {
   display: grid;
   grid-template-columns: 1fr 1fr; /* Three equal columns */
-  border: 1px solid rgb(188, 188, 188);
+  border: 1px solid rgb(220, 220, 220);
   grid-gap: 0;
   max-width: 75%; /* Make the container take up 75% of the parent width */
   min-width: 75%; /* Optional: Ensure it doesn't shrink below a minimum width */
@@ -73,19 +72,38 @@ div.pages-custom {
   border-bottom: 0;
 }
 /* Individual column styles */
-.column {
-  border: 1px solid black; /* Border for each column */
-  padding: 20px; /* Padding inside each column */
+.column { 
   text-align: left; /* Align text to the left inside the columns */
   grid-gap: 0;
-  border: 1px solid rgb(188, 188, 188);
-  border-top: 0;
-  border-right: 0;
-  border-bottom: 0;
 }
 
 .column1 {
-  border-left: 0;
+  border-right: 1px solid rgb(220, 220, 220);
+}
+
+.post-content-preview {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit content to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  line-height: 1.5; /* Adjust line height for better spacing */
+  max-height: 4.5em; /* 3 lines x 1.5em line height */
+  margin-bottom: 10px;
+}
+
+.post {
+  padding-left: 40px;
+  border: 0.5px solid rgb(235, 235, 235);
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+
+}
+
+.post h4 { 
+  font-size: 20px !important;
 }
 
 div.pages-custom h1 {
@@ -103,10 +121,6 @@ div.pages-custom h1 {
   margin-top: 40px;
 }
 
-.welcome h1 {
-  margin-bottom: 0px;
-}
-
 .map-style {
   width: 100%; /* Full width */
   height: 100vh; /* Full viewport height */
@@ -115,30 +129,33 @@ div.pages-custom h1 {
   align-items: center;
 }
 
-.welcome a {
-  align-self: auto;
-  font-size: 18px;
-  line-height: normal;
-}
-
 .master-blog h1 {
   font-size: 30px;
   line-height: 58px;
 }
 
-.homegif {
-  width: "200px";
-  height: "auto";
+.home-recents {
+  border: 0.5px solid rgb(235, 235, 235);
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  padding: 10px;
+  padding-bottom: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  max-width: 100%;
+}
+
+.home-recents h4 { 
+  font-size: 20px !important;
 }
 
 .home-head {
-  font-size: 26px;
-  line-height: 50px;
+  font-size: 25px !important;
+  font-family: "PT Sans Narrow", serif;
+  line-height: 35px;
   font-weight: 600;
-}
-
-.home-head h1 {
-  margin-top: 0%;
+  padding-left: 40px;
 }
 
 .master-blog p {
@@ -147,7 +164,7 @@ div.pages-custom h1 {
 }
 
 .master-blog h3 {
-  font-size: 22px;
+  font-size: 24px;
   line-height: 33px;
 }
 
@@ -171,7 +188,7 @@ div.pages-custom h1 {
   justify-items: left;
   align-items: left;
   text-align: left;
-  background-color: rgb(255, 255, 255);
+  background-color: #F8F9FA;
   border: 1px solid rgb(188, 188, 188);
   border-bottom: 0;
   border-top: 0;
@@ -179,13 +196,20 @@ div.pages-custom h1 {
   padding-right: 10%;
 }
 
+.post p {
+  font-size: 16px !important;
+  font-weight: 500;
+  line-height: 23px;
+}
+
 .footer-custom {
   display: flex;
   justify-content: space-around;
   max-width: 100%;
   margin: 0 auto;
-  margin-top: 7vh;
   margin-bottom: 7vh;
+  border-top: 1px solid rgb(220, 220, 220);
+  padding-top: 30px;
 }
 
 .footer-text {
@@ -194,37 +218,29 @@ div.pages-custom h1 {
   align-items: center;
   margin-top: 10px;
   margin-right: 30px;
-}
-
-.footer-terms {
-  margin: 10px;
-  margin-top: 0;
-}
-
-.footer-logo {
-  margin: 10px;
-}
-
-.foticon {
-  margin: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  padding-top: 10px;
 }
 
 @media only screen and (max-width: 1500px) {
 
   .centered-element {
-    max-width: 85%;
+    max-width: 90%;
+    min-width: 90%;
   }
 
   .grid-columns {
-    max-width: 85%;
+    max-width: 90%;
+    min-width: 90%;
   }
 
   .master-blog {
-    max-width: 85%;
+    max-width: 90%;
   }
 
   .holder {
-    max-width: 85%;
+    max-width: 90%;
   }
 
  }
@@ -232,26 +248,34 @@ div.pages-custom h1 {
 @media only screen and (max-width: 1320px) { 
 
   .centered-element {
-    max-width: 85%;
+    max-width: 100%;
+    min-width: 100%;
   }
 
   .grid-columns {
     max-width: 100%;
+    min-width: 100%;
   }
 
   .master-blog {
-    max-width: 85%;
+    max-width: 100%;
   }
 
   .holder {
-    max-width: 85%;
+    max-width: 100%;
   }
 
 }
 
-@media only screen and (max-width: 1000px) { 
+@media only screen and (max-width: 1120px) { 
   .centered-element {
-    font-size: 16px;
+    max-width: 100%;
+    min-width: 100%;
+  }
+
+  .grid-columns {
+    max-width: 100%;
+    min-width: 100%;
   }
 
   .homegif {
@@ -302,6 +326,10 @@ div.pages-custom h1 {
     line-height: 22px;
   }
 
+  .home-head h3 { 
+    font-size: 20px;
+  }
+
   .master-blog h2 {
     font-size: 20px;
     line-height: 22px;
@@ -350,13 +378,14 @@ div.pages-custom h1 {
   .centered-element {
     display: block;
     max-width: 100%;
-    padding: 26px;
+    padding: 20px;
     margin: 0;
   }
 
   .grid-columns {
     max-width: 100%;
     display: block;
+    padding-left: 0px;
   }
 
   .master-blog {

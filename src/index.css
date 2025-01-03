@@ -3,8 +3,8 @@
 @import "ol/ol.css";
 
 :root {
-  --background-color: #ffffff;
-  --text-color: #000000;
+  --background-color: #F8F9FA;
+  --text-color: #343A40;
   --card-bg: rgb(237, 237, 237);
   --link-color: #323232de; /* Define default link color */
   --meta-color: #7d7d7d;
@@ -12,16 +12,40 @@
   --search-bar-border-color: #c6c6c6;
   --search-bar-font-color: #000000;
   --nav-bar-back-color: #f0f0f0;
-  font-family: "Barlow", serif;
   overflow-y: scroll;
   transition: background-color 0.3s ease, color 0.3s ease;
   background-color: var(--background-color);
   color: var(--text-color);
+  font-family: "Open Sans", serif;
+  font-weight: 500;
 }
 
 /* Ensure links use the correct theme color */
 a {
   color: var(--link-color);
+  font-family: "Open Sans", serif;
+  font-weight: 500;
+}
+
+p {
+  font-family: "Open Sans", serif;
+  font-weight: 500;
+}
+
+h1 {
+  font-family: "PT Sans Narrow", serif;
+}
+
+h2 {
+  font-family: "PT Sans Narrow", serif;
+}
+
+h3 {
+  font-family: "PT Sans Narrow", serif;
+}
+
+h4 {
+  font-family: "PT Sans Narrow", serif;
 }
 
 

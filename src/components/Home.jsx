@@ -38,35 +38,64 @@ const Home = () => {
           <p>Oh and also, if for some reason you need more rants, go over to <a href="https://x.com/karthi9003" target="_blank" rel="noopener noreferrer">Twitter (X)</a> to see more of my ranting.</p>
           <p style={{ fontSize: "12px", fontWeight: 400, textAlign: "left" }}>Last Updated: 29/12/2024</p>
         </section>
-        <section>
-          <img src="welcome.gif" alt="welcome" className="homegif" />
-        </section>
       </div>
     <div className="grid-columns">
       <section className="column column1">
-          <h2 className="home-head">Featured Post</h2>
-          <article className="post">
-            <h3>Nothing at the moment still figuring it out :-)</h3>
-            <p>Weill be right back with something...</p>
-          </article>
+          <div className="back">
+            <h2 className="home-head">Featured</h2>
+          </div>
+          <div>
+            {posts
+              .sort((a, b) => new Date(b.publicationdate) - new Date(a.publicationdate)) // Sort by date
+              .slice(0, 6) // Take the latest six posts
+              .map((post) => (
+                <div className="home-recents" key={post.slug}>
+                  <h4 style={{ marginBottom: "5px" }}>{post.title}</h4>
+                  <p style={{ fontSize: "13px", marginTop: "0px", color: "gray" }}>
+                    Posted on{" "}
+                    {new Date(post.publicationdate).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </p>
+                  <div className="post-content-preview">
+                    {post.content} {/* This shows the truncated content */}
+                  </div>
+                  <Link to={`/blog/${post.slug}`} aria-label={`Read more about ${post.title}`}>
+                    <span style={{ fontSize: "13px", marginTop: "0px" }}>Read More..</span>
+                  </Link>
+                </div>
+              ))}
+          </div>
         </section>
         <section className="column">
-          <h2 className="home-head">Recent Posts</h2>
+          <div className="back">
+            <h2 className="home-head">Recent Posts</h2>
+          </div>
           <div>
-            {posts.map((post) => (
-              <Link
-                to={`/blog/${post.slug}`}
-                aria-label={`Read more about ${post.title}`}
-              >
-                <div><p>{post.category}</p></div>
-                <h4 style={{ marginBottom: "5px" }}>{post.title}</h4>
-                <div className="meta">
-                  <p style={{ fontSize: "14px", marginTop: "0px" }}>
-                    Posted on {new Date(post.publicationdate).toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric' })}
+            {posts
+              .sort((a, b) => new Date(b.publicationdate) - new Date(a.publicationdate)) // Sort by date
+              .slice(0, 6) // Take the latest six posts
+              .map((post) => (
+                <div className="home-recents" key={post.slug}>
+                  <h4 style={{ marginBottom: "5px" }}>{post.title}</h4>
+                  <p style={{ fontSize: "13px", marginTop: "0px", color: "gray" }}>
+                    Posted on{" "}
+                    {new Date(post.publicationdate).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
                   </p>
+                  <div className="post-content-preview">
+                    {post.content} {/* This shows the truncated content */}
+                  </div>
+                  <Link to={`/blog/${post.slug}`} aria-label={`Read more about ${post.title}`}>
+                    <span style={{ fontSize: "13px", marginTop: "0px" }}>Read More..</span>
+                  </Link>
                 </div>
-              </Link>
-            ))}
+              ))}
           </div>
         </section>
       </div>

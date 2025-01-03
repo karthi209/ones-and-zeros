@@ -1,9 +1,9 @@
 ---
-postid: 8b3cdcd7-eaab-4395-be2c-a6fd1cc220f8
-title: "How to Use JWT Tokens for Authentication"
+postid:
+title: "What Even More another blog post? FOr what brother?"
 author: "John Doe"
 category: "Authentication"
-publicationdate: "2025-01-01"
+publicationdate: "2025-01-02"
 tags:
   - "JWT"
   - "Security"
@@ -40,10 +40,6 @@ console.log(token);
 ## My Awesome Post
 
 This is a post with maps embedded in it.
-
-[map center="80.286900,13.079755" zoom="10" gisdataurl="https://theonesandzeros.com/api/files/gis/expanded-gcc.geojson"]
-
----
 
 [map center="80.286900,13.079755" zoom="10" gisdataurl="https://theonesandzeros.com/api/files/gis/expanded-gcc.geojson"]
 

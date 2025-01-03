@@ -77,16 +77,16 @@
     min-height: 320px;
     padding: 22px;
     transition: all .2s ease-in-out;
-    border: 1px solid rgb(188, 188, 188);
+    border-bottom: 1px solid rgb(220, 220, 220);
     grid-gap: 0;
     margin-bottom: 20px;
-    background-color: #ffffff;
+    background-color: #f2f2f2
 }
 
 .articleclass:hover {
     transform: scale(1.02);
     transition: all .2s ease-in-out;
-    background-color: #ffffff;
+    background-color: #ececec
 }
 
 .articleclass h4 {
@@ -133,7 +133,7 @@
 .search-input {
     width: 295px;
     padding: 8px;
-    border: 1px solid rgb(188, 188, 188);
+    border-bottom: 1px solid rgb(220, 220, 220);
     font-size: 14px;
 }
 

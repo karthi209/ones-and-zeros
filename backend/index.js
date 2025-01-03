@@ -46,7 +46,7 @@ app.get('/api/bloglist', async (req, res) => {
   try {
     const limit = 12;
     const query = `
-      SELECT postid, title, author, publicationdate, slug 
+      SELECT postid, title, author, publicationdate, slug, content 
       FROM Post 
       ${searchQuery ? 'WHERE title ILIKE $1' : ''} 
       ORDER BY postid ASC
