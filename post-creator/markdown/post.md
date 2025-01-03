@@ -39,6 +39,9 @@ This is a post with maps embedded in it.
 [map center="80.286900,13.079755" zoom="10" gisdataurl="https://theonesandzeros.com/api/files/gis/expanded-gcc.geojson"]
 
 
+[map center="80.286900,11.079755" zoom="10" gisdataurl="https://theonesandzeros.com/api/files/gis/expanded-gcc.geojson"]
+
+
 ## More STuff
 
 Get ready to be roaster you idiot. I;m tryuinggggg
