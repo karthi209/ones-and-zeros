@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { useParams, useNavigate } from "react-router-dom";
 import gfm from "remark-gfm";
-import MapComponent from "./MapComponent";
 import CodeBlock from "./CodeBlock";
+import MapComponent from "./MapComponent";
 
 const BlogPost = () => {
   const [post, setPost] = useState(null);
@@ -23,7 +23,7 @@ const BlogPost = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            slug: slug
+            slug: slug,
           }),
         });
 
@@ -44,29 +44,30 @@ const BlogPost = () => {
     fetchPost();
   }, [slug, navigate]);
 
-  const renderers = {
-    text: (text) => {
-      if (post?.hasMap && text.includes("[MAP]")) {
+  const renderContent = () => {
+    const parts = post.content.split("[MAP]");
+    
+    return parts.map((part, index) => {
+      if (index === 0) {
+        // First part: render markdown and the map
         return (
-          <>
-            {text.split("[MAP]").map((part, index) => (
-              <React.Fragment key={index}>
-                {part}
-                {index === 0 && (
-                  <MapComponent
-                    mapCenter={post.mapCenter || [0, 0]}
-                    zoom={post.zoom || 2}
-                    gisDataUrl={post.gisDataUrl || ""}
-                  />
-                )}
-              </React.Fragment>
-            ))}
-          </>
+          <div key={index}>
+            <ReactMarkdown>{part}</ReactMarkdown>
+            {post?.hasmap && (
+              <MapComponent
+                mapcenter={post.mapcenter}
+                zoom={post.zoom}
+                gisdataurl={post.gisdataurl}
+              />
+            )}
+          </div>
         );
       }
-      return text;
-    },
+      // For the other parts, just render markdown (after a [MAP] tag)
+      return <div key={index}><ReactMarkdown>{part}</ReactMarkdown></div>;
+    });
   };
+  
 
   return (
     <div className="container">
@@ -89,28 +90,7 @@ const BlogPost = () => {
                   })}
                 </a>
               </div>
-              {post.content ? (
-                <ReactMarkdown
-                  children={post.content}
-                  remarkPlugins={[gfm]}
-                  components={{
-                    ...renderers,
-                    code({ node, inline, className, children, ...props }) {
-                      const match = /language-(\w+)/.exec(className || "");
-                      return inline ? (
-                        <code {...props}>{children}</code>
-                      ) : (
-                        <CodeBlock
-                          language={match ? match[1] : ""}
-                          value={String(children).replace(/\n$/, "")}
-                        />
-                      );
-                    },
-                  }}
-                />
-              ) : (
-                <p>No content available for this post.</p>
-              )}
+              {renderContent()} {/* Call renderContent here instead of ReactMarkdown */}
             </article>
           ) : (
             <div className="error-message">Post not found.</div>

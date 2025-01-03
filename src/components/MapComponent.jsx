@@ -1,54 +1,32 @@
-// components/MapComponent.js
-import { useEffect, useRef } from "react";
-import { Map, View } from "ol";
-import TileLayer from "ol/layer/Tile";
-import OSM from "ol/source/OSM";
-import { fromLonLat } from "ol/proj";
-import VectorSource from "ol/source/Vector";
-import GeoJSON from "ol/format/GeoJSON";
-import VectorLayer from "ol/layer/Vector";
+import React from "react";
 
-const MapComponent = ({ mapCenter, zoom, gisDataUrl }) => {
-  const mapRef = useRef(null);
+const MapComponent = ({ mapcenter, zoom, gisdataurl }) => {
+  // Validate mapcenter and provide default value if necessary
+  const validMapCenter =
+    Array.isArray(mapcenter) && mapcenter.length === 2
+      ? mapcenter
+      : [0, 0]; // Default to [0, 0] if mapcenter is invalid
 
-  useEffect(() => {
-    const vectorSource = new VectorSource({
-      url: gisDataUrl, // GIS data URL
-      format: new GeoJSON(), // Data format
-    });
+  const iframeSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${validMapCenter[1] - 0.01}%2C${validMapCenter[0] - 0.01}%2C${validMapCenter[1] + 0.01}%2C${validMapCenter[0] + 0.01}&layer=mapnik`;
 
-    const vectorLayer = new VectorLayer({
-      source: vectorSource,
-      style: {
-        // Optional styles
-        fill: {
-          color: "rgba(255, 0, 0, 0.5)",
-        },
-        stroke: {
-          color: "red",
-          width: 2,
-        },
-      },
-    });
-
-    const map = new Map({
-      target: mapRef.current,
-      layers: [
-        new TileLayer({
-          source: new OSM(),
-        }),
-        vectorLayer, // Add the vector layer
-      ],
-      view: new View({
-        center: fromLonLat(mapCenter),
-        zoom,
-      }),
-    });
-
-    return () => map.setTarget(null); // Cleanup on unmount
-  }, [mapCenter, zoom, gisDataUrl]);
-
-  return <div ref={mapRef} style={{ width: "100%", height: "400px" }} />;
+  return (
+    <div style={{ marginBottom: "20px" }}>
+      <iframe
+        src={iframeSrc}
+        width="100%"
+        height="450"
+        style={{ border: "1px solid black" }}
+        title="Embedded Map"
+      ></iframe>
+      {gisdataurl && (
+        <div style={{ marginTop: "10px" }}>
+          <a href={gisdataurl} target="_blank" rel="noopener noreferrer">
+            View GIS Data
+          </a>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default MapComponent;

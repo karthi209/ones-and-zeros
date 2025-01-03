@@ -9,7 +9,6 @@ hasMap: true
 mapCenter: [37.7749, -122.4194]
 zoom: 10
 gisDataUrl: "https://theonesandzeros.com/api/files/gis/expanded-gcc.geojson"
-image: "example-image.jpg"
 ---
 
 ## Introduction
@@ -32,6 +31,8 @@ const token = jwt.sign({ userId: 123 }, 'your-secret-key', { expiresIn: '1h' });
 console.log(token);
 
 ```
+
+Here's where I started in London:
 [MAP]
 
 ### Explanation
