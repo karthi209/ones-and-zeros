@@ -22,6 +22,7 @@ const extractMapData = (markdownContent) => {
   return matches.length > 0 ? matches : null;
 };
 
+
 const BlogPost = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -121,7 +122,6 @@ const BlogPost = () => {
   return (
     <div className="container">
       <div className="master-blog">
-        <div className="pages-individual">
           {loading ? (
             <div className="loading-placeholder"></div>
           ) : error ? (
@@ -147,7 +147,6 @@ const BlogPost = () => {
           )}
         </div>
       </div>
-    </div>
   );
 };
 

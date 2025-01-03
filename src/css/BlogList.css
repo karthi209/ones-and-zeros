@@ -14,6 +14,16 @@
     margin-bottom: 50px;
 }
 
+/* Customize the default zoom buttons */
+.ol-zoom-in, .ol-zoom-out {
+    color: white;
+    border-radius: 30% !important;
+  }
+  
+  .ol-zoom-in:hover, .ol-zoom-out:hover {
+    background-color: #e7e7e7; /* Darker green on hover */
+  }
+
 .blog-meta {
     color: #777777;
     line-height: 18px;
@@ -152,13 +162,16 @@
 
 }
 
-
 @media only screen and (max-width: 768px) {
 
     .blogposts {
         margin: auto;
         max-width: 90%;
         padding-top: 20px;
+    }
+
+    .blog {
+        max-width: 100%;
     }
 
     .articleclass {

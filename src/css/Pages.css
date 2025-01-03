@@ -276,6 +276,10 @@ div.pages-custom h1 {
     padding-top: 0;
   }
 
+  .pages-individual {
+    max-width: 100%;
+  }
+
   .homegif {
     padding-top: 0;
     padding-left: 10px;
