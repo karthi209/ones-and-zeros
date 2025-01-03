@@ -5,12 +5,34 @@ import gfm from "remark-gfm";
 import CodeBlock from "./CodeBlock";
 import MapComponent from "./MapComponent";
 
+const extractMapData = (markdownContent) => {
+  // Regular expression to match multiple map syntax in markdown
+  const mapRegex = /\[map center="([^"]+)" zoom="([^"]+)" gisdataurl="([^"]+)"\]/g;
+  const matches = [];
+  let match;
+
+  while ((match = mapRegex.exec(markdownContent)) !== null) {
+    matches.push({
+      mapcenter: match[1].split(',').map(parseFloat), // Convert to [lat, lon]
+      zoom: parseInt(match[2], 10),
+      gisdataurl: match[3],
+    });
+  }
+
+  return matches.length > 0 ? matches : null;
+};
+
 const BlogPost = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { slug } = useParams();
   const navigate = useNavigate();
+
+  const { content } = post || {}; // Safely destructure content in case post is null
+  
+  // Extract map data from the content
+  const mapsData = content ? extractMapData(content) : null;
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -45,40 +67,54 @@ const BlogPost = () => {
   }, [slug, navigate]);
 
   const renderContent = () => {
-    const parts = post.content.split("[MAP]");
-    
+    if (!content) return null; // If content is not available, return nothing
+
+    const parts = content.split("[MAP]");
+
     return parts.map((part, index) => {
       if (index === 0) {
-        // First part: render markdown and the map
+        // First part: render markdown and the maps
         return (
           <div key={index}>
-            <ReactMarkdown 
-              children={part} 
-              remarkPlugins={[gfm]} 
+            <ReactMarkdown
+              children={part.replace(/\[map[^\]]+\]/g, "")} // Clean up the map tags from the markdown
+              remarkPlugins={[gfm]}
               components={{
                 code({ node, inline, className, children, ...props }) {
-                  const match = /language-(\w+)/.exec(className || '');
+                  const match = /language-(\w+)/.exec(className || "");
                   if (match) {
                     return (
-                      <CodeBlock language={match[1]} value={String(children).replace(/\n$/, '')} />
+                      <CodeBlock
+                        language={match[1]}
+                        value={String(children).replace(/\n$/, "")}
+                      />
                     );
                   }
-                  return <code className={className} {...props}>{children}</code>;
-                }
+                  return (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  );
+                },
               }}
             />
-            {post?.hasmap && (
+            {mapsData && mapsData.map((mapData, i) => (
               <MapComponent
-                mapcenter={post.mapcenter}
-                zoom={post.zoom}
-                gisdataurl={post.gisdataurl}
+                key={i}
+                mapcenter={mapData.mapcenter}
+                zoom={mapData.zoom}
+                gisdataurl={mapData.gisdataurl}
               />
-            )}
+            ))}
           </div>
         );
       }
-      // For the other parts, just render markdown (after a [MAP] tag)
-      return <div key={index}><ReactMarkdown children={part} remarkPlugins={[gfm]} /></div>;
+      // For other parts, just render markdown (after a [MAP] tag)
+      return (
+        <div key={index}>
+          <ReactMarkdown children={part} remarkPlugins={[gfm]} />
+        </div>
+      );
     });
   };
 
@@ -103,7 +139,8 @@ const BlogPost = () => {
                   })}
                 </a>
               </div>
-              {renderContent()} {/* Call renderContent here instead of ReactMarkdown */}
+              {renderContent()}{" "}
+              {/* Call renderContent here instead of ReactMarkdown */}
             </article>
           ) : (
             <div className="error-message">Post not found.</div>
