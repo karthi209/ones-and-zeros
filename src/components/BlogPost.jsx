@@ -52,7 +52,21 @@ const BlogPost = () => {
         // First part: render markdown and the map
         return (
           <div key={index}>
-            <ReactMarkdown>{part}</ReactMarkdown>
+            <ReactMarkdown 
+              children={part} 
+              remarkPlugins={[gfm]} 
+              components={{
+                code({ node, inline, className, children, ...props }) {
+                  const match = /language-(\w+)/.exec(className || '');
+                  if (match) {
+                    return (
+                      <CodeBlock language={match[1]} value={String(children).replace(/\n$/, '')} />
+                    );
+                  }
+                  return <code className={className} {...props}>{children}</code>;
+                }
+              }}
+            />
             {post?.hasmap && (
               <MapComponent
                 mapcenter={post.mapcenter}
@@ -64,10 +78,9 @@ const BlogPost = () => {
         );
       }
       // For the other parts, just render markdown (after a [MAP] tag)
-      return <div key={index}><ReactMarkdown>{part}</ReactMarkdown></div>;
+      return <div key={index}><ReactMarkdown children={part} remarkPlugins={[gfm]} /></div>;
     });
   };
-  
 
   return (
     <div className="container">

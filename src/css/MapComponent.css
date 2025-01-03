@@ -1,0 +1,11 @@
+.map-container {
+    width: 100%; /* Ensure it takes full width */
+    height: 400px; /* Fixed height, you can adjust this */
+    background-color: lightgray; /* Temporary background for debugging */
+  }
+  
+  /* You can also use 100vh for full screen height */
+  .map-container.full-screen {
+    height: 100vh; /* Full screen height */
+  }
+  

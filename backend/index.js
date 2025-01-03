@@ -82,10 +82,10 @@ app.post('/api/data', async (req, res) => {
     const post = data.rows[0];
 
     // Check if map-related data exists
-    const { mapCenter, zoom } = post;
+    const { mapcenter, zoom } = post;
 
-    const mapDetails = mapCenter ? {
-      center: mapCenter.split(','),  // Example: Convert a string like '12.34,-56.78' into an array [12.34, -56.78]
+    const mapDetails = mapcenter ? {
+      center: mapcenter.split(','),  // Example: Convert a string like '12.34,-56.78' into an array [12.34, -56.78]
       zoom: zoom || 2  // Default zoom level if not available
     } : null;
 

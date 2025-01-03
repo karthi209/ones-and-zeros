@@ -1,14 +1,17 @@
 ---
+postid: 8b3cdcd7-eaab-4395-be2c-a6fd1cc220f8
 title: "How to Use JWT Tokens for Authentication"
 author: "John Doe"
 category: "Authentication"
 publicationdate: "2025-01-01"
-tags: ["JWT", "Security", "Authentication"]
-postid: 104a774e-b8cf-4af1-b297-d98b99a12b7b
-hasMap: true
-mapCenter: [37.7749, -122.4194]
-zoom: 10
-gisDataUrl: "https://theonesandzeros.com/api/files/gis/expanded-gcc.geojson"
+tags:
+  - "JWT"
+  - "Security"
+  - "Authentication"
+mapcenter: [-73.9857, 40.7484]
+zoom: 12
+hasmap: true
+gisdataurl: "https://theonesandzeros.com/api/files/gis/expanded-gcc.geojson"
 ---
 
 ## Introduction
@@ -35,27 +38,7 @@ console.log(token);
 Here's where I started in London:
 [MAP]
 
-### Explanation
+## More STuff
 
-- **Front Matter**: 
-  - The metadata at the top (between the `---`) defines the post's title, author, category, publication date, tags, and other information like `postid`, `hasMap`, etc.
-  
-- **Content**: 
-  - The content below the front matter is your blog content. You can include any Markdown-supported content here, such as headings, paragraphs, lists, and code blocks.
-  
-- **Map**: 
-  - The `[MAP]` tag is used to indicate that the post has a map. The `hasMap` flag in the front matter (`true`) enables map display, and the `mapCenter` and `zoom` values will be used to configure the map when rendering the post.
-
-- **Image**: 
-  - The `image` field points to a file, like `"example-image.jpg"`, that you can process using the script (make sure to have the image in the correct directory or handle its path).
-
----
-
-### Testing the Script
-
-1. **Place this `.md` file** in the `markdown/` directory of your project.
-2. **Ensure that the image** (`example-image.jpg`) is available in your image folder or handle it accordingly.
-3. **Run the script**:
-   ```bash
-   node scripts/createPost.js
+Get ready to be roaster you idiot. I;m tryuinggggg
 

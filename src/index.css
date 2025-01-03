@@ -1,5 +1,7 @@
 /* Default light theme (set in :root) */
 
+@import "ol/ol.css";
+
 :root {
   --background-color: #ffffff;
   --text-color: #000000;
