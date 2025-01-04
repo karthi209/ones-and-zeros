@@ -8,29 +8,27 @@ const BlogList = () => {
   const [error, setError] = useState(null);
   const [totalPosts, setTotalPosts] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const fetchPosts = async (query = "") => {
+  const fetchPosts = async (query = "", page = 1) => {
     setLoading(true);
     setError(null);
     try {
+      // Fixed API endpoint path to match backend
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/bloglist${
-          query ? `?query=${encodeURIComponent(query)}` : ""
-        }`
+          query ? `?query=${encodeURIComponent(query)}&` : "?"
+        }page=${page}&limit=10`
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
       
-      // Handle the paginated response
-      if (data && Array.isArray(data.posts)) {
-        setPosts(data.posts);
-        setTotalPosts(data.totalPosts);
-        setTotalPages(data.totalPages);
-      } else {
-        throw new Error("Invalid response format");
-      }
+      setPosts(data.posts);
+      setTotalPosts(data.totalPosts);
+      setTotalPages(data.totalPages);
+      setCurrentPage(data.currentPage);
     } catch (error) {
       setError(error.message || "Error loading posts");
       console.error("Error loading posts:", error);
@@ -40,16 +38,14 @@ const BlogList = () => {
   };
 
   useEffect(() => {
-    fetchPosts();
-  }, []);
+    fetchPosts(searchQuery, currentPage);
+  }, [searchQuery, currentPage]);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    fetchPosts(searchQuery);
+    setCurrentPage(1);
+    fetchPosts(searchQuery, 1);
   };
-
-  const sortedPosts = [...posts]
-    .sort((a, b) => new Date(b.publicationdate) - new Date(a.publicationdate));
 
   return (
     <div className="container">
@@ -83,18 +79,19 @@ const BlogList = () => {
           </div>
         )}
 
-        {!loading && !error && sortedPosts.length === 0 && (
+        {!loading && !error && posts.length === 0 && (
           <p>No posts found.</p>
         )}
 
         <section className="column">
           <div>
-            {sortedPosts.map((post) => (
+            {posts.map((post) => (
               <article key={post.slug} className="blog-recents">
                 <Link 
                   to={`/blog/${post.slug}`}
                   className="blog-link"
                   aria-label={`Read ${post.title}`}
+                  style={{ textDecoration: 'none' }}
                 >
                   <h3 className="mb-1">{post.title}</h3>
                   <p className="text-sm text-gray-500 mt-0">
@@ -114,6 +111,33 @@ const BlogList = () => {
             ))}
           </div>
         </section>
+
+        {totalPages > 1 && (
+          <div className="pagination">
+            {/* "Previous" Button */}
+            <button
+              onClick={() => setCurrentPage(currentPage - 1)}
+              className="pagination-button"
+              disabled={currentPage === 1} // Disable if on the first page
+            >
+              Previous
+            </button>
+
+            {/* Page Info */}
+            <span className="page-info">
+              Page {currentPage} of {totalPages}
+            </span>
+
+            {/* "Next" Button */}
+            <button
+              onClick={() => setCurrentPage(currentPage + 1)}
+              className="pagination-button"
+              disabled={currentPage === totalPages} // Disable if on the last page
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

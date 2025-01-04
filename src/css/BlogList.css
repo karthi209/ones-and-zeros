@@ -135,53 +135,70 @@
     padding: 8px;
     border: 1px solid rgb(180, 180, 180);
     font-size: 14px;
+    border-radius: 5px;
 }
 
 .search-button {
-    padding: 8.5px 12px;
-    margin-left: 8px;
-    background-color: #323232;
+    padding: 8px 12px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #343A40;
     color: white;
-    border: none;
     cursor: pointer;
     font-size: 14px;
+    transition: background-color 0.3s;
 }
-
-.pagination-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin: 2rem 0;
-    padding: 1rem;
-  }
-  
-  .pagination-button {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #fff;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .pagination-button:hover:not(:disabled) {
-    background-color: #f0f0f0;
-  }
-  
-  .pagination-button:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-  
-  .pagination-info {
-    font-size: 0.9rem;
-    color: #666;
-  }
 
 .search-button:hover {
     background-color: #000000;
 }
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-bottom: 30px;
+}
+  
+  .pagination-numbers {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  /* .pagination-button.active {
+    background-color: #343A40 !important;
+    color: white;
+  } */
+
+  .pagination-button {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #343A40;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .pagination-button:hover:enabled {
+    background-color: #343A40;
+  }
+  
+  .pagination-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    color: #666;
+  }
+  
+  .page-info {
+    margin: 0 10px;
+    font-size: 14px;
+    color: #333;
+  }
 
 @media only screen and (max-width: 1500px) {
 

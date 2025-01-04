@@ -39,77 +39,48 @@ app.use('/api/files', express.static('webfiles'));
 
 // Fixed bloglist endpoint to ensure array response
 app.get('/api/bloglist', async (req, res) => {
-  const searchQuery = req.query.query || "";
   const page = parseInt(req.query.page) || 1;
-  const limit = 12;
+  const limit = parseInt(req.query.limit) || 10;
   const offset = (page - 1) * limit;
+  const searchQuery = req.query.query || "";
 
   try {
-    let countQuery;
-    let dataQuery;
-    let values;
+    // Get total count of posts
+    const countQuery = searchQuery 
+      ? 'SELECT COUNT(*) FROM Post WHERE title ILIKE $1'
+      : 'SELECT COUNT(*) FROM Post';
+    const countValues = searchQuery ? [`%${searchQuery}%`] : [];
+    const totalResult = await db.query(countQuery, countValues);
+    const total = parseInt(totalResult.rows[0].count);
 
-    if (searchQuery) {
-      countQuery = `SELECT COUNT(*) FROM Post WHERE title ILIKE $1`;
-      dataQuery = `
-        SELECT 
-          postid, 
-          title, 
-          author, 
-          publicationdate, 
-          slug, 
-          SUBSTRING(content, 1, 200) || '...' as content
-        FROM Post 
-        WHERE title ILIKE $1
-        ORDER BY publicationdate DESC
-        LIMIT $2 OFFSET $3
-      `;
-      values = [`%${searchQuery}%`, limit, offset];
-    } else {
-      countQuery = `SELECT COUNT(*) FROM Post`;
-      dataQuery = `
-        SELECT 
-          postid, 
-          title, 
-          author, 
-          publicationdate, 
-          slug, 
-          SUBSTRING(content, 1, 200) || '...' as content
-        FROM Post 
-        ORDER BY publicationdate DESC
-        LIMIT $1 OFFSET $2
-      `;
-      values = [limit, offset];
-    }
-
-    // Get total count
-    const countResult = await db.query(countQuery, searchQuery ? [`%${searchQuery}%`] : []);
-    const totalPosts = parseInt(countResult.rows[0].count);
-    const totalPages = Math.ceil(totalPosts / limit);
-
-    // Get posts
-    const result = await db.query(dataQuery, values);
+    // Get paginated posts
+    const query = `
+      SELECT postid, title, author, publicationdate, slug, content 
+      FROM Post 
+      ${searchQuery ? 'WHERE title ILIKE $1' : ''} 
+      ORDER BY publicationdate DESC
+      LIMIT $${searchQuery ? 2 : 1} 
+      OFFSET $${searchQuery ? 3 : 2}
+    `;
     
-    // Transform dates
-    const posts = result.rows.map(post => ({
-      ...post,
-      publicationdate: new Date(post.publicationdate).toISOString()
-    }));
+    const values = searchQuery 
+      ? [`%${searchQuery}%`, limit, offset]
+      : [limit, offset];
 
-    // Send paginated response
+    const result = await db.query(query, values);
+
     res.json({
-      posts,
-      totalPosts,
-      totalPages,
-      currentPage: page
+      posts: result.rows,
+      currentPage: page,
+      totalPages: Math.ceil(total / limit),
+      totalPosts: total
     });
 
   } catch (err) {
     console.error('Database error:', err);
     res.status(500).json({
       error: 'Internal Server Error',
-      message: 'An error occurred while processing your request.',
-      details: process.env.NODE_ENV === 'development' ? err.message : undefined
+      message: 'An error occurred while processing your request.'
     });
   }
 });
