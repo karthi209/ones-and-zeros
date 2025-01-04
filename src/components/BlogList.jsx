@@ -87,30 +87,37 @@ const BlogList = () => {
           <div>
             {posts.map((post) => (
               <article key={post.slug} className="blog-recents">
-                <Link 
+                <Link
                   to={`/blog/${post.slug}`}
                   className="blog-link"
                   aria-label={`Read ${post.title}`}
                   style={{ textDecoration: 'none' }}
                 >
-                  <h3 className="mb-1">{post.title}</h3>
-                  <p className="text-sm text-gray-500 mt-0">
-                    Posted on{" "}
-                    {new Date(post.publicationdate).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                  </p>
-                  <div className="post-content-preview">
-                    {post.content}
+                  {/* Add an image at the start of the post */}
+                  <img
+                  src={`${import.meta.env.VITE_API_URL}/files/media/thumbnails/${post.postid}.jpg`}
+                  />
+                  <div>
+                    <h3 className="mb-1">{post.title}</h3>
+                    <p className="text-sm text-gray-500 mt-0">
+                      Posted on{" "}
+                      {new Date(post.publicationdate).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </p>
+                    <div className="post-content-preview">
+                      {post.content}
+                    </div>
+                    <span className="text-sm mt-2">Read More...</span>
                   </div>
-                  <span className="text-sm mt-2">Read More...</span>
                 </Link>
               </article>
             ))}
           </div>
         </section>
+
 
         {totalPages > 1 && (
           <div className="pagination">

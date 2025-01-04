@@ -160,6 +160,8 @@ div.pages-custom h1 {
   max-width: 100%;
 }
 .blog-recents {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
   border: 0.5px solid rgb(235, 235, 235);
   border-bottom: none;
   border-left: none;

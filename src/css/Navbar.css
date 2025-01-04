@@ -1,43 +1,44 @@
+/* General Styling */
 div.logotext {
   display: flex;
-  font-size: 24px;
+  font-size: 1.5rem; /* 24px equivalent */
   font-weight: 800;
-  font-family: Inter;
-  margin-left: 20px;
+  font-family: 'Inter', sans-serif;
+  margin-left: 2vw; /* For smaller screens */
 }
 
 .iconclass.rotate {
-  transform: rotate(360deg) !important;  /* Rotates the icon by 360 degrees */
+  transform: rotate(360deg) !important;
 }
 
 .navbar {
-    display: flex;
-    font-size: 18px;
-    font-weight: 700;
-    max-width: 100%;
-    border-bottom: 1px solid rgb(220, 220, 220);
-    padding: 20px;
-    margin: 0 auto;
-    grid-gap: 0;
+  display: flex;
+  font-size: 1.125rem; /* 18px equivalent */
+  font-weight: 700;
+  max-width: 100%;
+  border-bottom: 1px solid rgb(220, 220, 220);
+  padding: 1.25rem 20px; /* Adjusted for consistency */
+  margin: 0 auto;
+  gap: 1vw; /* Flex gap for navbar items */
+  align-items: center;
 }
 
-/* Hide the icon on desktop/tablet */
 .nav-icon {
-  display: none !important; /* Force hide the icon by default */
+  display: none !important; /* Hidden by default */
 }
 
 .nav-text {
-  font-size: 15px; /* Adjust text size */
-  margin-left: 10px; /* Space between icon and text */
+  font-size: 0.9375rem; /* 15px equivalent */
+  margin-left: 0.625rem; /* Space between icon and text */
   font-weight: 500;
   color: #767f87;
-  line-height: 23px;
+  line-height: 1.5;
 }
-  
+
 .navbar-links {
   display: flex;
   list-style: none;
-  justify-content: right;
+  justify-content: flex-end;
   align-items: center;
   flex-grow: 1;
   padding: 0;
@@ -50,8 +51,9 @@ div.logotext {
   margin: 0;
 }
 
-.nav-text:hover {
+.nav-text:hover, .nav-text:focus {
   color: #5A6268;
+  outline: none; /* Remove default outline when focused */
 }
 
 .navbar-links li.selected .nav-text {
@@ -63,7 +65,7 @@ div.logotext {
 }
 
 .mobile-icon {
-  display: none;
+  display: none; /* Hide mobile icon by default */
 }
 
 .theme-text {
@@ -74,8 +76,8 @@ div.logotext {
   display: none !important;
 }
 
+/* Media Queries */
 @media only screen and (max-width: 1500px) {
-
   div.logotext {
     margin-left: 2vw;
   }
@@ -91,59 +93,50 @@ div.logotext {
   .pc-icon {
     margin-right: 3vw;
   }
-
-  .navbar {
-    max-width: 100%;
-    border-bottom: 1px solid rgb(220, 220, 220);
-  }
-
 }
 
 @media only screen and (max-width: 1320px) {
-
   div.logotext {
-    margin-left: 0vw;
+    margin-left: 0;
   }
 
   .navbar-links {
-    margin-right: 0vw;
+    margin-right: 0;
   }
-
-  .navbar {
-    display: flex;
-    font-size: 18px;
-    max-width: 100%;
-    border-bottom: 1px solid rgb(220, 220, 220);
-    padding: 20px;
-  }
-
 }
 
 @media only screen and (max-width: 1000px) {
-
   .nav-text {
-    font-size: 16px;
+    font-size: 1rem; /* 16px */
   }
 }
 
 @media only screen and (max-width: 768px) {
-
   .navbar {
-    padding: 18px;
-    padding-top: 20px;
+    padding: 1.125rem; /* Adjusted padding for mobile */
     flex-wrap: wrap;
-    justify-content: left;
-    font-size: 14px;
-    max-width: 100%;
+    justify-content: flex-start;
+    font-size: 0.875rem; /* 14px */
   }
 
   div.logotext {
-    font-size: 22px;
+    font-size: 1.375rem; /* 22px */
   }
 
   .nav-text {
-    font-size: 16px;
+    font-size: 1rem; /* 16px */
     padding: auto;
   }
 
+  .nav-icon {
+    display: block; /* Show nav icon on mobile */
+  }
+
+  .navbar-links {
+    display: none; /* Hide navbar items on mobile */
+  }
+
+  .mobile-icon {
+    display: block; /* Show mobile icon */
+  }
 }
