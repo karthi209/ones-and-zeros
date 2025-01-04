@@ -73,6 +73,7 @@ div.pages-custom {
   background-size: 20px 20px;
 }
 
+
 /* Grid of 3 columns */
 .grid-columns {
   display: grid;
@@ -288,7 +289,8 @@ footer {
   }
 
   .master-blog {
-    max-width: 90%;
+    max-width: 65%;
+    min-width: 50%;
   }
 
   .holder {
@@ -310,7 +312,8 @@ footer {
   }
 
   .master-blog {
-    max-width: 100%;
+    max-width: 75%;
+    min-width: 60%;
   }
 
   .holder {
@@ -323,15 +326,23 @@ footer {
   .centered-element {
     max-width: 100%;
     min-width: 100%;
+    height: 250px;
   }
 
   .grid-columns {
-    max-width: 100%;
     min-width: 100%;
+    max-width: 100%;
+    display: block;
+    padding-left: 0px;
   }
 
   .homegif {
     padding-top: 20px;
+  }
+
+  .master-blog {
+    max-width: 100%;
+    min-width: 100%;
   }
 
   .home-head {
@@ -356,6 +367,21 @@ footer {
     max-width: 100%;
   }
 
+  .blog-bar {
+    height: auto;
+    padding-top: 0px;
+    display: block;
+  }
+
+  .blog-bar h2 { 
+    padding-left: 20px;
+  }
+
+  .blog-recents {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
   .homegif {
     padding-top: 0;
     padding-left: 10px;
@@ -376,10 +402,20 @@ footer {
   .home-head {
     font-size: 20px;
     line-height: 22px;
+    padding-left: 20px;
+    margin-bottom: 20px;
+  }
+
+  .home-recents {
+    padding-left: 20px;
+   }
+
+  .home-recents h4 {
+    margin-top: 10px;
   }
 
   .home-head h3 { 
-    font-size: 20px;
+    font-size: 20px;    
   }
 
   .master-blog h2 {
@@ -388,7 +424,7 @@ footer {
   }
 
   .master-blog p {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 28px;
   }
 
@@ -432,6 +468,7 @@ footer {
     max-width: 100%;
     padding: 20px;
     margin: 0;
+    height: 260px;
   }
 
   .grid-columns {
@@ -454,5 +491,9 @@ footer {
     padding: auto;
     margin: auto;
   }
+
+  .text-sm mt-2 {
+    display: none;
+}
 }
 

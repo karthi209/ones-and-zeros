@@ -98,18 +98,10 @@ const BlogList = () => {
                     src={`${import.meta.env.VITE_API_URL}/files/media/thumbnails/${post.postid}.png`}
                     alt={post.title}
                     className="post-image"
-                    style={{
-                      width: '200px', // Adjust width as needed
-                      height: 'auto', // Maintain aspect ratio
-                      borderRadius: '4px', // Optional: Add rounded corners for a softer look
-                      marginBottom: '10px', // Add spacing between image and text
-                      marginTop: '20px',
-                      marginRight: '20px'
-                    }}
                   />
                   <div>
                     <h3 className="mb-1">{post.title}</h3>
-                    <p className="text-sm text-gray-500 mt-0">
+                    <p className="text-sm">
                       Posted on{" "}
                       {new Date(post.publicationdate).toLocaleDateString("en-US", {
                         month: "short",
@@ -120,7 +112,7 @@ const BlogList = () => {
                     <div className="post-content-preview">
                       {post.content}
                     </div>
-                    <span className="text-sm mt-2">Read More...</span>
+                    <p className="mb-2">Read more...</p>
                   </div>
                   </div>
                   {/* Add an image at the start of the post */}
