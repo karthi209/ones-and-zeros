@@ -3,15 +3,8 @@
 @import "ol/ol.css";
 
 :root {
-  --background-color: #F8F9FA;
+  --background-color: #ffffff;
   --text-color: #343A40;
-  --card-bg: rgb(237, 237, 237);
-  --link-color: #323232de; /* Define default link color */
-  --meta-color: #7d7d7d;
-  --search-bar-background-color: #ffffff;
-  --search-bar-border-color: #c6c6c6;
-  --search-bar-font-color: #000000;
-  --nav-bar-back-color: #f0f0f0;
   overflow-y: scroll;
   transition: background-color 0.3s ease, color 0.3s ease;
   background-color: var(--background-color);

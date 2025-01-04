@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const BlogList = () => {
@@ -6,6 +6,8 @@ const BlogList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [totalPosts, setTotalPosts] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
 
   const fetchPosts = async (query = "") => {
     setLoading(true);
@@ -16,10 +18,22 @@ const BlogList = () => {
           query ? `?query=${encodeURIComponent(query)}` : ""
         }`
       );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
-      setPosts(data);
+      
+      // Handle the paginated response
+      if (data && Array.isArray(data.posts)) {
+        setPosts(data.posts);
+        setTotalPosts(data.totalPosts);
+        setTotalPages(data.totalPages);
+      } else {
+        throw new Error("Invalid response format");
+      }
     } catch (error) {
-      setError("Error loading posts");
+      setError(error.message || "Error loading posts");
+      console.error("Error loading posts:", error);
     } finally {
       setLoading(false);
     }
@@ -29,61 +43,77 @@ const BlogList = () => {
     fetchPosts();
   }, []);
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     fetchPosts(searchQuery);
   };
+
+  const sortedPosts = [...posts]
+    .sort((a, b) => new Date(b.publicationdate) - new Date(a.publicationdate));
 
   return (
     <div className="container">
       <div className="holder">
-        <div className="search-container">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search with title..."
-            className="search-input"
-          />
-          <button onClick={handleSearch} className="search-button">
-            Search
-          </button>
+        <div className="blog-bar">
+          <h2>Blogs ({totalPosts} total)</h2>
+          <form onSubmit={handleSearch} className="search-container">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search posts..."
+              className="search-input"
+              aria-label="Search posts"
+            />
+            <button type="submit" className="search-button">
+              Search
+            </button>
+          </form>
         </div>
 
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
+        {loading && (
+          <div role="alert" aria-busy="true">
+            Loading...
+          </div>
+        )}
+        
+        {error && (
+          <div role="alert" className="error-message">
+            {error}
+          </div>
+        )}
 
-        <div className="blogposts">
-          {posts.map((post) => (
-            <article key={post.postid} className="articleclass">
-              <Link
-                to={`/blog/${post.slug}`}
-                aria-label={`Read more about ${post.title}`}
-              >
-                <div>
-                  <p>{post.catagory}</p>
-                </div>
-                <h4>{post.title}</h4>
-                <div className="meta">
-                  <p>
+        {!loading && !error && sortedPosts.length === 0 && (
+          <p>No posts found.</p>
+        )}
+
+        <section className="column">
+          <div>
+            {sortedPosts.map((post) => (
+              <article key={post.slug} className="blog-recents">
+                <Link 
+                  to={`/blog/${post.slug}`}
+                  className="blog-link"
+                  aria-label={`Read ${post.title}`}
+                >
+                  <h3 className="mb-1">{post.title}</h3>
+                  <p className="text-sm text-gray-500 mt-0">
                     Posted on{" "}
-                    {new Date(post.publicationdate).toLocaleDateString(
-                      "en-US",
-                      {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric",
-                      }
-                    )}
+                    {new Date(post.publicationdate).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
                   </p>
-                </div>
-                <img
-                  src={`${import.meta.env.VITE_API_URL}/files/thumbnails/${post.postid}.jpg`}
-                  alt={post.title}
-                />
-              </Link>
-            </article>
-          ))}
-        </div>
+                  <div className="post-content-preview">
+                    {post.content}
+                  </div>
+                  <span className="text-sm mt-2">Read More...</span>
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
