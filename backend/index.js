@@ -114,6 +114,45 @@ app.get('/api/bloglist', async (req, res) => {
   }
 });
 
+app.post('/api/data', async (req, res) => {
+  console.log('Received request body:', req.body);
+  const { slug } = req.body;
+  console.log(slug);
+
+  try {
+    const data = await db.query('SELECT * FROM Post WHERE slug = $1;', [slug]);
+
+    // Check if data exists
+    if (data.rows.length === 0) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
+    const post = data.rows[0];
+
+    // Check if map-related data exists
+    const { mapcenter, zoom } = post;
+
+    const mapDetails = mapcenter ? {
+      center: mapcenter.split(','),  // Example: Convert a string like '12.34,-56.78' into an array [12.34, -56.78]
+      zoom: zoom || 2  // Default zoom level if not available
+    } : null;
+
+    // Send the post data along with map details
+    res.json({
+      post: post,
+      mapDetails: mapDetails
+    });
+
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({
+      error: 'Internal Server Error',
+      message: 'An error occurred while fetching data from the database.',
+      details: err.message
+    });
+  }
+});
+
 // Individual post endpoint
 app.get('/api/blog/:slug', async (req, res) => {
   const { slug } = req.params;
