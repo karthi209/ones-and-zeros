@@ -28,9 +28,9 @@ div.logotext {
 }
 
 .nav-text {
-  font-size: 0.9375rem; /* 15px equivalent */
+  font-size: 15px; /* 15px equivalent */
   margin-left: 0.625rem; /* Space between icon and text */
-  font-weight: 500;
+  font-weight: 600;
   color: #767f87;
   line-height: 1.5;
 }

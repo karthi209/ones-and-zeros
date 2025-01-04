@@ -27,7 +27,7 @@ div.pages-custom {
 
 .holder {
   display: grid;
-  border: 1px solid rgb(188, 188, 188);
+  border: 1px solid rgb(220, 220, 220);
   grid-gap: 0;
   max-width: 75%; /* Make the container take up 75% of the parent width */
   min-width: 75%; /* Optional: Ensure it doesn't shrink below a minimum width */
@@ -144,8 +144,8 @@ div.pages-custom h1 {
 }
 
 .master-blog h1 {
-  font-size: 30px;
-  line-height: 58px;
+  font-size: 38px;
+  line-height: 50px;
 }
 
 .home-recents {
@@ -160,8 +160,6 @@ div.pages-custom h1 {
   max-width: 100%;
 }
 .blog-recents {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
   border: 0.5px solid rgb(235, 235, 235);
   border-bottom: none;
   border-left: none;
@@ -172,6 +170,11 @@ div.pages-custom h1 {
   padding-right: 40px;
   max-width: 100%;
   text-decoration: none;
+}
+
+.test-recents {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
 }
 
 .blog-recents:hover {
@@ -196,12 +199,13 @@ div.pages-custom h1 {
 }
 
 .master-blog p {
-  font-size: 18px;
-  line-height: 33px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 30px;
 }
 
-.master-blog h3 {
-  font-size: 24px;
+.master-blog h2 {
+  font-size: 26px;
   line-height: 33px;
 }
 
@@ -216,16 +220,15 @@ div.pages-custom h1 {
 .master-blog {
   margin: 0 auto;
   padding: 25px;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: normal;
   line-height: 28px;
   letter-spacing: normal;
-  max-width: 75%;
-  min-width: 75%;
+  max-width: 65%;
+  min-width: 50%;
   justify-items: left;
   align-items: left;
   text-align: left;
-  background-color: #F8F9FA;
   border: 1px solid rgb(188, 188, 188);
   border-bottom: 0;
   border-top: 0;

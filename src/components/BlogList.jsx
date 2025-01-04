@@ -93,9 +93,19 @@ const BlogList = () => {
                   aria-label={`Read ${post.title}`}
                   style={{ textDecoration: 'none' }}
                 >
-                  {/* Add an image at the start of the post */}
+                  <div className="test-recents">
                   <img
-                  src={`${import.meta.env.VITE_API_URL}/files/media/thumbnails/${post.postid}.jpg`}
+                    src={`${import.meta.env.VITE_API_URL}/files/media/thumbnails/${post.postid}.png`}
+                    alt={post.title}
+                    className="post-image"
+                    style={{
+                      width: '200px', // Adjust width as needed
+                      height: 'auto', // Maintain aspect ratio
+                      borderRadius: '4px', // Optional: Add rounded corners for a softer look
+                      marginBottom: '10px', // Add spacing between image and text
+                      marginTop: '20px',
+                      marginRight: '20px'
+                    }}
                   />
                   <div>
                     <h3 className="mb-1">{post.title}</h3>
@@ -112,6 +122,9 @@ const BlogList = () => {
                     </div>
                     <span className="text-sm mt-2">Read More...</span>
                   </div>
+                  </div>
+                  {/* Add an image at the start of the post */}
+
                 </Link>
               </article>
             ))}
