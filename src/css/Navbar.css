@@ -50,6 +50,20 @@ div.logotext {
   transform: rotate(45deg) translate(-5px, -6px);
 }
 
+/* Remove Weird Box Effect */
+.mobile-icon:focus,
+.mobile-icon:active {
+  outline: none !important;
+  box-shadow: none; /* Remove any click focus box */
+}
+
+.navbar-links:focus,
+.navbar-links:active {
+  outline: none !important; /* Ensure no focus on mobile menu links */
+  box-shadow: none; /* Remove any box-shadow */
+  background-color: transparent; /* Ensure no background change */
+}
+
 /* Navbar Links for Mobile */
 .navbar-links {
   display: flex;
@@ -73,6 +87,8 @@ div.logotext {
 
 .navbar-links li {
   padding: 10px 0;
+  outline: none;
+  box-shadow: none;
 }
 
 /* Navbar */
@@ -100,7 +116,15 @@ div.logotext {
   font-weight: 600;
   color: #767f87;
   line-height: 1.5;
-  transition: color 0.3s ease; /* Smooth color transition */
+  position: relative;
+  transition: color 0.3s ease, transform 0.2s ease; /* Smooth color and scale transition */
+}
+
+/* Remove Outline and Weird Box on Click */
+.nav-text:focus,
+.nav-text:active {
+  outline: none !important;
+  box-shadow: none !important; /* Prevent any weird background box on click */
 }
 
 .navbar-links {
@@ -117,15 +141,46 @@ div.logotext {
 .navbar-links li {
   padding: 5px 0.5vw;
   margin: 0;
+  outline: none;
+  box-shadow: none;
 }
 
-.nav-text:hover, .nav-text:focus {
-  color: #5A6268;
+/* Hover Effect */
+.nav-text:hover,
+.nav-text:focus {
+  color: #343A40; /* Add a stronger hover color */
   outline: none; /* Remove default outline when focused */
+  transform: scale(1.05); /* Slightly enlarge the link for better interaction */
+  transition: color 0.3s ease, transform 0.2s ease; /* Smooth transition */
+  outline: none;
+  box-shadow: none;
 }
 
+/* Click Animation */
+.nav-text:active {
+  transform: scale(0.95); /* Simulate a press */
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.2); /* Add a pressed effect */
+  transition: all 0.1s ease-in-out; /* Smoothen the press action */
+}
+
+/* Selected Link */
 .navbar-links li.selected .nav-text {
   color: #343A40; /* Black color for selected item */
+}
+
+.nav-text::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 0;
+  background-color: #9c9c9c;
+  transition: width 0.3s ease;
+}
+
+.nav-text:hover::after {
+  width: 100%; /* Expand border on hover */
 }
 
 .navbar-links a {
@@ -133,11 +188,7 @@ div.logotext {
 }
 
 .navbar-links a:active {
-  color: #007bff; /* Add color change on click for better interaction */
-}
-
-.mobile-icon {
-  display: none; /* Hide mobile icon by default */
+  color: #0056b3; /* Add color change on click for better interaction */
 }
 
 .theme-text {
@@ -214,6 +265,9 @@ div.logotext {
 
   .navbar-links.active {
     display: flex; /* Display links when mobile menu is active */
+    outline: none !important; /* Ensure no focus on mobile menu links */
+    box-shadow: none; /* Remove any box-shadow */
+    background-color: transparent; /* Ensure no background change */
   }
 
   /* Show hamburger menu */

@@ -108,6 +108,31 @@ div.pages-custom {
   margin-bottom: 10px;
 }
 
+/* Page Enter (Slide Up and Fade In) */
+.page-enter {
+  opacity: 0;
+  transform: translateY(50px); /* Start with a slide-up effect */
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+/* Page Exit (Fade Out and Slide Down) */
+.page-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+
 .post {
   padding-left: 40px;
   border: 0.5px solid rgb(235, 235, 235);
