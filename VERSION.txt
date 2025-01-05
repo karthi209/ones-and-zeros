@@ -1,2 +1,2 @@
-frontend=v1.0.6
+frontend=v1.0.7
 backend=v1.0.1
