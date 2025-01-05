@@ -370,6 +370,11 @@ footer {
     min-width: 80%;
   }
 
+  .master-blog p {
+    font-size: 15px;
+    line-height: 28px;
+  }
+
   .home-head {
     font-size: 22px;
   }
