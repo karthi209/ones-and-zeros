@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Blog from "./components/Blog";
 import Projects from "./components/Projects";
+import ScrollToTop from './components/ScrollToTop'; // Import ScrollToTop
 import "./css/Pages.css";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <ScrollToTop /> {/* Add this component here */}
       
       {/* Transition Group for Animating Routes */}
       <TransitionGroup>

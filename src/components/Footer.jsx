@@ -16,9 +16,6 @@ function Footer() {
             GitHub
           </a>
         </div>
-        <div class="footer-contact">
-          <p>Contact us at: <a href="mailto:info@209.com">info@209.com</a></p>
-        </div>
       </div>
     </footer>
   );
