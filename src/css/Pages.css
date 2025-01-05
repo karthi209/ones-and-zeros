@@ -245,7 +245,7 @@ div.pages-custom h1 {
 
 .master-blog {
   margin: 0 auto;
-  padding: 25px;
+  padding: 15px;
   font-size: 20px;
   font-weight: normal;
   line-height: 28px;
@@ -367,7 +367,7 @@ footer {
 
   .master-blog {
     max-width: 100%;
-    min-width: 100%;
+    min-width: 80%;
   }
 
   .home-head {
@@ -376,6 +376,10 @@ footer {
 
   .column a {
     font-size: 16px;
+  }
+
+  .blog-content {
+    max-width: 95%;
   }
 }
 
@@ -390,6 +394,10 @@ footer {
 
   .pages-individual {
     max-width: 100%;
+  }
+
+  .blog-content {
+    max-width: 95%;
   }
 
   .blog-bar {

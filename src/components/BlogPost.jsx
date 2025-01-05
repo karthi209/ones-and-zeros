@@ -76,7 +76,7 @@ const BlogPost = () => {
       if (index === 0) {
         // First part: render markdown and the maps
         return (
-          <div key={index}>
+          <div key={index} className="blog-content">
             <ReactMarkdown
               children={part.replace(/\[map[^\]]+\]/g, "")} // Clean up the map tags from the markdown
               remarkPlugins={[gfm]}
@@ -127,7 +127,7 @@ const BlogPost = () => {
           ) : error ? (
             <div className="error-message">{error}</div>
           ) : post ? (
-            <article className="blog">
+            <article>
               <div className="header-container">
                 <h1 className="blog-header">{post.title}</h1>
                 <a className="blog-meta">
