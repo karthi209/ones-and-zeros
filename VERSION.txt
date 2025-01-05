@@ -1,2 +1,2 @@
-frontend=v1.0.21
+frontend=v1.0.22
 backend=v1.0.19
