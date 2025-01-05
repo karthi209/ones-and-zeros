@@ -27,7 +27,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="logotext">
-        <img src={`logo.png`} style={{ width: '120px' }} alt="Logo" />
+        <img src="/logo.png" style={{ width: '120px' }} alt="Logo" />
       </div>
       
       {/* Mobile Menu Toggle */}
