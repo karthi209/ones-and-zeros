@@ -11,6 +11,71 @@ div.logotext {
   transform: rotate(360deg) !important;
 }
 
+.mobile-icon {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute; /* Position the mobile icon */
+  right: 20px; /* Align it to the right */
+  top: 20px; /* Adjust top value for proper spacing */
+  margin-top: 2px;
+}
+
+.mobile-icon .bar1,
+.mobile-icon .bar2,
+.mobile-icon .bar3 {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  margin-bottom: 4px;
+}
+
+.mobile-icon.opened .bar1 {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.mobile-icon.opened .bar2 {
+  opacity: 0;
+}
+
+.mobile-icon.opened .bar3 {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Navbar Links for Mobile */
+.navbar-links {
+  display: flex;
+  list-style: none;
+  justify-content: flex-end;
+  align-items: center;
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.navbar-links.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f9fa;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.navbar-links li {
+  padding: 10px 0;
+}
+
+/* Navbar */
 .navbar {
   display: flex;
   font-size: 1.125rem; /* 18px equivalent */
@@ -21,6 +86,8 @@ div.logotext {
   margin: 0 auto;
   gap: 1vw; /* Flex gap for navbar items */
   align-items: center;
+  position: relative; /* Position context for the hamburger menu */
+  transition: all 0.3s ease; /* Smooth transition for navbar */
 }
 
 .nav-icon {
@@ -33,6 +100,7 @@ div.logotext {
   font-weight: 600;
   color: #767f87;
   line-height: 1.5;
+  transition: color 0.3s ease; /* Smooth color transition */
 }
 
 .navbar-links {
@@ -62,6 +130,10 @@ div.logotext {
 
 .navbar-links a {
   text-decoration: none; /* Optional: remove underline */
+}
+
+.navbar-links a:active {
+  color: #007bff; /* Add color change on click for better interaction */
 }
 
 .mobile-icon {
@@ -128,5 +200,34 @@ div.logotext {
   .nav-text {
     font-size: 16px;
     padding: auto;
+  }
+
+  /* Mobile Menu (Hamburger) */
+  .navbar-links {
+    display: none; /* Hide links by default */
+    width: 100%;
+    flex-direction: column;
+    background-color: #f8f9fa;
+    margin-top: 10px;
+    padding: 10px;
+  }
+
+  .navbar-links.active {
+    display: flex; /* Display links when mobile menu is active */
+  }
+
+  /* Show hamburger menu */
+  .mobile-icon {
+    display: block;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .navbar {
+    padding: 15px;
   }
 }

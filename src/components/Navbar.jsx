@@ -4,6 +4,7 @@ import "../css/Navbar.css";
 
 const Navbar = () => {
   const [selectedItem, setSelectedItem] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -19,34 +20,39 @@ const Navbar = () => {
     );
   }, [location.pathname]);
 
+  const handleMobileMenuToggle = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <nav className="navbar">
       <div className="logotext">
-        {/* <p>karthi(209)</p> */}
-        <img src={`logo.png`} style={{ width: '120px' }} alt="Logo"/>
+        <img src={`logo.png`} style={{ width: '120px' }} alt="Logo" />
       </div>
-      <ul className="navbar-links">
+      
+      {/* Mobile Menu Toggle */}
+      <button 
+        className={`mobile-icon ${isMobileMenuOpen ? 'opened' : ''}`} 
+        onClick={handleMobileMenuToggle}>
+        <div className="bar1"></div>
+        <div className="bar2"></div>
+        <div className="bar3"></div>
+      </button>
+
+      <ul className={`navbar-links ${isMobileMenuOpen ? 'active' : ''}`}>
         <li className={selectedItem === "home" ? "selected" : ""}>
           <Link to="/" onClick={() => setSelectedItem("home")}>
-          <div class="logo-container">
             <span className="nav-text">Home</span>
-          </div>
           </Link>
         </li>
         <li className={selectedItem === "blog" ? "selected" : ""}>
-          <div class="logo-container">
-            <Link to="/blog" onClick={() => setSelectedItem("blog")}>
-            <div class="logo-container">
-              <span className="nav-text">Blogs</span>
-            </div>
+          <Link to="/blog" onClick={() => setSelectedItem("blog")}>
+            <span className="nav-text">Blogs</span>
           </Link>
-        </div>
         </li>
         <li className={selectedItem === "projects" ? "selected" : ""}>
           <Link to="/projects" onClick={() => setSelectedItem("projects")}>
-            <div class="logo-container">
-              <span className="nav-text">Projects</span>
-            </div>
+            <span className="nav-text">Projects</span>
           </Link>
         </li>
       </ul>
