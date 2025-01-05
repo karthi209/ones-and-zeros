@@ -23,7 +23,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="logotext">
         {/* <p>karthi(209)</p> */}
-        <img src={`logo.png`} style={{ width: '80px' }} alt="Logo"/>
+        <img src={`logo.png`} style={{ width: '120px' }} alt="Logo"/>
       </div>
       <ul className="navbar-links">
         <li className={selectedItem === "home" ? "selected" : ""}>
