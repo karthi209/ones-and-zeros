@@ -1,3 +1,3 @@
 # Pattinam
 
-Trying to get this website up and running to blog!!!
+Pattinam attempts to document Tamil Nādu cities through blogs, maps and data
