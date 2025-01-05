@@ -122,6 +122,7 @@ const BlogPost = () => {
   return (
     <div className="container">
       <div className="master-blog">
+        <div className="blog">
           {loading ? (
             <div className="loading-placeholder"></div>
           ) : error ? (
@@ -145,6 +146,7 @@ const BlogPost = () => {
           ) : (
             <div className="error-message">Post not found.</div>
           )}
+        </div>
         </div>
       </div>
   );
