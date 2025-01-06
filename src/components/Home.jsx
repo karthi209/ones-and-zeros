@@ -41,14 +41,14 @@ const Home = () => {
     <div className="home-container">
       {/* Banner Section */}
       <section className="home-banner">
-      <Container style={{ position: 'relative', marginTop: '30px', marginBottom: '30px' }}>
+      <Container style={{ position: 'relative', marginTop: '30px', marginBottom: '30px', }}>
         <img
           src="/welcome.png"
           style={{
             width: '100%',
             height: 'auto',
             borderRadius: '20px',
-            filter: 'brightness(70%)', // Darken the image slightly
+            filter: 'brightness(70%)',
           }}
         />
         <div
@@ -60,15 +60,17 @@ const Home = () => {
             color: 'white',
             zIndex: '1',
             textAlign: 'right', // Align text to the right
+            fontFamily: "Darker Grotesque",
+            fontWeight: "600",
           }}
         >
-          <h1>Welcome to Pattinam</h1>
-          <p>Discover the heart of Chennai and Tamil Nadu through blogs and tools</p>
+          <h1 style={{ fontSize:  "40px" }}>Welcome to Pattinam</h1>
+          <p style={{ fontSize:  "20px", fontWeight: "500" }}>Discover the heart of Chennai and Tamil Nadu through blogs and tools</p>
           <div className="banner-actions">
-            <Button as={Link} to="/blog" variant="primary" className="mr-3">
+            <Button as={Link} to="/blog" variant="primary" className="mr-3" style={{ fontSize:  "19px", fontWeight: "500", }}>
               Read Blogs
             </Button>
-            <Button as={Link} to="/tools" variant="secondary">
+            <Button as={Link} to="/tools" variant="secondary" style={{ fontSize:  "19px", fontWeight: "500" }}>
               Explore Maps
             </Button>
           </div>
@@ -110,7 +112,7 @@ const Home = () => {
               ))}
           </Col>
           <Col md={6} className="mb-4">
-            <h2 className="home-head">Recent Posts</h2>
+            <h2>Recent Posts</h2>
             {sortedPosts
               .slice(0, 3)
               .map((post) => (

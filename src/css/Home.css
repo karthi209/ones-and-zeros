@@ -7,15 +7,32 @@
     transition: box-shadow 0.2s, transform 0.2s;
     overflow: hidden;
     padding: 16px; /* Consistent padding */
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
   
   body:not(.light-theme) .m3-card {
-    background-color: #1e1e1e; /* Dark mode background */
+    background-color: #282828; /* Dark mode background */
     color: #ffffff;
   }
 
   .banner-actions {
     margin: 20px;
+  }
+
+  .card, .card-body, .card-header, .card-footer, .card-img-top {
+    border: none !important;    /* Ensure no border */
+    outline: none !important;   /* Remove outline */
+    box-shadow: none !important; /* Remove shadow */
+    border-radius: 15px !important; /* Apply rounded corners */
+  }
+  
+  .card-body {
+    padding: 1rem; /* Adjust padding to your needs */
+  }
+  
+  .card-title, .card-subtitle, .card-text {
+    margin-bottom: 0.5rem; /* Optional: adjust text spacing */
   }
 
   .btn-primary {
@@ -29,10 +46,10 @@
   
   /* Card Title */
   .m3-card-title {
-    font-family: "Roboto", sans-serif;
     font-size: 20px;
     font-weight: 600;
     color: #333333;
+    font-family: "Darker Grotesque", serif;
   }
   
   body:not(.light-theme) .m3-card-title {
@@ -41,10 +58,10 @@
   
   /* Card Subtitle */
   .m3-card-subtitle {
-    font-family: "Roboto", sans-serif;
     font-size: 14px;
     color: #666666;
     margin-bottom: 8px;
+    font-family: "Darker Grotesque", serif;
   }
   
   body:not(.light-theme) .m3-card-subtitle {
@@ -53,10 +70,10 @@
   
   /* Card Text */
   .m3-card-text {
-    font-family: "Roboto", sans-serif;
     font-size: 16px;
     color: #444444;
     margin-bottom: 16px;
+    font-family: "Darker Grotesque", serif;
   }
   
   body:not(.light-theme) .m3-card-text {
@@ -65,7 +82,7 @@
   
   /* Read More Button */
   .m3-read-more-button {
-    font-family: "Roboto", sans-serif;
+    font-family: "Darker Grotesque", serif;
     font-size: 14px;
     text-transform: uppercase;
     background-color: #6200ea; /* Primary color */

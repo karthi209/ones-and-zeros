@@ -5,6 +5,12 @@
   --link-color: #1e90ff !important;
   --card-background: #282828 !important;
   --transition-duration: 0.3s !important;
+  font-family: "Darker Grotesque", serif;
+}
+
+h2 {
+  font-family: "Darker Grotesque", serif;
+  font-weight: 600;
 }
 
 body {
