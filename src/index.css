@@ -1,60 +1,22 @@
-/* index.css */
-
 /* Default dark theme */
 :root {
-  --background-color: #121212;
-  --text-color: #ffffff;
-  --link-color: #1e90ff;
-  --card-background: #282828;
-  --transition-duration: 0.3s;
-
-  background-color: var(--background-color);
-  color: var(--text-color);
-  overflow-y: scroll;
-  transition: background-color var(--transition-duration), color var(--transition-duration);
-  font-family: "Open Sans", serif;
-  font-weight: 500;
-}
-
-/* Light theme */
-.light-theme {
-  --background-color: #ffffff;
-  --text-color: #000000;
-  --link-color: #1e90ff;
-  --card-background: #f4f4f4;
-}
-
-/* Global reset */
-#root {
-  width: 100%;
-  margin: auto;
-}
-
-body,
-html {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  width: 100%;
-  min-height: 100%;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+  --background-color: #121212 !important;
+  --text-color: #ffffff !important;
+  --link-color: #1e90ff !important;
+  --card-background: #282828 !important;
+  --transition-duration: 0.3s !important;
 }
 
 body {
-  transition: background-color var(--transition-duration), color var(--transition-duration);
-  margin: 0;
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+  transition: background-color var(--transition-duration), color var(--transition-duration) !important;
 }
 
-.theme-toggle-btn {
-  background-color: transparent;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 10px;
+/* Light theme */
+body.light-theme {
+  --background-color: #ffffff !important;
+  --text-color: #000000 !important;
+  --link-color: #1e90ff !important;
+  --card-background: #f4f4f4 !important;
 }

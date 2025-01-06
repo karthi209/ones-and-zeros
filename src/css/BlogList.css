@@ -1,58 +1,89 @@
-/* BlogList.css */
+/* Default Styles (Dark Theme) */
 .blog-list-container {
-    margin-top: 2rem;
-  }
-  
-  .blog-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-  }
-  
-  .blog-header h2 {
-    margin: 0;
-  }
-  
-  .search-form {
-    display: flex;
-    align-items: center;
-  }
-  
-  .search-form .form-control {
-    margin-right: 0.5rem;
-  }
-  
-  .pagination-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 1.5rem;
-  }
-  
-  .card-container {
-    margin-bottom: 1.5rem;
-  }
-  
-  .card-img {
-    width: 100%;
-  }
-  
-  .card-body {
-    padding: 1rem;
-  }
-  
-  .card-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .card-text {
-    font-size: 0.875rem;
-    color: #6c757d;
-  }
-  
-  .card-footer {
-    text-align: center;
-    padding-top: 0.5rem;
-  }
-  
+  margin-top: 2rem;
+  background-color: #121212; /* Dark background */
+  color: #ffffff; /* Light text */
+}
+
+.blog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.blog-header h2 {
+  margin: 0;
+  color: #ffffff; /* Light color for title */
+}
+
+.search-form .form-control {
+  margin-right: 0.5rem;
+  background-color: #333333; /* Dark input field */
+  color: #ffffff; /* Light text in input */
+  border: 1px solid #555555; /* Darker border */
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.card-container {
+  margin-bottom: 1.5rem;
+}
+
+.card-img {
+  width: 100%;
+}
+
+.card-body {
+  padding: 1rem;
+  background-color: #282828; /* Dark card background */
+  color: #ffffff; /* Light text in cards */
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  font-size: 0.875rem;
+  color: #bbb; /* Light gray text */
+}
+
+.card-footer {
+  text-align: center;
+  padding-top: 0.5rem;
+}
+
+/* Light Theme Overrides */
+body.light-theme .blog-list-container {
+  background-color: #ffffff; /* Light background */
+  color: #000000; /* Dark text */
+}
+
+body.light-theme .blog-header h2 {
+  color: #000000; /* Dark color for title */
+}
+
+body.light-theme .search-form .form-control {
+  background-color: #f0f0f0; /* Light input field */
+  color: #000000; /* Dark text in input */
+  border: 1px solid #ccc; /* Lighter border */
+}
+
+body.light-theme .card-body {
+  background-color: #f8f9fa; /* Light card background */
+  color: #000000; /* Dark text in cards */
+}
+
+body.light-theme .card-text {
+  color: #555; /* Dark gray text */
+}
+
+body.light-theme .card-footer {
+  color: #000000; /* Dark text in footer */
+}

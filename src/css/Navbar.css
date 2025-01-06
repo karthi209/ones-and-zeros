@@ -1,24 +1,39 @@
-.navbar {
+/* Dark Theme Navbar */
+body:not(.light-theme) .navbar {
     background-color: #121212; /* Dark background */
-}
-
-.navbar .nav-link {
+  }
+  
+  body:not(.light-theme) .navbar .nav-link {
     color: #888888 !important; /* Light text color */
-}
-
-.navbar .nav-link.active {
+  }
+  
+  body:not(.light-theme) .navbar .nav-link.active {
     color: #ffffff !important; /* Gold color for active links */
-}
-
-.navbar .navbar-brand img {
-    width: 100px; /* Adjust logo size */
-}
-
-/* Align navbar links to the right */
-.navbar-nav {
+  }
+  
+  /* Light Theme Navbar */
+  body.light-theme .navbar {
+    background-color: #ffffff; /* Light background */
+  }
+  
+  body.light-theme .navbar .nav-link {
+    color: #333333 !important; /* Dark text color for light theme */
+  }
+  
+  body.light-theme .navbar .nav-link.active {
+    color: #1e90ff !important; /* Blue color for active links in light theme */
+  }
+  
+  body.light-theme .navbar .navbar-brand img {
+    width: 120px; /* Adjust logo size for light theme */
+  }
+  
+  /* Align navbar links to the right */
+  .navbar-nav {
     margin-left: auto; /* Push items to the right */
-}
-
-.navbar-nav .nav-item {
+  }
+  
+  .navbar-nav .nav-item {
     margin-left: 20px; /* Optional: Add space between the nav items */
-}
+  }
+  

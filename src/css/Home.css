@@ -1,5 +1,3 @@
-/* Home.css */
-
 /* General background for the page */
 .home-container {
     background-color: #121212; /* Dark background */
@@ -7,9 +5,19 @@
     padding: 20px;
 }
 
+/* Light theme override for the home container */
+body.light-theme .home-container {
+    background-color: #ffffff; /* Light background */
+}
+
 /* Featured and Recent sections heading */
 .home-head {
     color: white;
+}
+
+/* Light theme override for headings */
+body.light-theme .home-head {
+    color: black; /* Dark text for light theme */
 }
 
 /* Card styles for posts */
@@ -17,6 +25,12 @@
     background-color: #282828; /* Dark card background */
     color: white;
     border: none; /* Remove card border */
+}
+
+/* Light theme override for cards */
+body.light-theme .home-card {
+    background-color: #f4f4f4; /* Light card background */
+    color: black; /* Dark text for light theme */
 }
 
 /* Styling the card text and links */
@@ -40,6 +54,11 @@
     color: #FFD700; /* Gold color for links */
 }
 
+/* Light theme override for card links */
+body.light-theme .home-card .read-more-link {
+    color: #1e90ff; /* Blue color for links in light theme */
+}
+
 .home-card .read-more-link:hover {
     text-decoration: underline;
 }
@@ -48,6 +67,11 @@
 .post-content-preview {
     font-size: 14px;
     color: #ccc;
+}
+
+/* Light theme override for content preview */
+body.light-theme .post-content-preview {
+    color: #333; /* Dark text for content preview in light theme */
 }
 
 /* Centered element container */
@@ -63,6 +87,11 @@ a {
 
 a:hover {
     color: #FFDD00;
+}
+
+/* Light theme override for links */
+body.light-theme a {
+    color: #1e90ff; /* Blue links in light theme */
 }
 
 /* General margin for columns */

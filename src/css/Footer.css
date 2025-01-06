@@ -1,35 +1,55 @@
-/* Footer.css */
+/* Footer Default (Dark Theme) */
 footer {
-    background-color: #f8f9fa;
-    padding: 1.5rem 0;
-    text-align: center;
-  }
-  
-  .footer-content {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-  
-  .footer-content p {
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    color: #6c757d;
-  }
-  
-  .footer-links a {
-    margin: 0 0.5rem;
-    text-decoration: none;
-    color: #007bff;
-    font-size: 0.9rem;
-  }
-  
-  .footer-links a:hover {
-    color: #0056b3;
-  }
-  
-  .footer-links a:focus {
-    outline: none;
-    color: #0056b3;
-  }
-  
+  background-color: #121212; /* Dark background */
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.footer-content p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #6c757d; /* Light text color */
+}
+
+.footer-links a {
+  margin: 0 0.5rem;
+  text-decoration: none;
+  color: #1e90ff; /* Light link color */
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  color: #0056b3; /* Darker color on hover */
+}
+
+.footer-links a:focus {
+  outline: none;
+  color: #0056b3;
+}
+
+/* Light Theme Overrides */
+body.light-theme footer {
+  background-color: #f8f9fa; /* Light background */
+}
+
+body.light-theme .footer-content p {
+  color: #343a40; /* Dark text for light theme */
+}
+
+body.light-theme .footer-links a {
+  color: #007bff; /* Standard blue link color for light theme */
+}
+
+body.light-theme .footer-links a:hover {
+  color: #0056b3; /* Darker color on hover in light theme */
+}
+
+body.light-theme .footer-links a:focus {
+  color: #0056b3;
+}

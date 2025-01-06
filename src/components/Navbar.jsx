@@ -4,7 +4,7 @@ import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { FaMoon, FaSun } from "react-icons/fa";
 import "../css/Navbar.css";
 
-const NavbarComponent = ({ toggleTheme }) => {
+const NavbarComponent = ({ toggleTheme, theme }) => {  // Receive theme as a prop
   const [selectedItem, setSelectedItem] = useState(null);
   const location = useLocation();
 
@@ -64,8 +64,8 @@ const NavbarComponent = ({ toggleTheme }) => {
               </Nav.Link>
             </Nav.Item>
             <Button onClick={toggleTheme} variant="outline-light">
-              {/* Toggle between Sun and Moon icons */}
-              {document.body.classList.contains("light-theme") ? <FaMoon /> : <FaSun />}
+              {/* Toggle between Sun and Moon icons based on the theme */}
+              {theme === "light" ? <FaMoon /> : <FaSun />}
             </Button>
           </Nav>
         </Navbar.Collapse>

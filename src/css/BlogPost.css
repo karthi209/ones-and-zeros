@@ -1,52 +1,81 @@
-/* BlogPost.css */
+/* Default Styles (Dark Theme) */
 .blog-post-container {
-    margin-top: 2rem;
-  }
-  
-  .blog-post-header {
-    margin-bottom: 1.5rem;
-  }
-  
-  .blog-post-title {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .blog-post-author {
-    font-size: 1rem;
-    color: #6c757d;
-  }
-  
-  .blog-post-content {
-    margin-top: 1.5rem;
-  }
-  
-  .blog-post-map {
-    margin-top: 1.5rem;
-  }
-  
-  .spinner-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-  }
-  
-  .alert-container {
-    margin-top: 2rem;
-  }
-  
-  .card-body {
-    padding: 1.5rem;
-  }
-  
-  .card-body .card-title {
-    font-size: 1.75rem;
-    margin-bottom: 0.75rem;
-  }
-  
-  .card-body .card-subtitle {
-    font-size: 1rem;
-    color: #6c757d;
-    margin-bottom: 1.25rem;
-  }
-  
+  margin-top: 2rem;
+  background-color: #121212; /* Dark background */
+  color: #ffffff; /* Light text */
+}
+
+.blog-post-header {
+  margin-bottom: 1.5rem;
+}
+
+.blog-post-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-post-author {
+  font-size: 1rem;
+  color: #6c757d; /* Light gray for author */
+}
+
+.blog-post-content {
+  margin-top: 1.5rem;
+  color: #bbb; /* Light gray text for content */
+}
+
+.blog-post-map {
+  margin-top: 1.5rem;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.alert-container {
+  margin-top: 2rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+  background-color: #282828; /* Dark card background */
+}
+
+.card-body .card-title {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-body .card-subtitle {
+  font-size: 1rem;
+  color: #6c757d; /* Light gray subtitle */
+  margin-bottom: 1.25rem;
+}
+
+/* Light Theme Overrides */
+body.light-theme .blog-post-container {
+  background-color: #ffffff; /* Light background */
+  color: #000000; /* Dark text */
+}
+
+body.light-theme .blog-post-author {
+  color: #6c757d; /* Dark gray for author */
+}
+
+body.light-theme .blog-post-content {
+  color: #555; /* Darker gray text for content */
+}
+
+body.light-theme .card-body {
+  background-color: #f8f9fa; /* Light card background */
+}
+
+body.light-theme .card-body .card-title {
+  color: #000; /* Dark card title text */
+}
+
+body.light-theme .card-body .card-subtitle {
+  color: #555; /* Darker gray subtitle */
+}
