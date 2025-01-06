@@ -2,18 +2,19 @@ import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { useParams, useNavigate } from "react-router-dom";
 import gfm from "remark-gfm";
+import { Container, Row, Col, Spinner, Alert, Card } from "react-bootstrap";
 import CodeBlock from "./CodeBlock";
 import MapComponent from "./MapComponent";
+import "../css/BlogPost.css"; // Import the CSS file
 
 const extractMapData = (markdownContent) => {
-  // Regular expression to match multiple map syntax in markdown
   const mapRegex = /\[map center="([^"]+)" zoom="([^"]+)" gisdataurl="([^"]+)"\]/g;
   const matches = [];
   let match;
 
   while ((match = mapRegex.exec(markdownContent)) !== null) {
     matches.push({
-      mapcenter: match[1].split(',').map(parseFloat), // Convert to [lat, lon]
+      mapcenter: match[1].split(',').map(parseFloat),
       zoom: parseInt(match[2], 10),
       gisdataurl: match[3],
     });
@@ -21,7 +22,6 @@ const extractMapData = (markdownContent) => {
 
   return matches.length > 0 ? matches : null;
 };
-
 
 const BlogPost = () => {
   const [post, setPost] = useState(null);
@@ -31,8 +31,6 @@ const BlogPost = () => {
   const navigate = useNavigate();
 
   const { content } = post || {}; // Safely destructure content in case post is null
-  
-  // Extract map data from the content
   const mapsData = content ? extractMapData(content) : null;
 
   useEffect(() => {
@@ -68,17 +66,16 @@ const BlogPost = () => {
   }, [slug, navigate]);
 
   const renderContent = () => {
-    if (!content) return null; // If content is not available, return nothing
+    if (!content) return null;
 
     const parts = content.split("[MAP]");
 
     return parts.map((part, index) => {
       if (index === 0) {
-        // First part: render markdown and the maps
         return (
-          <div key={index} className="blog-content">
+          <div key={index} className="blog-post-content">
             <ReactMarkdown
-              children={part.replace(/\[map[^\]]+\]/g, "")} // Clean up the map tags from the markdown
+              children={part.replace(/\[map[^\]]+\]/g, "")}
               remarkPlugins={[gfm]}
               components={{
                 code({ node, inline, className, children, ...props }) {
@@ -105,12 +102,12 @@ const BlogPost = () => {
                 mapcenter={mapData.mapcenter}
                 zoom={mapData.zoom}
                 gisdataurl={mapData.gisdataurl}
+                className="blog-post-map"
               />
             ))}
           </div>
         );
       }
-      // For other parts, just render markdown (after a [MAP] tag)
       return (
         <div key={index}>
           <ReactMarkdown children={part} remarkPlugins={[gfm]} />
@@ -120,35 +117,40 @@ const BlogPost = () => {
   };
 
   return (
-    <div className="container">
-      <div className="master-blog">
-        <div className="blog">
+    <Container className="blog-post-container">
+      <Row>
+        <Col>
           {loading ? (
-            <div className="loading-placeholder"></div>
+            <div className="spinner-container">
+              <Spinner animation="border" variant="primary" />
+            </div>
           ) : error ? (
-            <div className="error-message">{error}</div>
+            <div className="alert-container">
+              <Alert variant="danger">{error}</Alert>
+            </div>
           ) : post ? (
-            <article>
-              <div className="header-container">
-                <h1 className="blog-header">{post.title}</h1>
-                <a className="blog-meta">
+            <Card className="mb-4">
+              <Card.Body>
+                <Card.Title className="card-title">{post.title}</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted card-subtitle">
                   Posted by {post.author} on{" "}
                   {new Date(post.publicationdate).toLocaleDateString("en-US", {
                     month: "long",
                     day: "numeric",
                     year: "numeric",
                   })}
-                </a>
-              </div>
-              {renderContent()}{" "}
-              {/* Call renderContent here instead of ReactMarkdown */}
-            </article>
+                </Card.Subtitle>
+                {renderContent()}
+              </Card.Body>
+            </Card>
           ) : (
-            <div className="error-message">Post not found.</div>
+            <div className="alert-container">
+              <Alert variant="danger">Post not found.</Alert>
+            </div>
           )}
-        </div>
-        </div>
-      </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

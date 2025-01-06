@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
+import { FaMoon, FaSun } from "react-icons/fa";
 import "../css/Navbar.css";
 
-const NavbarComponent = () => {
+const NavbarComponent = ({ toggleTheme }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const location = useLocation();
 
@@ -62,6 +63,10 @@ const NavbarComponent = () => {
                 Projects
               </Nav.Link>
             </Nav.Item>
+            <Button onClick={toggleTheme} variant="outline-light">
+              {/* Toggle between Sun and Moon icons */}
+              {document.body.classList.contains("light-theme") ? <FaMoon /> : <FaSun />}
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>

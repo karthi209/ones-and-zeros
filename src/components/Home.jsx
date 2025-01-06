@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Card, Row, Col, Container } from "react-bootstrap";
-import "../css/Home.css"; // Custom styles
+import "../css/Home.css";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);

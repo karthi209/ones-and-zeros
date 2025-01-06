@@ -1,47 +1,30 @@
-/* Default light theme (set in :root) */
+/* index.css */
 
-@import "ol/ol.css";
-
+/* Default dark theme */
 :root {
-  --background-color: #ffffff;
-  --text-color: #343A40;
-  overflow-y: scroll;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --link-color: #1e90ff;
+  --card-background: #282828;
+  --transition-duration: 0.3s;
+
   background-color: var(--background-color);
   color: var(--text-color);
+  overflow-y: scroll;
+  transition: background-color var(--transition-duration), color var(--transition-duration);
   font-family: "Open Sans", serif;
   font-weight: 500;
 }
 
-/* Ensure links use the correct theme color */
-a {
-  color: var(--link-color);
-  font-family: "Open Sans", serif;
-  font-weight: 500;
+/* Light theme */
+.light-theme {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --link-color: #1e90ff;
+  --card-background: #f4f4f4;
 }
 
-p {
-  font-family: "Open Sans", serif;
-  font-weight: 500;
-}
-
-h1 {
-  font-family: "PT Sans Narrow", serif;
-}
-
-h2 {
-  font-family: "PT Sans Narrow", serif;
-}
-
-h3 {
-  font-family: "PT Sans Narrow", serif;
-}
-
-h4 {
-  font-family: "PT Sans Narrow", serif;
-}
-
-
+/* Global reset */
 #root {
   width: 100%;
   margin: auto;
@@ -63,6 +46,15 @@ html {
 }
 
 body {
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color var(--transition-duration), color var(--transition-duration);
   margin: 0;
+}
+
+.theme-toggle-btn {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px;
 }

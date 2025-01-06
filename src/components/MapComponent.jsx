@@ -9,6 +9,7 @@ import { fromLonLat } from "ol/proj";
 import GeoJSON from "ol/format/GeoJSON";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
+import { Form } from "react-bootstrap"; // Added react-bootstrap Form for dropdown
 
 const MapComponent = ({ mapcenter, zoom, gisdataurl, basemap }) => {
   const mapRef = useRef(null);
@@ -103,16 +104,19 @@ const MapComponent = ({ mapcenter, zoom, gisdataurl, basemap }) => {
     <div style={styles.container}>
       {/* Dropdown for base map selection */}
       <div style={styles.mapControls}>
-        <select
-          id="basemap"
-          value={currentBaseMap}
-          onChange={handleBaseMapChange}
-          style={styles.select}
-        >
-          <option value="osm">OpenStreetMap</option>
-          <option value="carto">Carto Light</option>
-          <option value="satellite">Satellite Imagery</option>
-        </select>
+        <Form.Group controlId="basemap">
+          <Form.Label>Select Base Map</Form.Label>
+          <Form.Control
+            as="select"
+            value={currentBaseMap}
+            onChange={handleBaseMapChange}
+            style={styles.select}
+          >
+            <option value="osm">OpenStreetMap</option>
+            <option value="carto">Carto Light</option>
+            <option value="satellite">Satellite Imagery</option>
+          </Form.Control>
+        </Form.Group>
       </div>
 
       {/* Map container */}
