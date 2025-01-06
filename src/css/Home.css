@@ -1,0 +1,71 @@
+/* Home.css */
+
+/* General background for the page */
+.home-container {
+    background-color: #121212; /* Dark background */
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Featured and Recent sections heading */
+.home-head {
+    color: white;
+}
+
+/* Card styles for posts */
+.home-card {
+    background-color: #282828; /* Dark card background */
+    color: white;
+    border: none; /* Remove card border */
+}
+
+/* Styling the card text and links */
+.home-card .card-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.home-card .card-subtitle {
+    font-size: 13px;
+    color: #aaa;
+}
+
+.home-card .card-text {
+    font-size: 14px;
+    color: #bbb;
+}
+
+.home-card .read-more-link {
+    font-size: 13px;
+    color: #FFD700; /* Gold color for links */
+}
+
+.home-card .read-more-link:hover {
+    text-decoration: underline;
+}
+
+/* Styling for the content preview */
+.post-content-preview {
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* Centered element container */
+.centered-element {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Adjust link colors */
+a {
+    color: #FFD700; /* Gold for links */
+}
+
+a:hover {
+    color: #FFDD00;
+}
+
+/* General margin for columns */
+.mb-4 {
+    margin-bottom: 1.5rem !important;
+}
