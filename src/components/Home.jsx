@@ -41,41 +41,41 @@ const Home = () => {
     <div className="home-container">
       {/* Banner Section */}
       <section className="home-banner">
-      <Container style={{ position: 'relative', marginTop: '30px', marginBottom: '30px', }}>
-        <img
-          src="/welcome.png"
-          style={{
-            width: '100%',
-            height: 'auto',
-            borderRadius: '20px',
-            filter: 'brightness(70%)',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            right: '100px', // Align text to the right with some margin
-            transform: 'translateY(-50%)', // Center vertically
-            color: 'white',
-            zIndex: '1',
-            textAlign: 'right', // Align text to the right
-            fontFamily: "Darker Grotesque",
-            fontWeight: "600",
-          }}
-        >
-          <h1 style={{ fontSize:  "40px" }}>Welcome to Pattinam</h1>
-          <p style={{ fontSize:  "20px", fontWeight: "500" }}>Discover the heart of Chennai and Tamil Nadu through blogs and tools</p>
-          <div className="banner-actions">
-            <Button as={Link} to="/blog" variant="primary" className="mr-3" style={{ fontSize:  "19px", fontWeight: "500", }}>
-              Read Blogs
-            </Button>
-            <Button as={Link} to="/tools" variant="secondary" style={{ fontSize:  "19px", fontWeight: "500" }}>
-              Explore Maps
-            </Button>
+        <Container style={{ position: 'relative', marginTop: '30px', marginBottom: '30px', }}>
+          <img
+            src="/welcome.png"
+            style={{
+              width: '100%',
+              height: 'auto',
+              borderRadius: '20px',
+            }}
+            className="welcome-img"
+          />
+          <div
+            style={{
+              position: 'absolute',
+              top: '50%',
+              right: '100px', // Align text to the right with some margin
+              transform: 'translateY(-50%)', // Center vertically
+              color: 'white',
+              zIndex: '1',
+              textAlign: 'right', // Align text to the right
+              fontFamily: "Darker Grotesque",
+              fontWeight: "600",
+            }}
+          >
+            <h1 style={{ fontSize:  "40px" }}>Welcome to Pattinam</h1>
+            <p style={{ fontSize:  "20px", fontWeight: "500" }}>Discover the heart of Chennai and Tamil Nadu through blogs and tools</p>
+            <div className="banner-actions">
+              <Button as={Link} to="/blog" variant="primary" className="mr-3" style={{ fontSize:  "19px", fontWeight: "500", }}>
+                Read Blogs
+              </Button>
+              <Button as={Link} to="/tools" variant="secondary" style={{ fontSize:  "19px", fontWeight: "500" }}>
+                Explore Maps
+              </Button>
+            </div>
           </div>
-        </div>
-      </Container>
+        </Container>
       </section>
       <Container>
         {/* Featured and Recent Posts */}

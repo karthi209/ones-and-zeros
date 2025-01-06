@@ -1,6 +1,6 @@
 /* Dark Theme Navbar */
 body:not(.light-theme) .navbar {
-    background-color: #202124; /* Dark background */
+    background-color: #1d1d1d; /* Dark background */
   }
   
   body:not(.light-theme) .navbar .nav-link {
