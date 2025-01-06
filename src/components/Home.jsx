@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Card, Row, Col, Container } from "react-bootstrap";
+import { Card, Row, Col, Container, Button } from "react-bootstrap";
 import "../css/Home.css";
 
 const Home = () => {
@@ -39,32 +39,54 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <Container>
-        <div className="centered-element">
-          <section>
-            <p className="text-white">
-              Welcome to my little corner of the web! I mostly post about computers and stuff, a little bit of transit map here and there, and tons of rant about cities and stuff.
-            </p>
-            <p className="text-white">
-              Oh and also, if for some reason you need more rants, go over to <a href="https://x.com/karthi9003" target="_blank" rel="noopener noreferrer">Twitter (X)</a> to see more of my ranting.
-            </p>
-            <p className="text-white" style={{ fontSize: "12px", fontWeight: 400, textAlign: "left" }}>
-              Last Updated: 29/12/2024
-            </p>
-          </section>
+      {/* Banner Section */}
+      <section className="home-banner">
+      <Container style={{ position: 'relative', marginTop: '30px', marginBottom: '30px' }}>
+        <img
+          src="/welcome.png"
+          style={{
+            width: '100%',
+            height: 'auto',
+            borderRadius: '20px',
+            filter: 'brightness(70%)', // Darken the image slightly
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            right: '100px', // Align text to the right with some margin
+            transform: 'translateY(-50%)', // Center vertically
+            color: 'white',
+            zIndex: '1',
+            textAlign: 'right', // Align text to the right
+          }}
+        >
+          <h1>Welcome to Pattinam</h1>
+          <p>Discover the heart of Chennai and Tamil Nadu through blogs and tools</p>
+          <div className="banner-actions">
+            <Button as={Link} to="/blog" variant="primary" className="mr-3">
+              Read Blogs
+            </Button>
+            <Button as={Link} to="/tools" variant="secondary">
+              Explore Maps
+            </Button>
+          </div>
         </div>
-
+      </Container>
+      </section>
+      <Container>
+        {/* Featured and Recent Posts */}
         <Row>
-          {/* Featured Posts */}
           <Col md={6} className="mb-4">
             <h2 className="home-head">Featured</h2>
             {sortedPosts
-              .slice(0, 5)
+              .slice(0, 3)
               .map((post) => (
-                <Card key={post.slug} className="home-card mb-3">
+                <Card key={post.slug} className="m3-card mb-3">
                   <Card.Body>
-                    <Card.Title>{post.title}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">
+                    <Card.Title className="m3-card-title">{post.title}</Card.Title>
+                    <Card.Subtitle className="mb-2 m3-card-subtitle">
                       Posted on{" "}
                       {new Date(post.publicationdate).toLocaleDateString("en-US", {
                         month: "short",
@@ -72,25 +94,30 @@ const Home = () => {
                         year: "numeric",
                       })}
                     </Card.Subtitle>
-                    <Card.Text className="post-content-preview">{post.content}</Card.Text>
-                    <Link to={`/blog/${post.slug}`} aria-label={`Read more about ${post.title}`} className="read-more-link">
-                      Read More...
-                    </Link>
+                    <Card.Text className="m3-card-text">
+                      {post.content.slice(0, 100)}...
+                    </Card.Text>
+                    <Button
+                      as={Link}
+                      to={`/blog/${post.slug}`}
+                      aria-label={`Read more about ${post.title}`}
+                      className="m3-read-more-button"
+                    >
+                      Read More
+                    </Button>
                   </Card.Body>
                 </Card>
               ))}
           </Col>
-
-          {/* Recent Posts */}
           <Col md={6} className="mb-4">
             <h2 className="home-head">Recent Posts</h2>
             {sortedPosts
-              .slice(0, 5)
+              .slice(0, 3)
               .map((post) => (
-                <Card key={post.slug} className="home-card mb-3">
+                <Card key={post.slug} className="m3-card mb-3">
                   <Card.Body>
-                    <Card.Title>{post.title}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">
+                    <Card.Title className="m3-card-title">{post.title}</Card.Title>
+                    <Card.Subtitle className="mb-2 m3-card-subtitle">
                       Posted on{" "}
                       {new Date(post.publicationdate).toLocaleDateString("en-US", {
                         month: "short",
@@ -98,10 +125,17 @@ const Home = () => {
                         year: "numeric",
                       })}
                     </Card.Subtitle>
-                    <Card.Text className="post-content-preview">{post.content}</Card.Text>
-                    <Link to={`/blog/${post.slug}`} aria-label={`Read more about ${post.title}`} className="read-more-link">
-                      Read More...
-                    </Link>
+                    <Card.Text className="m3-card-text">
+                      {post.content.slice(0, 100)}...
+                    </Card.Text>
+                    <Button
+                      as={Link}
+                      to={`/blog/${post.slug}`}
+                      aria-label={`Read more about ${post.title}`}
+                      className="m3-read-more-button"
+                    >
+                      Read More
+                    </Button>
                   </Card.Body>
                 </Card>
               ))}

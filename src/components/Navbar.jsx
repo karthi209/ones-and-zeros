@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
-import { FaMoon, FaSun } from "react-icons/fa";
+import { FaSun } from "react-icons/fa";
 import "../css/Navbar.css";
 
 const NavbarComponent = ({ toggleTheme, theme }) => {  // Receive theme as a prop
@@ -25,7 +25,12 @@ const NavbarComponent = ({ toggleTheme, theme }) => {  // Receive theme as a pro
     <Navbar expand="lg" className="navbar">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          <img src="/logo.png" style={{ width: '120px' }} alt="Logo" />
+          {/* Conditionally render logo based on the theme */}
+          <img
+            src={theme === "light" ? "/logo-light.png" : "/logo-dark.png"}  // Use different logo for each theme
+            style={{ width: '120px' }}
+            alt="Logo"
+          />
         </Navbar.Brand>
         
         {/* Mobile Menu Toggle */}
@@ -63,9 +68,26 @@ const NavbarComponent = ({ toggleTheme, theme }) => {  // Receive theme as a pro
                 Projects
               </Nav.Link>
             </Nav.Item>
-            <Button onClick={toggleTheme} variant="outline-light">
+            <Button
+              onClick={toggleTheme}
+              variant="link"
+              style={{
+                marginTop: '3px',
+                marginLeft: '20px',
+                padding: 0,
+                fontSize: '20px',
+                lineHeight: '0',
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
               {/* Toggle between Sun and Moon icons based on the theme */}
-              {theme === "light" ? <FaMoon /> : <FaSun />}
+              {theme === "light" ? (
+                <FaSun style={{ color: "#202124" }} />
+              ) : (
+                <FaSun style={{ color: "#ffffff" }} />
+              )}
             </Button>
           </Nav>
         </Navbar.Collapse>

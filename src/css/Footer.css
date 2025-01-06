@@ -1,8 +1,9 @@
 /* Footer Default (Dark Theme) */
 footer {
-  background-color: #121212; /* Dark background */
+  background-color: #202124; /* Dark background */
   padding: 1.5rem 0;
   text-align: center;
+  font-family: "Darker Grotesque", serif;
 }
 
 .footer-content {
@@ -13,43 +14,45 @@ footer {
 
 .footer-content p {
   margin-bottom: 1rem;
-  font-size: 1rem;
-  color: #6c757d; /* Light text color */
+  font-size: 18px;
+  font-weight: 600;
+  color: #878f96; /* Light text color */
 }
 
 .footer-links a {
   margin: 0 0.5rem;
   text-decoration: none;
-  color: #1e90ff; /* Light link color */
-  font-size: 0.9rem;
+  color: #909499; /* Light link color */
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .footer-links a:hover {
-  color: #0056b3; /* Darker color on hover */
+  color: #5f7992; /* Darker color on hover */
 }
 
 .footer-links a:focus {
   outline: none;
-  color: #0056b3;
+  color: #57708c;
 }
 
 /* Light Theme Overrides */
 body.light-theme footer {
-  background-color: #f8f9fa; /* Light background */
+  background-color: #202124; /* Light background */
 }
 
 body.light-theme .footer-content p {
-  color: #343a40; /* Dark text for light theme */
+  color: #878f96; /* Dark text for light theme */
 }
 
 body.light-theme .footer-links a {
-  color: #007bff; /* Standard blue link color for light theme */
+  color: #909499; /* Standard blue link color for light theme */
 }
 
 body.light-theme .footer-links a:hover {
-  color: #0056b3; /* Darker color on hover in light theme */
+  color: #5f7992; /* Darker color on hover in light theme */
 }
 
 body.light-theme .footer-links a:focus {
-  color: #0056b3;
+  color: #57708c;
 }

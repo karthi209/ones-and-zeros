@@ -1,100 +1,91 @@
-/* General background for the page */
-.home-container {
-    background-color: #121212; /* Dark background */
-    min-height: 100vh;
-    padding: 20px;
-}
+/* Material Design 3 Card */
+.m3-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Elevated surfaces */
+    background-color: #ffffff; /* Light mode background */
+    transition: box-shadow 0.2s, transform 0.2s;
+    overflow: hidden;
+    padding: 16px; /* Consistent padding */
+  }
+  
+  body:not(.light-theme) .m3-card {
+    background-color: #1e1e1e; /* Dark mode background */
+    color: #ffffff;
+  }
 
-/* Light theme override for the home container */
-body.light-theme .home-container {
-    background-color: #ffffff; /* Light background */
-}
+  .banner-actions {
+    margin: 20px;
+  }
 
-/* Featured and Recent sections heading */
-.home-head {
-    color: white;
-}
-
-/* Light theme override for headings */
-body.light-theme .home-head {
-    color: black; /* Dark text for light theme */
-}
-
-/* Card styles for posts */
-.home-card {
-    background-color: #282828; /* Dark card background */
-    color: white;
-    border: none; /* Remove card border */
-}
-
-/* Light theme override for cards */
-body.light-theme .home-card {
-    background-color: #f4f4f4; /* Light card background */
-    color: black; /* Dark text for light theme */
-}
-
-/* Styling the card text and links */
-.home-card .card-title {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.home-card .card-subtitle {
-    font-size: 13px;
-    color: #aaa;
-}
-
-.home-card .card-text {
+  .btn-primary {
+    margin: 20px;
+  }
+  
+  .m3-card:hover {
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+  
+  /* Card Title */
+  .m3-card-title {
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333333;
+  }
+  
+  body:not(.light-theme) .m3-card-title {
+    color: #ffffff;
+  }
+  
+  /* Card Subtitle */
+  .m3-card-subtitle {
+    font-family: "Roboto", sans-serif;
     font-size: 14px;
-    color: #bbb;
-}
-
-.home-card .read-more-link {
-    font-size: 13px;
-    color: #FFD700; /* Gold color for links */
-}
-
-/* Light theme override for card links */
-body.light-theme .home-card .read-more-link {
-    color: #1e90ff; /* Blue color for links in light theme */
-}
-
-.home-card .read-more-link:hover {
-    text-decoration: underline;
-}
-
-/* Styling for the content preview */
-.post-content-preview {
+    color: #666666;
+    margin-bottom: 8px;
+  }
+  
+  body:not(.light-theme) .m3-card-subtitle {
+    color: #cccccc;
+  }
+  
+  /* Card Text */
+  .m3-card-text {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    color: #444444;
+    margin-bottom: 16px;
+  }
+  
+  body:not(.light-theme) .m3-card-text {
+    color: #bbbbbb;
+  }
+  
+  /* Read More Button */
+  .m3-read-more-button {
+    font-family: "Roboto", sans-serif;
     font-size: 14px;
-    color: #ccc;
-}
-
-/* Light theme override for content preview */
-body.light-theme .post-content-preview {
-    color: #333; /* Dark text for content preview in light theme */
-}
-
-/* Centered element container */
-.centered-element {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-/* Adjust link colors */
-a {
-    color: #FFD700; /* Gold for links */
-}
-
-a:hover {
-    color: #FFDD00;
-}
-
-/* Light theme override for links */
-body.light-theme a {
-    color: #1e90ff; /* Blue links in light theme */
-}
-
-/* General margin for columns */
-.mb-4 {
-    margin-bottom: 1.5rem !important;
-}
+    text-transform: uppercase;
+    background-color: #6200ea; /* Primary color */
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 24px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s;
+  }
+  
+  .m3-read-more-button:hover {
+    background-color: #3700b3; /* Darker primary */
+  }
+  
+  body:not(.light-theme) .m3-read-more-button {
+    background-color: #bb86fc; /* Primary for dark mode */
+  }
+  
+  body:not(.light-theme) .m3-read-more-button:hover {
+    background-color: #3700b3; /* Consistent hover color */
+  }
+  

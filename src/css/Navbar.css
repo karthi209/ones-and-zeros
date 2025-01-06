@@ -1,6 +1,6 @@
 /* Dark Theme Navbar */
 body:not(.light-theme) .navbar {
-    background-color: #121212; /* Dark background */
+    background-color: #202124; /* Dark background */
   }
   
   body:not(.light-theme) .navbar .nav-link {
@@ -35,5 +35,14 @@ body:not(.light-theme) .navbar {
   
   .navbar-nav .nav-item {
     margin-left: 20px; /* Optional: Add space between the nav items */
+    font-family: "Darker Grotesque", serif;
+    font-size: 19px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 24px;
+  }
+
+  .navbar {
+    margin-top: 15px;
   }
   
