@@ -61,9 +61,10 @@ const BlogList = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search posts..."
                 className="md3-search-input"
+                aria-label="Search blog posts"
               />
               <Button type="submit" variant="text" className="md3-search-button">
-                <i className="material-icons">search</i>
+                <i className="material-icons">search</i> {/* Material icon */}
               </Button>
             </div>
           </Form>
@@ -87,9 +88,10 @@ const BlogList = () => {
                         src={`${import.meta.env.VITE_API_URL}/files/media/thumbnails/${post.postid}.png`}
                         alt={post.title}
                         className="card-img"
+                        style={{ borderBottomLeftRadius: '0px', borderBottomRightRadius: '0px' }}
                       />
                     </div>
-                    <Card.Body className="card-body">
+                    <Card.Body className="card-body" style={{ borderBottomLeftRadius: '20px', borderBottomRightRadius: '20px' }}>
                       <Card.Title className="m3-card-title">{post.title}</Card.Title>
                       <Card.Text className="m3-card-subtitle">
                         Posted on{" "}
@@ -99,7 +101,6 @@ const BlogList = () => {
                           year: "numeric",
                         })}
                       </Card.Text>
-                      <Card.Text className="m3-card-text">{post.content}</Card.Text>
                     </Card.Body>
                   </Link>
                 </Card>

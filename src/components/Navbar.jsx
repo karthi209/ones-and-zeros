@@ -27,7 +27,7 @@ const NavbarComponent = ({ toggleTheme, theme }) => {  // Receive theme as a pro
         <Navbar.Brand as={Link} to="/">
           <img
             src={theme === "light" ? "/logo-light.png" : "/logo-dark.png"}
-            style={{ width: '120px' }}
+            style={{ width: '140px' }}
             alt="Logo"
           />
         </Navbar.Brand>
@@ -87,9 +87,19 @@ const NavbarComponent = ({ toggleTheme, theme }) => {  // Receive theme as a pro
             >
               {/* Toggle between Sun and Moon icons based on the theme */}
               {theme === "light" ? (
-                <FaSun style={{ color: "#202124" }} />
+                <span
+                  className="material-symbols-outlined"
+                  style={{ color: "#1d1d1d", fontSize: "30px" }}
+                >
+                  toggle_on
+                </span>
               ) : (
-                <FaSun style={{ color: "#ffffff" }} />
+                <span
+                  className="material-symbols-outlined"
+                  style={{ color: "#e8eaed", fontSize: "30px" }}
+                  >
+                  toggle_off
+                </span>
               )}
             </Button>
           </Nav>
