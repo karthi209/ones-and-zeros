@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
+import { FaSun } from "react-icons/fa";
 import "../css/Navbar.css";
 
-const Navbar = () => {
+const NavbarComponent = ({ toggleTheme, theme }) => {  // Receive theme as a prop
   const [selectedItem, setSelectedItem] = useState(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -20,44 +21,82 @@ const Navbar = () => {
     );
   }, [location.pathname]);
 
-  const handleMobileMenuToggle = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
   return (
-    <nav className="navbar">
-      <div className="logotext">
-        <img src="/logo.png" style={{ width: '120px' }} alt="Logo" />
-      </div>
-      
-      {/* Mobile Menu Toggle */}
-      <button 
-        className={`mobile-icon ${isMobileMenuOpen ? 'opened' : ''}`} 
-        onClick={handleMobileMenuToggle}>
-        <div className="bar1"></div>
-        <div className="bar2"></div>
-        <div className="bar3"></div>
-      </button>
-
-      <ul className={`navbar-links ${isMobileMenuOpen ? 'active' : ''}`}>
-        <li className={selectedItem === "home" ? "selected" : ""}>
-          <Link to="/" onClick={() => setSelectedItem("home")}>
-            <span className="nav-text">Home</span>
-          </Link>
-        </li>
-        <li className={selectedItem === "blog" ? "selected" : ""}>
-          <Link to="/blog" onClick={() => setSelectedItem("blog")}>
-            <span className="nav-text">Blogs</span>
-          </Link>
-        </li>
-        <li className={selectedItem === "projects" ? "selected" : ""}>
-          <Link to="/projects" onClick={() => setSelectedItem("projects")}>
-            <span className="nav-text">Projects</span>
-          </Link>
-        </li>
-      </ul>
-    </nav>
+    <Navbar expand="lg" className="navbar">
+      <Container>
+        <Navbar.Brand as={Link} to="/">
+          <img
+            src={theme === "light" ? "/logo-light.png" : "/logo-dark.png"}
+            style={{ width: '120px' }}
+            alt="Logo"
+          />
+        </Navbar.Brand>
+        
+        {/* Mobile Menu Toggle */}
+        <Navbar.Toggle aria-controls="navbar-nav">
+          <span className="material-icons menu-icon">
+            menu
+          </span>
+        </Navbar.Toggle>
+        
+        <Navbar.Collapse id="navbar-nav">
+          <Nav className="ml-auto">
+            <Nav.Item>
+              <Nav.Link
+                as={Link}
+                to="/"
+                active={selectedItem === "home"}
+                onClick={() => setSelectedItem("home")}
+              >
+                Home
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                as={Link}
+                to="/blog"
+                active={selectedItem === "blog"}
+                onClick={() => setSelectedItem("blog")}
+              >
+                Blogs
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                as={Link}
+                to="/projects"
+                active={selectedItem === "projects"}
+                onClick={() => setSelectedItem("projects")}
+              >
+                Projects
+              </Nav.Link>
+            </Nav.Item>
+            <Button
+              onClick={toggleTheme}
+              variant="link"
+              style={{
+                marginTop: '3px',
+                marginLeft: '20px',
+                padding: 0,
+                fontSize: '20px',
+                lineHeight: '0',
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              {/* Toggle between Sun and Moon icons based on the theme */}
+              {theme === "light" ? (
+                <FaSun style={{ color: "#202124" }} />
+              ) : (
+                <FaSun style={{ color: "#ffffff" }} />
+              )}
+            </Button>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 
-export default Navbar;
+export default NavbarComponent;

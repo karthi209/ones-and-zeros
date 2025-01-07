@@ -1,12 +1,12 @@
 import React from "react";
-import "../css/Pages.css";
+import "../css/Footer.css"; // Import the CSS file
 
 function Footer() {
   return (
     <footer>
-      <div class="footer-content">
+      <div className="footer-content">
         <p>© 2025 Pattinam.</p>
-        <div class="footer-links">
+        <div className="footer-links">
           <a href="/privacy-policy" target="_blank">Privacy Policy</a>
           <a href="/terms-of-use" target="_blank">Terms of Use</a>
           <a href="https://twitter.com/karthi9003" target="_blank" aria-label="Follow us on Twitter">

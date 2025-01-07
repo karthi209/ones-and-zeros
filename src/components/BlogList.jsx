@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Container, Row, Col, Form, Button, Card, Pagination } from "react-bootstrap";
+import "../css/BlogList.css"; // Import the CSS file
 
 const BlogList = () => {
   const [posts, setPosts] = useState([]);
@@ -14,17 +16,15 @@ const BlogList = () => {
     setLoading(true);
     setError(null);
     try {
-      // Fixed API endpoint path to match backend
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/bloglist${
           query ? `?query=${encodeURIComponent(query)}&` : "?"
-        }page=${page}&limit=10`
+        }page=${page}&limit=9`
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      
       setPosts(data.posts);
       setTotalPosts(data.totalPosts);
       setTotalPages(data.totalPages);
@@ -48,110 +48,83 @@ const BlogList = () => {
   };
 
   return (
-    <div className="container">
-      <div className="holder">
-        <div className="blog-bar">
+    <Container className="blog-list-container">
+      <Row>
+        <Col>
+        <div className="blog-header">
           <h2>Blogs ({totalPosts} total)</h2>
-          <form onSubmit={handleSearch} className="search-container">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search posts..."
-              className="search-input"
-              aria-label="Search posts"
-            />
-            <button type="submit" className="search-button">
-              Search
-            </button>
-          </form>
+          <Form onSubmit={handleSearch} className="search-form-md3">
+            <div className="md3-search-bar">
+              <Form.Control
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search posts..."
+                className="md3-search-input"
+              />
+              <Button type="submit" variant="text" className="md3-search-button">
+                <i className="material-icons">search</i>
+              </Button>
+            </div>
+          </Form>
         </div>
+          {loading && <div role="alert" aria-busy="true">Loading...</div>}
+          {error && <div role="alert" className="alert alert-danger">{error}</div>}
+          {!loading && !error && posts.length === 0 && <p>No posts found.</p>}
 
-        {loading && (
-          <div role="alert" aria-busy="true">
-            Loading...
-          </div>
-        )}
-        
-        {error && (
-          <div role="alert" className="error-message">
-            {error}
-          </div>
-        )}
-
-        {!loading && !error && posts.length === 0 && (
-          <p>No posts found.</p>
-        )}
-
-        <section className="column">
-          <div>
+          <Row>
             {posts.map((post) => (
-              <article key={post.slug} className="blog-recents">
-                <Link
-                  to={`/blog/${post.slug}`}
-                  className="blog-link"
-                  aria-label={`Read ${post.title}`}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <div className="test-recents">
-                  <img
-                    src={`${import.meta.env.VITE_API_URL}/files/media/thumbnails/${post.postid}.png`}
-                    alt={post.title}
-                    className="post-image"
-                  />
-                  <div>
-                    <h3 className="mb-1">{post.title}</h3>
-                    <p className="text-sm">
-                      Posted on{" "}
-                      {new Date(post.publicationdate).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
-                    </p>
-                    <div className="post-content-preview">
-                      {post.content}
+              <Col key={post.slug} sm={12} md={6} lg={4} className="card-container">
+                <Card className="m3-card">
+                  <Link
+                    to={`/blog/${post.slug}`}
+                    className="text-decoration-none"
+                    aria-label={`Read ${post.title}`}
+                  >
+                    <div className="card-img-wrapper">
+                      <Card.Img
+                        variant="top"
+                        src={`${import.meta.env.VITE_API_URL}/files/media/thumbnails/${post.postid}.png`}
+                        alt={post.title}
+                        className="card-img"
+                      />
                     </div>
-                    <p className="mb-2">Read more...</p>
-                  </div>
-                  </div>
-                  {/* Add an image at the start of the post */}
-
-                </Link>
-              </article>
+                    <Card.Body className="card-body">
+                      <Card.Title className="m3-card-title">{post.title}</Card.Title>
+                      <Card.Text className="m3-card-subtitle">
+                        Posted on{" "}
+                        {new Date(post.publicationdate).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </Card.Text>
+                      <Card.Text className="m3-card-text">{post.content}</Card.Text>
+                    </Card.Body>
+                  </Link>
+                </Card>
+              </Col>
             ))}
-          </div>
-        </section>
+          </Row>
 
-
-        {totalPages > 1 && (
-          <div className="pagination">
-            {/* "Previous" Button */}
-            <button
-              onClick={() => setCurrentPage(currentPage - 1)}
-              className="pagination-button"
-              disabled={currentPage === 1} // Disable if on the first page
-            >
-              Previous
-            </button>
-
-            {/* Page Info */}
-            <span className="page-info">
-              Page {currentPage} of {totalPages}
-            </span>
-
-            {/* "Next" Button */}
-            <button
-              onClick={() => setCurrentPage(currentPage + 1)}
-              className="pagination-button"
-              disabled={currentPage === totalPages} // Disable if on the last page
-            >
-              Next
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
+          {totalPages > 1 && (
+            <div className="pagination-container">
+              <Pagination>
+                <Pagination.Prev
+                  onClick={() => setCurrentPage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                />
+                <Pagination.Item>{currentPage}</Pagination.Item>
+                <Pagination.Next
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                />
+              </Pagination>
+            </div>
+          )}
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

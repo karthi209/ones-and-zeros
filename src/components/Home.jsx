@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../css/Pages.css";
-import "../css/BlogList.css";
+import { Card, Row, Col, Container, Button } from "react-bootstrap";
+import "../css/Home.css";
 
 const Home = () => {
-  const [posts, setPosts] = useState([]); // Ensure posts is always an array
+  const [posts, setPosts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   const fetchPosts = async (query = "") => {
@@ -33,80 +33,95 @@ const Home = () => {
     fetchPosts(searchQuery);
   };
 
-  // Ensure posts is always an array before sorting
   const sortedPosts = Array.isArray(posts)
     ? posts.sort((a, b) => new Date(b.publicationdate) - new Date(a.publicationdate))
     : [];
 
   return (
-    <div className="container">
-      <div className="centered-element">
-        <section>
-          <p>Welcome to my little corner of the web! I mostly post about computers and stuff, a little bit of transit map here and there, and tons of rant about cities and stuff.</p>
-          <p>Oh and also, if for some reason you need more rants, go over to <a href="https://x.com/karthi9003" target="_blank" rel="noopener noreferrer">Twitter (X)</a> to see more of my ranting.</p>
-          <p style={{ fontSize: "12px", fontWeight: 400, textAlign: "left" }}>Last Updated: 29/12/2024</p>
-        </section>
-      </div>
-
-      <div className="grid-columns">
-        <section className="column column1">
-          <div className="back">
+    <div className="home-container">
+      {/* Banner Section */}
+      <section className="home-banner">
+        <Container>
+          <div className="banner-wrapper"> {/* Add this wrapper */}
+            <img src="/welcome.png" alt="Welcome" className="welcome-img" />
+            <div className="welcome-cont">
+              <h1 className="welcome">Welcome to Pattinam</h1>
+              <p className="welcome-description">
+                Discover the heart of Chennai and Tamil Nadu through blogs and tools
+              </p>
+              <div className="banner-actions">
+                <Button as={Link} to="/blog" className="btn-primary">
+                  Read Blogs
+                </Button>
+                <Button as={Link} to="/tools" className="btn-secondary">
+                  Explore Maps
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+      <Container>
+        {/* Featured and Recent Posts */}
+        <Row>
+          <Col md={6} className="mb-4">
             <h2 className="home-head">Featured</h2>
-          </div>
-          <div>
-            {sortedPosts
-              .slice(0, 5) // Take the latest six posts for the featured section
-              .map((post) => (
-                <div className="home-recents" key={post.slug}>
-                  <h4 style={{ marginBottom: "5px" }}>{post.title}</h4>
-                  <p style={{ fontSize: "13px", marginTop: "0px", color: "gray" }}>
+            {sortedPosts.slice(0, 3).map((post) => (
+              <Card key={post.slug} className="m3-card mb-3">
+                <Card.Body>
+                  <Card.Title className="m3-card-title">{post.title}</Card.Title>
+                  <Card.Subtitle className="mb-2 m3-card-subtitle">
                     Posted on{" "}
                     {new Date(post.publicationdate).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
                       year: "numeric",
                     })}
-                  </p>
-                  <div className="post-content-preview">
-                    {post.content} {/* This shows the truncated content */}
-                  </div>
-                  <Link to={`/blog/${post.slug}`} aria-label={`Read more about ${post.title}`}>
-                    <span style={{ fontSize: "13px", marginTop: "0px" }}>Read More..</span>
-                  </Link>
-                </div>
-              ))}
-          </div>
-        </section>
-
-        <section className="column">
-          <div className="back">
-            <h2 className="home-head">Recent Posts</h2>
-          </div>
-          <div>
-            {sortedPosts
-              .slice(0, 5) // Take the latest six posts for the featured section
-              .map((post) => (
-                <div className="home-recents" key={post.slug}>
-                  <h4 style={{ marginBottom: "5px" }}>{post.title}</h4>
-                  <p style={{ fontSize: "13px", marginTop: "0px", color: "gray" }}>
+                  </Card.Subtitle>
+                  <Card.Text className="m3-card-text">
+                    {post.content.slice(0, 100)}...
+                  </Card.Text>
+                  <Button
+                    as={Link}
+                    to={`/blog/${post.slug}`}
+                    className="m3-read-more-button"
+                  >
+                    Read More
+                  </Button>
+                </Card.Body>
+              </Card>
+            ))}
+          </Col>
+          <Col md={6} className="mb-4">
+            <h2>Recent Posts</h2>
+            {sortedPosts.slice(0, 3).map((post) => (
+              <Card key={post.slug} className="m3-card mb-3">
+                <Card.Body>
+                  <Card.Title className="m3-card-title">{post.title}</Card.Title>
+                  <Card.Subtitle className="mb-2 m3-card-subtitle">
                     Posted on{" "}
                     {new Date(post.publicationdate).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
                       year: "numeric",
                     })}
-                  </p>
-                  <div className="post-content-preview">
-                    {post.content} {/* This shows the truncated content */}
-                  </div>
-                  <Link to={`/blog/${post.slug}`} aria-label={`Read more about ${post.title}`}>
-                    <span style={{ fontSize: "13px", marginTop: "0px" }}>Read More..</span>
-                  </Link>
-                </div>
-              ))}
-          </div>
-        </section>
-      </div>
+                  </Card.Subtitle>
+                  <Card.Text className="m3-card-text">
+                    {post.content.slice(0, 100)}...
+                  </Card.Text>
+                  <Button
+                    as={Link}
+                    to={`/blog/${post.slug}`}
+                    className="m3-read-more-button"
+                  >
+                    Read More
+                  </Button>
+                </Card.Body>
+              </Card>
+            ))}
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };

@@ -1,334 +1,190 @@
-.blogposts {
-    display: flex;
-    justify-content: center;
-    flex-direction: row; 
-    flex-wrap: wrap;
-    max-width: 1200px;
-    min-width: 100%;
-    margin: auto;
-    gap: 25px;
-    line-height: normal;
+/* Blog Card */
+.m3-card {
+  position: relative;
+  border: none;
+  border-radius: 24px;
+  background-color: var(--surface);
+  color: var(--on-surface);
+  overflow: hidden;
+  box-shadow: var(--elevation-1);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+  padding: 0px;
 }
 
-.header-container {
-    margin-bottom: 50px;
+/* Override hyperlink styles inside cards */
+.m3-card a {
+  color: inherit; /* Inherit the color from the parent (normal text color) */
+  text-decoration: none; /* Remove underline */
 }
 
-.mb-1 {
-    margin-bottom: 10px;
-    font-size: 22px;
-}
-
-.text-sm {
-    color: gray;
-    line-height: 18px;
-    font-weight: 500;
-    font-size: 14px;
-    margin-top: 0px;
-}
-
-.mb-2 {
-    font-size: 14px;
-}
-
-.post-content-preview {
-    margin-top: 20px;
-}
-
-.post-image {
-    width: 200px;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    margin-top: 20px;
-    margin-right: 20px;
-}
-
-/* Customize the default zoom buttons */
-.ol-zoom-in, .ol-zoom-out {
-    color: white;
-    border-radius: 30% !important;
-  }
-  
-  .ol-zoom-in:hover, .ol-zoom-out:hover {
-    background-color: #e7e7e7; /* Darker green on hover */
-  }
-
-.blog-meta {
-    color: #777777;
-    line-height: 18px;
-    font-weight: 500;
-    font-size: 16px;
-}
-
+/* Blog Header */
 .blog-header {
-    font-size: 48px;
-    line-height: 58px;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 24px;
 }
 
-.blogposts a {
-    color: var(--text-color);
-    text-decoration: none; /* Optional: remove underline */
+/* Center the pagination container */
+.pagination-container {
+  display: flex;
+  justify-content: center;  /* Horizontally center the pagination */
+  align-items: center;      /* Vertically center the pagination */
+  width: 100%;              /* Ensure it takes full width */
+  margin-top: 20px;         /* Optional: Add some margin if needed */
 }
 
-.blogposts time {
-    padding: 0;
-    margin: 0;
+/* Optional: Add some space between pagination items */
+.pagination-container .pagination-item {
+  margin: 0 5px; /* Adjust as necessary */
 }
 
-/* Loading placeholder styles */
-.loading-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; /* Full viewport height */
-    width: 100vw;  /* Full viewport width */
-    background-color: var(--background-color);
-    color: var(--text-color);
-    font-size: 1.5em; /* Adjust font size as needed */
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-.meta p {
-    color: var(--meta-color);
-    line-height: 18px;
-    font-weight: 500;
-    font-size: 14px;
+.blog-header h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  font-family: "Roboto", sans-serif; /* Align with MD3 typography */
 }
 
-.articleclass {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    max-width: 240px;
-    min-width: 230px;
-    max-height: 360px;
-    min-height: 320px;
-    padding: 22px;
-    transition: all .2s ease-in-out;
-    border-bottom: 1px solid rgb(220, 220, 220);
-    grid-gap: 0;
-    margin-bottom: 20px;
-    background-color: #f2f2f2
+/* Search Bar Styles */
+.search-form-md3 {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  align-items: right;
 }
 
-.articleclass:hover {
-    transform: scale(1.02);
-    transition: all .2s ease-in-out;
-    background-color: #ececec
+.md3-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--md-sys-color-surface); /* MD3 surface color */
+  border: 1px solid var(--md-sys-color-outline); /* Subtle border */
+  border-radius: 24px; /* Rounded corners for MD3 style */
+  padding: 8px 16px;
+  width: 100%;
+  max-width: 500px; /* Adjust as needed */
+  box-shadow: var(--md-sys-elevation-level1); /* Subtle shadow */
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
-.articleclass h4 {
-    padding: 0;
-    margin: 0;
-    line-height: 28px;
-    font-size: 22px;
-    font-weight: 600;
-    text-align: left;
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Sets exactly three lines */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Adds "..." if text exceeds three lines */
-    height: calc(1em * 1.5 * 3); /* Assuming line height is 1.5, adjust if needed */
+.md3-search-bar:hover {
+  box-shadow: var(--md-sys-elevation-level2);
+  transform: translateY(-2px);
 }
 
-.blogposts img {
-    
-    display: flex;
-    max-width:100%;
-    width: 100%;
-    border-radius: 5px;
-    object-fit: cover; 
-    align-self: flex-end;
+.md3-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  color: var(--md-sys-color-on-surface); /* Text color on surface */
 }
 
-.blog img {
-    max-width: 100%; /* Ensure the image doesn't exceed container width */
-    height: auto;    /* Maintain aspect ratio */
-    width: auto;    /* Set the image width to 300px */
-    margin: 20px auto;
+.md3-search-input::placeholder {
+  color: var(--md-sys-color-on-surface-variant); /* Subtle placeholder color */
 }
 
-.search-container {
-    display: flex;
-    align-items: flex-end;
-    margin: 20px;
-    margin-right: 40px;
-    margin-bottom: 30px;
-    justify-content: flex-end;
+.md3-search-button {
+  border: none;
+  background: transparent;
+  color: var(--md-sys-color-primary); /* Primary color */
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
-.search-input {
-    width: 280px;
-    padding: 8px;
-    border: 1px solid rgb(180, 180, 180);
-    font-size: 14px;
-    border-radius: 5px;
+.md3-search-button:hover {
+  color: var(--md-sys-color-primary-container); /* Highlighted primary color */
 }
 
-.search-button {
-    padding: 8px 12px;
-    margin-left: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #343A40;
-    color: white;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s;
+/* Search Bar Styles for Dark Mode */
+body:not(.light-theme) .md3-search-bar {
+  background: var(--md-sys-color-surface-dark); /* Dark surface color for dark mode */
+  border: 1px solid var(--md-sys-color-outline-dark); /* Dark outline color for dark mode */
+  box-shadow: var(--md-sys-elevation-level1-dark); /* Dark mode shadow */
 }
 
-.search-button:hover {
-    background-color: #000000;
+/* Search Bar Hover Effects for Dark Mode */
+body:not(.light-theme) .md3-search-bar:hover {
+  box-shadow: var(--md-sys-elevation-level2-dark); /* Dark hover elevation */
 }
 
-.pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
-    padding-bottom: 30px;
-}
-  
-  .pagination-numbers {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  /* .pagination-button.active {
-    background-color: #343A40 !important;
-    color: white;
-  } */
-
-  .pagination-button {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #343A40;
-    color: white;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s;
-  }
-  
-  .pagination-button:hover:enabled {
-    background-color: #343A40;
-  }
-  
-  .pagination-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-    color: #666;
-  }
-  
-  .page-info {
-    margin: 0 10px;
-    font-size: 14px;
-    color: #333;
-  }
-
-@media only screen and (max-width: 1500px) {
-
-    .blogposts {
-        margin: auto;
-        max-width: 100%;
-        min-width: 100%;
-        padding-top: 20px;
-    }
-
+body:not(.light-theme) .md3-search-input {
+  color: var(--md-sys-color-on-surface-dark); /* Dark mode text color */
 }
 
-@media only screen and (max-width: 768px) {
+body:not(.light-theme) .md3-search-input::placeholder {
+  color: var(--md-sys-color-on-surface-variant-dark); /* Dark mode placeholder color */
+}
 
-    .blogposts {
-        margin: auto;
-        max-width: 90%;
-        padding-top: 20px;
-    }
+body:not(.light-theme) .md3-search-button {
+  color: var(--md-sys-color-primary-dark); /* Primary color for buttons in dark mode */
+}
 
-    .blog {
-        max-width: 100%;
-    }
+body:not(.light-theme) .md3-search-button:hover {
+  color: var(--md-sys-color-primary-container-dark); /* Hover button color for dark mode */
+}
 
-    .articleclass {
-        margin: 0;
-        padding: 22px;
-        justify-content: center;
-        max-height: 500px;
-        min-height: 320px;
-        max-width: 360px;
-        min-width: 230px;
-    }
+.m3-card-subtitle {
+  font-size: 14px;
+  color: #6c757d;
+  margin: 5px;
+  margin-bottom: 10px;
+}
 
-    .meta {
-        font-size: 10px;
-        text-align: left;
-    }
+.m3-card a:hover {
+  color: var(--primary); /* Optional: Add a subtle color change on hover */
+  text-decoration: underline; /* Optional: Add underline back on hover */
+}
 
-    
-    .meta p {
-        margin-top: 0;
-    }
+.card-body .card-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+  margin: 5px;
+}
 
-    .blogposts img {
-        max-width: 360px;
-    }
+.m3-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-2);
+}
 
-    .search-container {
-        margin: 20px;
-        /* margin-right: 15px; */
-        margin-left: 20px;
-        margin-bottom: 30px;
-        justify-content: flex-start;
-    }
+.card-img-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* 4:3 aspect ratio */
+  overflow: hidden;
+  border-radius: 16px;
+  border-bottom-right-radius: 0%;
+  border-bottom-left-radius: 0%;
+}
 
-    .post-content-preview {
-        display: none;
-    }
+.card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-    .articleclass h4 { 
-        font-size: 30px;
-        line-height: 40px;
-        font-weight: 700;
-    }
-
-    .header-container {
-        margin-bottom: 40px;
-    }
-
-    .blog-header {
-        line-height: 48px !important;
-     }
-
-    .blog-meta {
-        font-size: 15px;
-    }
-
-    .post-image {
-        width: 150px;
-        height: auto;
-        border-radius: 4px;
-        margin-bottom: 10px;
-        margin-top: 20px;
-        margin-right: 20px;
-        margin-left: 10px;
-    }
-
-    .mb-1 {
-        margin-top: 16px;
-        font-size: 20px;
-    }
-
-    .text-sm {
-        color: gray;
-        font-size: 13px;
-    }
-    
-    .mb-2 {
-        font-size: 13px;
-    }
-    
+/* Limit card content text to 3 lines */
+.m3-card-text {
+  font-size: 15px;
+  color: rgb(200, 209, 216);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 5px;
 }

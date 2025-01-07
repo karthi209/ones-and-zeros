@@ -1,0 +1,128 @@
+/* Default Styles (Dark Theme) */
+.blog-post-container {
+  margin-top: 2rem;
+  background-color: #282828; /* Dark background */
+  color: #ffffff; /* Light text */
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.card-body {
+  padding: initial; /* Reset to default */
+}
+
+.blog-post-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.blog-post-container .card-body {
+  flex: 1 1 auto;
+  padding: 1.5rem 2rem; /* Custom padding values */
+  color: var(--bs-card-color);
+}
+
+.card-body {
+  padding: 30px;
+  background-color: #282828 !important; /* Ensure dark background */
+  --bs-card-bg: #282828 !important; /* Dark background */
+  border: none; /* Remove border */
+  box-shadow: none; /* Remove shadow */
+  color: #fff !important; /* Light font color for dark mode */
+  border-radius: 20px;
+}
+
+.card {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.card-body .card-title {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: #ffffff !important; /* Light color for title */
+}
+
+.card-body .card-subtitle {
+  font-size: 1rem;
+  color: #888 !important; /* Lighter gray for subtitle in dark theme */
+}
+
+/* Ensure content text also follows the same font color */
+.card-body p,
+.card-body span,
+.card-body li,
+.card-body a {
+  color: #efefef !important; /* Lighter gray for general content in dark theme */
+}
+
+/* Light Theme Overrides */
+body.light-theme .blog-post-container {
+  background-color: #ffffff; /* Light background */
+  color: #000000; /* Dark text */
+}
+
+body.light-theme .card-body {
+  background-color: #f8f9fa !important; /* Light card background */
+  border: none; /* Remove border */
+  box-shadow: none; /* Remove shadow */
+  color: #000 !important; /* Dark font color for light mode */
+}
+
+body.light-theme .card-body .card-title {
+  color: #000000 !important; /* Dark text for title */
+}
+
+body.light-theme .card-body .card-subtitle {
+  color: #555 !important; /* Darker gray subtitle */
+}
+
+/* Ensure content text is also dark in light theme */
+body.light-theme .card-body p,
+body.light-theme .card-body span,
+body.light-theme .card-body li,
+body.light-theme .card-body a {
+  color: #555 !important; /* Dark text for general content in light theme */
+}
+
+/* Remove unwanted outlines or borders */
+.card-body:focus,
+.card-body:active,
+.card-body:focus-visible,
+.card:focus,
+.card:active,
+.card:focus-visible,
+.container:focus,
+.container:active,
+.container:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Override Bootstrap's card background variable */
+body.light-theme .card-body {
+  --bs-card-bg: #f8f9fa; /* Set light theme card background */
+}
+
+body.dark-theme .card-body {
+  --bs-card-bg: #282828; /* Set dark theme card background */
+}
+
+/* Dark Theme Font Color */
+body.dark-theme .card-body .card-title {
+  color: #ffffff !important; /* Ensure title text is light */
+}
+
+body.dark-theme .card-body .card-subtitle {
+  color: #888 !important; /* Slightly lighter gray for subtitles */
+}
+
+/* Light Theme Font Color */
+body.light-theme .card-body .card-title {
+  color: #000000 !important; /* Ensure title text is dark */
+}
+
+body.light-theme .card-body .card-subtitle {
+  color: #555 !important; /* Darker gray for subtitles */
+}

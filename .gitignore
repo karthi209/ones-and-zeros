@@ -23,5 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 .env
-backend/core/media
-!backend/core/media/.gitkeep
+backend/webfiles
+backend/node_modules
+post-creator/node_modules
