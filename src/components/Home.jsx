@@ -42,7 +42,7 @@ const Home = () => {
       {/* Banner Section */}
       <section className="home-banner">
         <Container>
-          <div className="banner-wrapper"> {/* Add this wrapper */}
+          <div className="banner-wrapper">
             <img src="/welcome.png" alt="Welcome" className="welcome-img" />
             <div className="welcome-cont">
               <h1 className="welcome">Welcome to Pattinam</h1>
@@ -79,7 +79,7 @@ const Home = () => {
                     })}
                   </Card.Subtitle>
                   <Card.Text className="m3-card-text">
-                    {post.content.slice(0, 100)}...
+                    {post.content}
                   </Card.Text>
                   <Button
                     as={Link}
@@ -107,7 +107,7 @@ const Home = () => {
                     })}
                   </Card.Subtitle>
                   <Card.Text className="m3-card-text">
-                    {post.content.slice(0, 100)}...
+                    {post.content}
                   </Card.Text>
                   <Button
                     as={Link}

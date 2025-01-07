@@ -37,10 +37,6 @@
     background-color: rgba(255, 255, 255, 0.08); /* MD3 hover state */
   }
 
-  /* body:not(.light-theme) .navbar-toggler:active {
-    background-color: rgba(255, 255, 255, 0.12);
-  } */
-
   /* Light theme styles */
   body.light-theme .navbar-toggler .menu-icon {
     color: #202124;
@@ -49,10 +45,6 @@
   body.light-theme .navbar-toggler:hover {
     background-color: rgba(0, 0, 0, 0.08); /* MD3 hover state */
   }
-
-  /* body.light-theme .navbar-toggler:active {
-    background-color: rgba(0, 0, 0, 0.12);
-  } */
 
   /* General menu icon styles */
   .menu-icon {
@@ -78,7 +70,7 @@
   
   /* Light Theme Navbar */
   body.light-theme .navbar {
-    background-color: #ffffff; /* Light background */
+    background-color: #F5F5F5; /* Light background */
   }
   
   body.light-theme .navbar .nav-link {
@@ -100,14 +92,14 @@
   
   .navbar-nav .nav-item {
     margin-left: 20px; /* Optional: Add space between the nav items */
-    font-family: "Darker Grotesque", serif;
-    font-size: 19px;
-    font-weight: 600;
+    font-family: "Roboto", serif;
+    font-size: 17px;
+    font-weight: 500;
     font-style: normal;
     line-height: 24px;
   }
 
   .navbar {
-    margin-top: 15px;
+    margin-top: 5px;
   }
   

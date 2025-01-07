@@ -5,11 +5,11 @@
   --link-color: #1e90ff !important;
   --card-background: #2d2d2d !important;
   --transition-duration: 0.3s !important;
-  font-family: "Darker Grotesque", serif;
+  font-family: "Roboto", serif;
 }
 
 h2 {
-  font-family: "Darker Grotesque", serif;
+  font-family: "Roboto", serif;
   font-weight: 600;
 }
 
@@ -21,8 +21,8 @@ body {
 
 /* Light theme */
 body.light-theme {
-  --background-color: #ffffff !important;
+  --background-color: #F5F5F5 !important;
   --text-color: #000000 !important;
   --link-color: #1e90ff !important;
-  --card-background: #dedede !important;
+  --card-background: #d5d5d5 !important;
 }

@@ -23,13 +23,11 @@
 }
 
 .card-body {
-  padding: 30px;
   background-color: #282828 !important; /* Ensure dark background */
   --bs-card-bg: #282828 !important; /* Dark background */
   border: none; /* Remove border */
   box-shadow: none; /* Remove shadow */
   color: #fff !important; /* Light font color for dark mode */
-  border-radius: 20px;
 }
 
 .card {
@@ -38,7 +36,7 @@
 }
 
 .card-body .card-title {
-  font-size: 1.75rem;
+  font-size: 22px;
   margin-bottom: 0.75rem;
   color: #ffffff !important; /* Light color for title */
 }
@@ -58,12 +56,12 @@
 
 /* Light Theme Overrides */
 body.light-theme .blog-post-container {
-  background-color: #ffffff; /* Light background */
+  background-color: #e5e5e5; Light background
   color: #000000; /* Dark text */
 }
 
 body.light-theme .card-body {
-  background-color: #f8f9fa !important; /* Light card background */
+  background-color: #e5e5e5 !important; /* Light card background */
   border: none; /* Remove border */
   box-shadow: none; /* Remove shadow */
   color: #000 !important; /* Dark font color for light mode */
@@ -80,8 +78,7 @@ body.light-theme .card-body .card-subtitle {
 /* Ensure content text is also dark in light theme */
 body.light-theme .card-body p,
 body.light-theme .card-body span,
-body.light-theme .card-body li,
-body.light-theme .card-body a {
+body.light-theme .card-body li {
   color: #555 !important; /* Dark text for general content in light theme */
 }
 
@@ -101,13 +98,13 @@ body.light-theme .card-body a {
 }
 
 /* Override Bootstrap's card background variable */
-body.light-theme .card-body {
-  --bs-card-bg: #f8f9fa; /* Set light theme card background */
+/* body.light-theme .card-body {
+  --bs-card-bg: #f8f9fa;
 }
 
 body.dark-theme .card-body {
-  --bs-card-bg: #282828; /* Set dark theme card background */
-}
+  --bs-card-bg: #282828;
+} */
 
 /* Dark Theme Font Color */
 body.dark-theme .card-body .card-title {
@@ -125,4 +122,36 @@ body.light-theme .card-body .card-title {
 
 body.light-theme .card-body .card-subtitle {
   color: #555 !important; /* Darker gray for subtitles */
+}
+
+@media (max-width: 1000px) { 
+  .blog-post-container {
+    margin-top: 2rem;
+    background-color: #282828; /* Dark background */
+    color: #ffffff; /* Light text */
+    border-radius: 20px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) { 
+  .blog-post-container {
+    margin-top: 2rem;
+    background-color: #282828; /* Dark background */
+    color: #ffffff; /* Light text */
+    border-radius: 20px;
+    padding: 10px;
+  }
+
+  .card-body .card-title {
+    font-size: 27px !important;
+    margin-bottom: 0.75rem;
+    color: #ffffff !important; /* Light color for title */
+  }
+
+  .mobile-view {
+    padding-top: 15% !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
 }
