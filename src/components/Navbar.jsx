@@ -25,16 +25,19 @@ const NavbarComponent = ({ toggleTheme, theme }) => {  // Receive theme as a pro
     <Navbar expand="lg" className="navbar">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          {/* Conditionally render logo based on the theme */}
           <img
-            src={theme === "light" ? "/logo-light.png" : "/logo-dark.png"}  // Use different logo for each theme
+            src={theme === "light" ? "/logo-light.png" : "/logo-dark.png"}
             style={{ width: '120px' }}
             alt="Logo"
           />
         </Navbar.Brand>
         
         {/* Mobile Menu Toggle */}
-        <Navbar.Toggle aria-controls="navbar-nav" />
+        <Navbar.Toggle aria-controls="navbar-nav">
+          <span className="material-icons menu-icon">
+            menu
+          </span>
+        </Navbar.Toggle>
         
         <Navbar.Collapse id="navbar-nav">
           <Nav className="ml-auto">

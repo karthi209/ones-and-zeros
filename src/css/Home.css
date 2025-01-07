@@ -1,82 +1,186 @@
-/* Material Design 3 Card */
+.home-banner {
+    position: relative;
+    width: 100%;
+    margin: 40px 0;
+}
+
+/* Remove container's default padding for the banner section */
+.home-banner .container {
+    padding: 0;
+    position: relative;
+}
+
+.welcome-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.welcome-cont {
+    font-family: "Darker Grotesque", serif;
+    position: absolute;
+    top: 50%;
+    right: 5%; /* Adjust this value as needed */
+    transform: translateY(-50%);
+    color: white;
+    z-index: 1;
+    text-align: right;
+    padding: 20px;
+    width: 500px; /* Use fixed width instead of percentage */
+    max-width: 40%; /* Ensure it doesn't get too wide */
+}
+
+
+.welcome {
+    font-size: 50px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.welcome-description {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.banner-actions .btn {
+    font-size: 19px;
+    font-weight: 500;
+}
+
+.banner-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
+/* Card Styles */
 .m3-card {
     position: relative;
     border: none;
-    border-radius: 24px !important; /* Added !important to ensure it overrides other styles */
-    background-color: #ffffff; /* Light mode background */
+    border-radius: 24px;
+    background-color: #ffffff;
     transition: box-shadow 0.2s, transform 0.2s;
     overflow: hidden;
-    padding: 16px; /* Consistent padding */
-    margin-top: 30px;
-    margin-bottom: 30px;
+    padding: 16px;
+    margin: 16px 0;
     cursor: pointer;
+}
+
+.m3-card-title {
+    font-size: 20px;
+    font-weight: bold;
     font-family: "Darker Grotesque", serif;
-  }
-  
-  /* Dark Mode Styling */
-  body:not(.light-theme) .m3-card {
-    background-color: #282828; /* Dark mode background */
-    color: #ffffff;
-  }
+}
 
-  .welcome-img {
-    filter: brightness(95%);
-  }
+.m3-card-subtitle {
+    font-size: 14px;
+    color: #6c757d;
+}
 
-  body:not(.light-theme) .welcome-img {
-    filter: brightness(70%);
-  }
+.m3-card-text {
+    font-size: 16px;
+    margin-top: 10px;
+}
 
-  .btn-primary {
-    margin: 20px;
-  }
+.m3-read-more-button {
+    margin-top: 10px;
+}
 
-  .m3-card {
-    background-color: #ababab; /* Dark mode background */
-  }
-
-  body.light-theme .card-body {
-    background-color: #f6f6f6 !important;
-  }
-
-  body.light-theme .card {
-    background-color: #f6f6f6 !important;
-    border: none;
-  }
-  
-  /* Hover effect */
-  .m3-card:hover {
+/* Hover Effects */
+.m3-card:hover {
     transform: translateY(-2px);
-  }
-  
-  /* Mouse-Pointed Lighten Effect */
-  .m3-card::after {
-    content: "";
-    position: absolute;
-    top: var(--mouse-y);
-    left: var(--mouse-x);
-    width: 300px; /* Set the size of the effect */
-    height: 300px; /* Set the size of the effect */
-    background: rgba(255, 255, 255, 0.4); /* Lightening color */
-    pointer-events: none;
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0); /* Center the effect at the pointer */
-    transition: transform 0.4s ease, background 0.4s ease;
-    z-index: 0; /* Ensure the effect is on top of the card but below the content */
-  }
-  
-  /* Ensure the content stays above the effect */
-  .m3-card-body {
-    position: relative;
-    z-index: 1; /* Ensure text content is above the effect */
-  }
-  
-  /* Adjust position of light effect based on mouse position */
-  .m3-card:hover {
-    overflow: hidden;
-  }
-  
-  .m3-card {
-    transition: transform 0.2s ease;
-  }
-  
+}
+
+body:not(.light-theme) .m3-card {
+    background-color: #282828;
+    color: white;
+}
+
+body:not(.light-theme) .welcome-img {
+    filter: brightness(70%);
+}
+
+/* Optional: Add a media query for very large screens */
+
+@media (max-width: 1320px) { 
+    .welcome {
+        font-size: 40px;
+    }
+
+    .banner-actions .btn {
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .welcome-description {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .welcome {
+        font-size: 35px;
+        text-align: right;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .welcome {
+        font-size: 30px;
+        text-align: right;
+    }
+
+    .welcome-description {
+        font-size: 20px;
+        text-align: right;
+    }
+
+    .welcome-cont {
+        top: 60%; /* Adjust vertical positioning */
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        max-width: 90%; /* Increase text container width */
+    }
+
+    .banner-actions .btn {
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    .banner-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+    }
+
+    .welcome-img {
+        max-width: 95%;
+        height: auto;
+        margin: auto;
+        display: block;
+        object-fit: cover;
+        border-radius: 016x;
+        aspect-ratio: 1/1; /* Creates a square aspect ratio */
+        object-position: 5% center; /* 25% from left, centered vertically */
+    }
+}
+
+@media (max-width: 576px) {
+    .welcome {
+        font-size: 30px;
+    }
+
+    .welcome-img {
+        border-radius: 15px;
+    }
+
+    .m3-card {
+        padding: 12px;
+    }
+}

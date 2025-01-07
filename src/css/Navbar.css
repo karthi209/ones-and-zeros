@@ -1,5 +1,5 @@
 /* Dark Theme Navbar */
-body:not(.light-theme) .navbar {
+  body:not(.light-theme) .navbar {
     background-color: #1d1d1d; /* Dark background */
   }
   
@@ -9,6 +9,71 @@ body:not(.light-theme) .navbar {
   
   body:not(.light-theme) .navbar .nav-link.active {
     color: #ffffff !important; /* Gold color for active links */
+  }
+
+  /* Remove default Bootstrap toggle styles */
+  .navbar-toggler {
+    border: none !important;
+    padding: 8px !important;
+    border-radius: 50% !important; /* MD3 circular button */
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+  }
+
+  .navbar-toggler:focus {
+    box-shadow: none !important;
+  }
+
+  /* Dark theme styles */
+  body:not(.light-theme) .navbar-toggler .menu-icon {
+    color: #ffffff;
+  }
+
+  body:not(.light-theme) .navbar-toggler:hover {
+    background-color: rgba(255, 255, 255, 0.08); /* MD3 hover state */
+  }
+
+  /* body:not(.light-theme) .navbar-toggler:active {
+    background-color: rgba(255, 255, 255, 0.12);
+  } */
+
+  /* Light theme styles */
+  body.light-theme .navbar-toggler .menu-icon {
+    color: #202124;
+  }
+
+  body.light-theme .navbar-toggler:hover {
+    background-color: rgba(0, 0, 0, 0.08); /* MD3 hover state */
+  }
+
+  /* body.light-theme .navbar-toggler:active {
+    background-color: rgba(0, 0, 0, 0.12);
+  } */
+
+  /* General menu icon styles */
+  .menu-icon {
+    font-size: 24px !important;
+    transition: transform 0.2s;
+  }
+
+  /* Optional: Add animation for menu icon when navbar is expanded */
+  .navbar-toggler[aria-expanded="true"] .menu-icon {
+    transform: rotate(90deg);
+  }
+
+  /* Optional: Add hover effect */
+  .navbar-toggler:hover {
+    opacity: 0.8;
+  }
+
+  /* Optional: Add focus style */
+  .navbar-toggler:focus {
+    box-shadow: none;
+    outline: none;
   }
   
   /* Light Theme Navbar */

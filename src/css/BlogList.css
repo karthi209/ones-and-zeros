@@ -1,89 +1,190 @@
-/* Default Styles (Dark Theme) */
-.blog-list-container {
-  margin-top: 2rem;
-  background-color: #202124; /* Dark background */
-  color: #ffffff; /* Light text */
+/* Blog Card */
+.m3-card {
+  position: relative;
+  border: none;
+  border-radius: 24px;
+  background-color: var(--surface);
+  color: var(--on-surface);
+  overflow: hidden;
+  box-shadow: var(--elevation-1);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+  padding: 0px;
 }
 
+/* Override hyperlink styles inside cards */
+.m3-card a {
+  color: inherit; /* Inherit the color from the parent (normal text color) */
+  text-decoration: none; /* Remove underline */
+}
+
+/* Blog Header */
 .blog-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+/* Center the pagination container */
+.pagination-container {
+  display: flex;
+  justify-content: center;  /* Horizontally center the pagination */
+  align-items: center;      /* Vertically center the pagination */
+  width: 100%;              /* Ensure it takes full width */
+  margin-top: 20px;         /* Optional: Add some margin if needed */
+}
+
+/* Optional: Add some space between pagination items */
+.pagination-container .pagination-item {
+  margin: 0 5px; /* Adjust as necessary */
 }
 
 .blog-header h2 {
-  margin: 0;
-  color: #ffffff; /* Light color for title */
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  font-family: "Roboto", sans-serif; /* Align with MD3 typography */
 }
 
-.search-form .form-control {
-  margin-right: 0.5rem;
-  background-color: #333333; /* Dark input field */
-  color: #ffffff; /* Light text in input */
-  border: 1px solid #555555; /* Darker border */
-}
-
-.pagination-container {
+/* Search Bar Styles */
+.search-form-md3 {
+  width: 100%;
   display: flex;
-  justify-content: center;
-  margin-top: 1.5rem;
+  justify-content: right;
+  align-items: right;
 }
 
-.card-container {
-  margin-bottom: 1.5rem;
+.md3-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--md-sys-color-surface); /* MD3 surface color */
+  border: 1px solid var(--md-sys-color-outline); /* Subtle border */
+  border-radius: 24px; /* Rounded corners for MD3 style */
+  padding: 8px 16px;
+  width: 100%;
+  max-width: 500px; /* Adjust as needed */
+  box-shadow: var(--md-sys-elevation-level1); /* Subtle shadow */
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.md3-search-bar:hover {
+  box-shadow: var(--md-sys-elevation-level2);
+  transform: translateY(-2px);
+}
+
+.md3-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  color: var(--md-sys-color-on-surface); /* Text color on surface */
+}
+
+.md3-search-input::placeholder {
+  color: var(--md-sys-color-on-surface-variant); /* Subtle placeholder color */
+}
+
+.md3-search-button {
+  border: none;
+  background: transparent;
+  color: var(--md-sys-color-primary); /* Primary color */
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.md3-search-button:hover {
+  color: var(--md-sys-color-primary-container); /* Highlighted primary color */
+}
+
+/* Search Bar Styles for Dark Mode */
+body:not(.light-theme) .md3-search-bar {
+  background: var(--md-sys-color-surface-dark); /* Dark surface color for dark mode */
+  border: 1px solid var(--md-sys-color-outline-dark); /* Dark outline color for dark mode */
+  box-shadow: var(--md-sys-elevation-level1-dark); /* Dark mode shadow */
+}
+
+/* Search Bar Hover Effects for Dark Mode */
+body:not(.light-theme) .md3-search-bar:hover {
+  box-shadow: var(--md-sys-elevation-level2-dark); /* Dark hover elevation */
+}
+
+body:not(.light-theme) .md3-search-input {
+  color: var(--md-sys-color-on-surface-dark); /* Dark mode text color */
+}
+
+body:not(.light-theme) .md3-search-input::placeholder {
+  color: var(--md-sys-color-on-surface-variant-dark); /* Dark mode placeholder color */
+}
+
+body:not(.light-theme) .md3-search-button {
+  color: var(--md-sys-color-primary-dark); /* Primary color for buttons in dark mode */
+}
+
+body:not(.light-theme) .md3-search-button:hover {
+  color: var(--md-sys-color-primary-container-dark); /* Hover button color for dark mode */
+}
+
+.m3-card-subtitle {
+  font-size: 14px;
+  color: #6c757d;
+  margin: 5px;
+  margin-bottom: 10px;
+}
+
+.m3-card a:hover {
+  color: var(--primary); /* Optional: Add a subtle color change on hover */
+  text-decoration: underline; /* Optional: Add underline back on hover */
+}
+
+.card-body .card-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+  margin: 5px;
+}
+
+.m3-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-2);
+}
+
+.card-img-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* 4:3 aspect ratio */
+  overflow: hidden;
+  border-radius: 16px;
+  border-bottom-right-radius: 0%;
+  border-bottom-left-radius: 0%;
 }
 
 .card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.card-body {
-  padding: 1rem;
-  background-color: #282828; /* Dark card background */
-  color: #ffffff; /* Light text in cards */
-}
-
-.card-title {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-}
-
-.card-text {
-  font-size: 0.875rem;
-  color: #bbb; /* Light gray text */
-}
-
-.card-footer {
-  text-align: center;
-  padding-top: 0.5rem;
-}
-
-/* Light Theme Overrides */
-body.light-theme .blog-list-container {
-  background-color: #ffffff; /* Light background */
-  color: #000000; /* Dark text */
-}
-
-body.light-theme .blog-header h2 {
-  color: #000000; /* Dark color for title */
-}
-
-body.light-theme .search-form .form-control {
-  background-color: #f0f0f0; /* Light input field */
-  color: #000000; /* Dark text in input */
-  border: 1px solid #ccc; /* Lighter border */
-}
-
-body.light-theme .card-body {
-  background-color: #f8f9fa; /* Light card background */
-  color: #000000; /* Dark text in cards */
-}
-
-body.light-theme .card-text {
-  color: #555; /* Dark gray text */
-}
-
-body.light-theme .card-footer {
-  color: #000000; /* Dark text in footer */
+/* Limit card content text to 3 lines */
+.m3-card-text {
+  font-size: 15px;
+  color: rgb(200, 209, 216);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 5px;
 }

@@ -130,7 +130,7 @@ const BlogPost = () => {
             </div>
           ) : post ? (
             <Card className="mb-4">
-              <Card.Body>
+              <Card.Body style={{ padding: '5rem 10rem' }}>
                 <Card.Title className="card-title">{post.title}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted card-subtitle">
                   Posted by {post.author} on{" "}
