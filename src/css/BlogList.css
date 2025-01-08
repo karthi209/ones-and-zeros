@@ -48,13 +48,27 @@
   font-weight: 500;     /* Medium emphasis */
   line-height: 1.25;    /* Adjust line height for readability */
   margin: 0; 
-  color: #e8e8e8;
   margin-top: 8px;
+}
+
+body:not(.light-theme) .blog-header h2 {
+  color: #e8e8e8;
+}
+
+body.light-theme .blog-header h2 {
+  color: #000000;
+}
+
+body:not(.light-theme) .blog-header p {
+  color: #ededed99;  /* Subtle color for secondary text */
+}
+
+body.light-theme .blog-header p {
+  color: #585858;
 }
 
 .blog-header p {
   font-size: 16px;      /* Smaller font for the post count text */
-  color: rgba(237, 237, 237, 0.6);  /* Subtle color for secondary text */
   margin-top: 28px;      /* Space between title and the post count */
   margin-left: 10px;
 }
@@ -238,8 +252,13 @@ body.light-theme form-control {
     margin-bottom: 5px;
   }
 
+  .card-container {
+    padding-left: 0% !important;
+    padding-right: 0% !important;
+  }
+
   .search-form-md3 {
-    margin-left: 20%;
+    margin-left: 10%;
     margin-right: 5%;
   }
 
@@ -250,6 +269,7 @@ body.light-theme form-control {
   .blog-header h2 {
     margin-left: 5%; 
     margin-top: 0px;
+    font-size: 26px;
   }
 
   .blog-header p {

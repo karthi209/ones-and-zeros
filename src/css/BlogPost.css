@@ -119,6 +119,11 @@ body.dark-theme .card-body .card-title {
   color: #ffffff !important; /* Ensure title text is light */
 }
 
+body.light-theme .blog-post-content a {
+  color: #2c2c2c !important; /* Ensure title text is light */
+  text-decoration: underline darkseagreen !important;
+}
+
 body.dark-theme .card-body .card-subtitle {
   color: #888 !important; /* Slightly lighter gray for subtitles */
   font-style: italic !important;
@@ -146,10 +151,17 @@ body.light-theme .card-body .card-subtitle {
 @media (max-width: 768px) { 
   .blog-post-container {
     margin-top: 2rem;
-    background-color: #1d1d1d; /* Dark background */
-    color: #ffffff; /* Light text */
     border-radius: 20px;
     padding: 0px;
+  }
+
+  body.dark-theme .blog-post-container {
+    background-color: #1d1d1d; /* Dark background */
+    color: #ffffff; /* Light text */
+  } 
+
+  body.light-theme .blog-post-container {
+    background-color: #F5F5F5; /* Dark background */
   }
 
   .card-body .card-title {
@@ -160,9 +172,16 @@ body.light-theme .card-body .card-subtitle {
 
   .mobile-view {
     padding-top: 0% !important;
-    padding-left: 5px !important;
-    padding-right: 5px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
+  body.dark-theme .mobile-view {
     background-color: #1d1d1d !important;
+  }
+
+  body.light-theme .mobile-view {
+    background-color: #F5F5F5 !important;
   }
 
   .mobile-card-subtitle {

@@ -275,12 +275,13 @@ body:not(.light-theme) .welcome-img {
     }
 
     .m3-card-title {
+        margin-top: 10px !important;
         font-size: 27px !important;
     }
 
     .m3-card {
-        margin-left: 20px;
-        margin-right: 20px;
+        margin-left: 12px;
+        margin-right: 12px;
     }
 
     .welcome-description {

@@ -74,7 +74,7 @@ const BlogList = () => {
           {error && <div role="alert" className="alert alert-danger">{error}</div>}
           {!loading && !error && posts.length === 0 && <p>No posts found.</p>}
 
-          <Row>
+          <Row className="mobile-conatiner">
             {posts.map((post) => (
               <Col key={post.slug} sm={12} md={6} lg={4} className="card-container">
                 <Card className="m3-card">
