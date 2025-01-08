@@ -11,6 +11,17 @@
     color: #ffffff !important; /* Gold color for active links */
   }
 
+  .mobile-links {
+    margin-top: 0px;
+    margin-left: 20px;
+    padding: 0;
+    font-size: 20px;
+    line-height: 1;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
   /* Remove default Bootstrap toggle styles */
   .navbar-toggler {
     border: none !important;
@@ -50,11 +61,6 @@
   .menu-icon {
     font-size: 24px !important;
     transition: transform 0.2s;
-  }
-
-  /* Optional: Add animation for menu icon when navbar is expanded */
-  .navbar-toggler[aria-expanded="true"] .menu-icon {
-    transform: rotate(90deg);
   }
 
   /* Optional: Add hover effect */
@@ -102,4 +108,21 @@
   .navbar {
     margin-top: 8px;
   }
+
+  @media (max-width: 768px) {
+    .navbar-collapse {
+      text-align: right; /* Aligns all content in Navbar.Collapse to the right */
+      padding-right: 10px !important;
+      padding-top: 10px !important;
+    }
+
+    .mobile-links {
+      display: flex;
+      margin-right: 0px;
+      margin-left: 100px;
+      margin-top: 10px;
+      justify-content: flex-end;
+    }
+  }
+  
   

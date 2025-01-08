@@ -33,14 +33,14 @@ const NavbarComponent = ({ toggleTheme, theme }) => {  // Receive theme as a pro
         </Navbar.Brand>
         
         {/* Mobile Menu Toggle */}
-        <Navbar.Toggle aria-controls="navbar-nav">
+        <Navbar.Toggle aria-controls="navbar-nav ">
           <span className="material-icons menu-icon">
             menu
           </span>
         </Navbar.Toggle>
         
         <Navbar.Collapse id="navbar-nav">
-          <Nav className="ml-auto">
+          <Nav className="ms-auto">
             <Nav.Item>
               <Nav.Link
                 as={Link}
@@ -74,8 +74,10 @@ const NavbarComponent = ({ toggleTheme, theme }) => {  // Receive theme as a pro
             <Button
               onClick={toggleTheme}
               variant="link"
+              className="mobile-links"
               style={{
-                marginTop: '3px',
+                display: 'flex',
+                marginTop: '5px',
                 marginLeft: '20px',
                 padding: 0,
                 fontSize: '20px',
@@ -83,6 +85,7 @@ const NavbarComponent = ({ toggleTheme, theme }) => {  // Receive theme as a pro
                 background: 'transparent',
                 border: 'none',
                 cursor: 'pointer',
+                textDecoration: 'none'
               }}
             >
               {/* Toggle between Sun and Moon icons based on the theme */}

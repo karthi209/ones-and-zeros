@@ -73,7 +73,7 @@ const BlogPost = () => {
     return parts.map((part, index) => {
       if (index === 0) {
         return (
-          <div key={index} className="blog-post-content" style={{ marginTop: '50px' }}>
+          <div key={index} className="blog-post-content mobile-blog-post-content" style={{ marginTop: '50px' }}>
             <ReactMarkdown
               children={part.replace(/\[map[^\]]+\]/g, "")}
               remarkPlugins={[gfm]}
@@ -129,10 +129,10 @@ const BlogPost = () => {
               <Alert variant="danger">{error}</Alert>
             </div>
           ) : post ? (
-            <Card className="mb-4">
-              <Card.Body className="mobile-view" style={{ padding: '5% 10%' }}>
-                <Card.Title className="card-title" style={{ fontSize: '40px', marginBottom: '20px' }}>{post.title}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted card-subtitle" style={{ fontSize: '18px' }}>
+            <Card className="mb-4 web-card">
+              <Card.Body className="mobile-view" style={{ padding: '8% 10%' }}>
+                <Card.Title className="card-title mobile-card-title" style={{ fontSize: '40px', marginBottom: '20px' }}>{post.title}</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted card-subtitle mobile-card-subtitle" style={{ fontSize: '18px' }}>
                   Posted by {post.author} on{" "}
                   {new Date(post.publicationdate).toLocaleDateString("en-US", {
                     month: "long",

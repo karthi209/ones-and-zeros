@@ -12,6 +12,10 @@
     position: relative;
 }
 
+.home-head {
+    margin-left: 20px;
+}
+
 .welcome-img {
     width: 100%;
     height: auto;
@@ -206,13 +210,7 @@ body:not(.light-theme) .welcome-img {
         font-size: 35px;
         text-align: right;
     }
-}
 
-@media (max-width: 1000px) {
-    .welcome {
-        font-size: 35px;
-        text-align: right;
-    }
     .welcome-cont {
         font-family: "Roboto", serif;
         position: absolute;
@@ -236,6 +234,36 @@ body:not(.light-theme) .welcome-img {
     .m3-card-title {
         font-size: 26px !important;
     }
+}
+
+@media (max-width: 1000px) {
+    .welcome {
+        font-size: 32px;
+        text-align: right;
+    }
+    .welcome-cont {
+        font-family: "Roboto", serif;
+        position: absolute;
+        top: 35%;
+        right: 0%; /* Adjust this value as needed */
+        transform: translateY(-50%);
+        color: #1d1d1d;
+        z-index: 1;
+        text-align: right;
+        padding: 20px;
+        width: 600px; /* Use fixed width instead of percentage */
+        max-width: 60%; /* Ensure it doesn't get too wide */
+    }
+
+    .welcome-description {
+        font-size: 18px;
+        font-weight: 400;
+        margin-bottom: 20px;
+    }
+
+    .m3-card-title {
+        font-size: 26px !important;
+    }
 
 }
 
@@ -243,16 +271,21 @@ body:not(.light-theme) .welcome-img {
 @media (max-width: 768px) {
     .welcome {
         font-size: 30px;
-        text-align: left;
+        text-align: center;
     }
 
     .m3-card-title {
         font-size: 27px !important;
     }
 
+    .m3-card {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
     .welcome-description {
-        font-size: 17px;
-        text-align: left;
+        font-size: 18px;
+        text-align: center;
     }
 
     .welcome-cont {
@@ -271,7 +304,11 @@ body:not(.light-theme) .welcome-img {
     .banner-actions {
         display: flex;
         gap: 20px;
-        justify-content: flex-start;
+        justify-content:center;
+    }
+
+    .home-head {
+        margin-left: 15px;
     }
 
     .welcome-img {

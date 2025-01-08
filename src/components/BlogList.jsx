@@ -52,7 +52,8 @@ const BlogList = () => {
       <Row>
         <Col>
         <div className="blog-header">
-          <h2>Blogs ({totalPosts} total)</h2>
+          <h2>Blogs</h2>
+          <p>({totalPosts} Total)</p>  {/* Optional: Separate post count from title */}
           <Form onSubmit={handleSearch} className="search-form-md3">
             <div className="md3-search-bar">
               <Form.Control

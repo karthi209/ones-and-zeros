@@ -21,9 +21,12 @@
 /* Blog Header */
 .blog-header {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: flex-end;
   margin-bottom: 24px;
+  font-size: medium;
+  justify-content: center;  /* Aligns horizontally */
+  align-items: center;      /* Aligns vertically */
 }
 
 /* Center the pagination container */
@@ -41,10 +44,19 @@
 }
 
 .blog-header h2 {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 16px;
-  font-family: "Roboto", sans-serif; /* Align with MD3 typography */
+  font-size: 30px;      /* Medium size for headers */
+  font-weight: 500;     /* Medium emphasis */
+  line-height: 1.25;    /* Adjust line height for readability */
+  margin: 0; 
+  color: #e8e8e8;
+  margin-top: 8px;
+}
+
+.blog-header p {
+  font-size: 16px;      /* Smaller font for the post count text */
+  color: rgba(237, 237, 237, 0.6);  /* Subtle color for secondary text */
+  margin-top: 28px;      /* Space between title and the post count */
+  margin-left: 10px;
 }
 
 .m3-card-subtitle {
@@ -93,16 +105,16 @@
   --search-bar-background: #ffffff; /* Light surface color for light mode */
   --search-bar-border: #e0e0e0; /* Light border color */
   --search-bar-focus-border: #6200ee; /* Focus border color */
-  --search-bar-text: #1c1b1f; /* Text color */
+  --search-bar-text: #e5e5e5; /* Text color */
   --search-bar-placeholder: #6c7176; /* Placeholder color */
 }
 
 /* Dark Mode */
 body:not(.light-theme) {
-  --search-bar-background: #121212; /* Dark background color for dark mode */
-  --search-bar-border: #333333; /* Dark border color */
+  --search-bar-background: #282828; /* Dark background color for dark mode */
+  --search-bar-border: #282828; /* Dark border color */
   --search-bar-focus-border: #bb86fc; /* Dark mode focus border color */
-  --search-bar-text: #e6e1e5; /* Light text color for dark mode */
+  --search-bar-text: #e0e0e0; /* Light text color for dark mode */
   --search-bar-placeholder: #a29fac; /* Placeholder color for dark mode */
 }
 
@@ -110,19 +122,21 @@ body:not(.light-theme) {
 .md3-search-bar {
   display: flex;
   align-items: right;
-  gap: 8px;
+  gap: 8x;
   background-color: var(--search-bar-background);
   border: 1px solid var(--search-bar-border);
   border-radius: 24px;
-  padding: 8px 16px;
+  padding: 0px 16px;
   transition: border-color 0.2s, box-shadow 0.2s;
-  max-width: 600px;
-  width: 100%;
   box-sizing: border-box;
 }
 
-.form-control {
-  background-color: #121212 !important;
+.search-form-md3 {
+  margin-left: 60%;
+}
+
+body:not(.light-theme) .form-control {
+  background-color: #282828 !important;
   border: none !important;
  }
 
@@ -148,14 +162,16 @@ body:not(.light-theme) {
 }
 
 .md3-search-input::placeholder {
-  color: var(--search-bar-placeholder);
+  color: var(--search-bar-placeholder) !important;
 }
 
 /* Button (md3-search-button) */
+
 .md3-search-button {
   border: none;
   background: transparent;
-  color: var(--search-bar-focus-border);
+  color: var(--search-bar-focus-border) !important;
+  margin-top: 5px;
   padding: 0;
   display: flex;
   align-items: center;
@@ -165,9 +181,54 @@ body:not(.light-theme) {
   transition: color 0.2s;
 }
 
-.md3-search-button:hover {
-  color: var(--search-bar-focus-border); /* Hover color */
+body:not(.light-theme) Input[type="text"] {
+  border: 0px solid #746c6c00;
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: text;
+  color: #ffffff !important;
+  caret-color: #bababa;
 }
+
+input[type="text"]:focus {
+  border: 0px solid #00000000; /* Border color change on focus */
+  box-shadow: 0 0 0px rgba(0, 123, 255, 0.5); /* Subtle shadow on focus */
+}
+
+body.light-theme input[type="text"] { 
+  border: 0px solid #746c6c00;
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: text;
+  color: #000000 !important;
+  caret-color: #444444;
+}
+
+body.light-theme form-control {
+  background-color: #d4d4d4 !important;
+  border: none !important;
+ }
+
+@media (max-width: 1400px) { 
+  .blog-header p {
+    display: none 
+  }
+}
+
+@media (max-width: 1000px) { 
+
+  .search-form-md3 {
+    margin-left: 40%;
+  }
+
+  .blog-header p {
+    display: none 
+  }
+
+}
+
 
 @media (max-width: 768px) { 
 
@@ -175,5 +236,23 @@ body:not(.light-theme) {
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 5px;
+  }
+
+  .search-form-md3 {
+    margin-left: 20%;
+    margin-right: 5%;
+  }
+
+  .blog-header {
+    flex-direction: c;
+  }
+
+  .blog-header h2 {
+    margin-left: 5%; 
+    margin-top: 0px;
+  }
+
+  .blog-header p {
+    display: none 
   }
 }

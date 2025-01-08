@@ -93,7 +93,7 @@ const Home = () => {
             ))}
           </Col>
           <Col md={6} className="mb-4">
-            <h2>Recent Posts</h2>
+            <h2 className="home-head">Recent Posts</h2>
             {sortedPosts.slice(0, 3).map((post) => (
               <Card key={post.slug} className="m3-card mb-3">
                 <Card.Body>
