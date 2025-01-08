@@ -47,7 +47,7 @@ const Home = () => {
             <div className="welcome-cont">
               <h1 className="welcome">Welcome to Pattinam</h1>
               <p className="welcome-description">
-                Discover the heart of Chennai and Tamil Nadu through blogs and tools
+                Maps, blogs and tools aimed to document and provide information about Tamilnadu cities.
               </p>
               <div className="banner-actions">
                 <Button as={Link} to="/blog" className="btn-primary">

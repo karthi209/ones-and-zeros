@@ -24,14 +24,14 @@
     font-family: "Roboto", serif;
     position: absolute;
     top: 50%;
-    right: 5%; /* Adjust this value as needed */
+    right: 0%; /* Adjust this value as needed */
     transform: translateY(-50%);
     color: #1d1d1d;
     z-index: 1;
     text-align: right;
     padding: 20px;
-    width: 500px; /* Use fixed width instead of percentage */
-    max-width: 40%; /* Ensure it doesn't get too wide */
+    width: 700px; /* Use fixed width instead of percentage */
+    max-width: 50%; /* Ensure it doesn't get too wide */
 }
 
 
@@ -79,12 +79,13 @@
     font-weight: bold;
     padding: 20px;
     padding-bottom: 10px;
+    padding-left: 25px;
 }
 
 .m3-card-subtitle {
     font-size: 14px;
     color: #6c757d;
-    padding-left: 20px;
+    padding-left: 25px;
     padding-bottom: 15px;
 }
 
@@ -106,6 +107,11 @@
     margin-left: 25px;
     margin-bottom: 20px;
     margin-top: 15px;
+    text-decoration: none;
+}
+
+.m3-read-more-button:hover {
+    text-decoration: none;
 }
 
 /* Hover Effects */
@@ -237,7 +243,7 @@ body:not(.light-theme) .welcome-img {
 @media (max-width: 768px) {
     .welcome {
         font-size: 30px;
-        text-align: right;
+        text-align: left;
     }
 
     .m3-card-title {
@@ -245,15 +251,14 @@ body:not(.light-theme) .welcome-img {
     }
 
     .welcome-description {
-        font-size: 18px;
-        text-align: right;
+        font-size: 17px;
+        text-align: left;
     }
 
     .welcome-cont {
-        top: 130%; /* Adjust vertical positioning */
+        top: 138%; /* Adjust vertical positioning */
         left: 50%;
         transform: translate(-50%, -50%);
-        text-align: center;
         max-width: 100%; /* Increase text container width */
         padding-right: 5%;
     }
@@ -266,7 +271,7 @@ body:not(.light-theme) .welcome-img {
     .banner-actions {
         display: flex;
         gap: 20px;
-        justify-content: flex-end;
+        justify-content: flex-start;
     }
 
     .welcome-img {
@@ -274,7 +279,7 @@ body:not(.light-theme) .welcome-img {
         width: 90%;
         height: auto;
         margin: 20px;
-        margin-top: 0% !important;
+        margin-top: 8% !important;
         display: block;
         object-fit: cover;
         border-radius: 016x;
@@ -287,7 +292,7 @@ body:not(.light-theme) .welcome-img {
         width: 100%;
         margin: 40px 0;
         margin-top: 10px;
-        margin-bottom: 250px;
+        margin-bottom: 280px;
     }
 
     .welcome-description {

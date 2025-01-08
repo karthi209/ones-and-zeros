@@ -1,16 +1,22 @@
 /* Default dark theme */
 :root {
-  --background-color: #1d1d1d !important;
-  --text-color: #ffffff !important;
-  --link-color: #1e90ff !important;
-  --card-background: #2d2d2d !important;
-  --transition-duration: 0.3s !important;
-  font-family: "Roboto", serif;
+  --background-color: #1d1d1d;
+  --text-color: #ffffff;
+  --link-color: #1e90ff;
+  --card-background: #2d2d2d;
+  --transition-duration: 0.3s;
 }
 
-h2 {
-  font-family: "Roboto", serif;
-  font-weight: 600;
+html, body {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+a {
+  text-decoration: none !important; /* Remove underline by default */
+}
+
+a:hover {
+  text-decoration: none !important; /* Remove underline on hover */
 }
 
 body {

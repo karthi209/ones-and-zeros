@@ -92,8 +92,8 @@ const BlogList = () => {
                       />
                     </div>
                     <Card.Body className="card-body" style={{ borderBottomLeftRadius: '20px', borderBottomRightRadius: '20px' }}>
-                      <Card.Title className="m3-card-title">{post.title}</Card.Title>
-                      <Card.Text className="m3-card-subtitle">
+                      <Card.Title className="m3-card-title" style={{  fontSize: '24px', fontWeight: '600', padding: '12px', lineHeight: '32px' }}>{post.title}</Card.Title>
+                      <Card.Text className="m3-card-subtitle" style={{  paddingLeft: '12px' }}>
                         Posted on{" "}
                         {new Date(post.publicationdate).toLocaleDateString("en-US", {
                           month: "short",

@@ -56,12 +56,12 @@
 
 /* Light Theme Overrides */
 body.light-theme .blog-post-container {
-  background-color: #e5e5e5;
+  background-color: #ededed;
   color: #000000; /* Dark text */
 }
 
 body.light-theme .card-body {
-  background-color: #e5e5e5 !important; /* Light card background */
+  background-color: #ededed !important; /* Light card background */
   border: none; /* Remove border */
   box-shadow: none; /* Remove shadow */
   color: #000 !important; /* Dark font color for light mode */
@@ -73,6 +73,7 @@ body.light-theme .card-body .card-title {
 
 body.light-theme .card-body .card-subtitle {
   color: #555 !important; /* Darker gray subtitle */
+  font-style: italic !important;
 }
 
 /* Ensure content text is also dark in light theme */
@@ -113,6 +114,7 @@ body.dark-theme .card-body .card-title {
 
 body.dark-theme .card-body .card-subtitle {
   color: #888 !important; /* Slightly lighter gray for subtitles */
+  font-style: italic !important;
 }
 
 /* Light Theme Font Color */
