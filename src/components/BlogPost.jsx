@@ -119,7 +119,7 @@ const BlogPost = () => {
   return (
     <Container className="blog-post-container">
       <Row className="post-card">
-        <Col>
+        <Col className="post-card">
           {loading ? (
             <div className="spinner-container">
               <Spinner animation="border" variant="primary" />
@@ -129,7 +129,7 @@ const BlogPost = () => {
               <Alert variant="danger">{error}</Alert>
             </div>
           ) : post ? (
-            <Card className="mb-4 web-card">
+            <Card className="mb-4 web-card" style={{ 'backgroundColor': '#F5F5F5'}}>
               <Card.Body className="mobile-view" style={{ padding: '5% 10%' }}>
                 <Card.Title className="card-title mobile-card-title" style={{ fontSize: '40px', marginBottom: '20px' }}>{post.title}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted card-subtitle mobile-card-subtitle" style={{ fontSize: '18px' }}>

@@ -124,7 +124,7 @@
 }
 
 body:not(.light-theme) .m3-card {
-    background-color: #282828;
+    background-color: #282828 !important;
     color: white;
 }
 

@@ -6,6 +6,7 @@ function Footer() {
     <footer>
       <div className="footer-content">
         <p>© 2025 Pattinam.</p>
+        <p>This website is maintained by <a href="https://twitter.com/karthi9003" target="_blank" aria-label="karthi209">karthi209</a></p>
         <div className="footer-links">
           <a href="/privacy-policy" target="_blank">Privacy Policy</a>
           <a href="/terms-of-use" target="_blank">Terms of Use</a>

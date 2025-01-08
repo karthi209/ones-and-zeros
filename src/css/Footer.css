@@ -1,6 +1,5 @@
 /* Footer Default (Dark Theme) */
 footer {
-  background-color: #1d1d1d; /* Dark background */
   padding: 4rem 0;
   text-align: center;
   font-family: "Roboto", serif;
@@ -14,7 +13,7 @@ footer {
 
 .footer-content p {
   margin-bottom: 1rem;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   color: #878f96; /* Light text color */
 }
@@ -38,7 +37,7 @@ footer {
 
 /* Light Theme Overrides */
 body.light-theme footer {
-  background-color: #202124; /* Light background */
+  background-color: #F5F5F5; /* Light background */
 }
 
 body.light-theme .footer-content p {
